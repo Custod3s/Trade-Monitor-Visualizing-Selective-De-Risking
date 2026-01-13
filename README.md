@@ -33,6 +33,26 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains unaffected by the geopolitical shift.
 ---
 
+## 🧮 Statistical Proof (Chow Test)
+
+To confirm that the visual drop in High-Tech imports was not random volatility, we performed a **Chow Test for Structural Breaks**. We ran the model twice to control for the extreme volatility of the 2020 COVID shock.
+
+**Hypothesis:**
+* **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
+* **Break Point Tested:** January 2023 (Implementation of Economic Security Strategy).
+
+**Results:**
+
+| Model Specification | Timeframe | F-Statistic | p-value | Conclusion |
+| :--- | :--- | :--- | :--- | :--- |
+| **Model A (Full Sample)** | Jan 2020 – Dec 2025 | `3.42` | `0.0688` | *Marginally Significant* (High Noise) |
+| **Model B (Post-COVID)** | Jan 2021 – Dec 2025 | `55.12` | `2.43e-10` | **Highly Significant (< 0.001)** |
+
+**Interpretation:**
+* **Model A** (including 2020) yields a p-value of **0.068**, which is marginally significant (93% confidence). The extreme volatility of the COVID-19 period increases the variance, making the 2023 break harder to detect statistically.
+* **Model B** (excluding 2020) establishes a stable post-pandemic baseline. Against this backdrop, the 2023 drop yields an extremely high F-statistic and a p-value near zero, confirming the structural break with >99.9% confidence.
+---
+
 ## 📂 Repository Structure
 * **data/**: Raw CSVs and processed RDS files.
 * **scripts/**: R code for ETL, Stats, and Viz.
