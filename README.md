@@ -24,8 +24,12 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > **Table 1: Relative Trade Performance (Index: Jan 2023 = 100).**
 > While "Traditional" imports (Grey) exhibit resilience (100–110), "Strategic" imports (Blue) show a structural contraction (<85) following the announcement of the Economic Security Strategy.
 
+![Eurozone Banking Claims on CN](20_Images/06_banking_claims_CN.png)
+> **Figure 2: Euro Area Banking Claims on China (Mrd. USD).**
+> Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
+
 ![Trade & Finance Divergence](20_Images/05_grand_unification_No_zoom.png)
-> **Table 2: The Dual De-Risking Sighting (Index: Jan 2023 = 100).**
+> **Table 3: The Dual De-Risking Sighting (Index: Jan 2023 = 100).**
 > The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains unaffected by the geopolitical shift.
 ---
 
