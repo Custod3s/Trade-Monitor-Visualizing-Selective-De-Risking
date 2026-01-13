@@ -36,4 +36,5 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 1. Run `40_scripts/01_data_pull.R`
 2. Run `40_scripts/02_sitc_mapping.R`
 3. Run `40_scripts/03_first_look.R`
+4. Run `04_data_pull_BIS.R`
 
