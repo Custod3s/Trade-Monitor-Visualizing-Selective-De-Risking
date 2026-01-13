@@ -45,7 +45,7 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 
 | Sector | F-Statistic | P-Value | Interpretation |
 | :--- | :--- | :--- | :--- |
-| **High-Tech (Strategic)** | `55.12` | `$0.0000000002429` | **Massive Break** (Policy + Market) |
+| **High-Tech (Strategic)** | `55.12` | `0.0000000002429` | **Massive Break** (Policy + Market) |
 | **Low-Tech (Control)** | `12.37` | `0.0007818` | **Moderate Break** (Market Only) |
 
 **Conclusion:** 
