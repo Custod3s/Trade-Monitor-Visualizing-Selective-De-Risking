@@ -43,14 +43,13 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 
 **Results:**
 
-**Results:**
-
 | Sector | F-Statistic | Interpretation |
 | :--- | :--- | :--- |
 | **High-Tech (Strategic)** | `55.12` | **Massive Break** (Policy + Market) |
 | **Low-Tech (Control)** | `12.37` | **Moderate Break** (Market Only) |
 
-**Conclusion:** The structural break in strategic goods is **4.5x more intense** than in general trade, confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
+**Conclusion:** 
+* The structural break in strategic goods is **4.5x more intense** than in general trade, confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
 ---
 
 ## 📂 Repository Structure
