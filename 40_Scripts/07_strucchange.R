@@ -1,5 +1,4 @@
 # -------------------------------------------------------------------------
-# Script: 02_strucchange.R
 # Purpose: Perform Chow Test to confirm Structural Break in Trade Data
 # -------------------------------------------------------------------------
 
