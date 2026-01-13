@@ -47,5 +47,8 @@ df_bis_monthly <- df_bis_clean %>%
 # ---------------------------------------------------------
 print(head(df_bis_monthly))
 View(df_bis_monthly)
-saveRDS(df_bis_monthly, "data/processed/bis_financial_data.rds")
 
+write_csv2(
+  df_bis_monthly,
+  "10_Data/12_Raw/BIS_Financial_Exposure_EU_CN_2020-2025.csv"
+)

@@ -69,5 +69,5 @@ View(trade_csv)
 
 write_csv2(
   trade_csv,
-  "data/pulled_EU_CN_VN_US_2020-2025.csv"
+  "10_data/pulled_EU_CN_VN_US_2020-2025.csv"
 )

@@ -48,7 +48,7 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
            fontface = "bold",
            size = 4)
 
-ggsave("output/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
+ggsave("20_Images/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
 
 
 # Calculate Index (Jan 2023 = 100)
@@ -78,4 +78,4 @@ ggplot(plot_data_indexed, aes(x = date, y = index_value, color = sector_group)) 
   ) +
   scale_color_manual(values = c("High-Tech & Strategic" = "#004494", 
                                 "Traditional & Basic" = "#555555"))
-ggsave("output/03_eu_trade_china_sector_indexed.png", width = 10, height = 6)
+ggsave("20_Images/03_eu_trade_china_sector_indexed.png", width = 10, height = 6)

@@ -59,6 +59,6 @@ df_categorized <- categorize_trade(df_clean) %>%
   select(date, partner, sector_group, values)
 View(df_categorized)
 
-write.csv(df_categorized, file = "data/01_data_clean_sitc.csv", row.names = FALSE)
+write.csv(df_categorized, file = "10_Data/01_data_clean_sitc.csv", row.names = FALSE)
 
 
