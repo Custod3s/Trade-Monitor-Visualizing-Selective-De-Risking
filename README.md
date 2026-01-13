@@ -21,7 +21,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 
 ## 📊 The "Money Plot": Evidence of Divergence
 
-[[20_Images/03_eu_trade_china_sector_indexed.png]]
+(20_Images/03_eu_trade_china_sector_indexed.png)
 > **Figure 1: Relative Trade Performance (Index: Jan 2023 = 100).**
 > While "Traditional" imports (Grey) exhibit resilience (100–110), "Strategic" imports (Blue) show a structural contraction (<85) following the announcement of the Economic Security Strategy.
 
