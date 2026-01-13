@@ -17,7 +17,7 @@ library(lubridate)
 # ---------------------------------------------------------
 bis_url <- "https://stats.bis.org/api/v2/data/dataflow/BIS/WS_LBS_D_PUB/1.0/Q..C.A.TO1....5C+AT+BE+CY+DE+ES+FI+FR+GR+IE+IT+LU+NL+PT.A.CN?startPeriod=2020-01-01&endPeriod=2026-01-13&format=csv"
 df_bis_raw <- read_csv(bis_url, show_col_types = FALSE)
-
+View(df_bis_raw)
 # Making a vector with the countries of the EU 
 
 eurozone_iso <- c("AT", "BE", "CY", "EE", "FI", "FR", "DE", "GR", 
@@ -40,7 +40,7 @@ View(clean_df_bis)
 
 # 4. Export Final Merged File for Member C
 # ---------------------------------------------------------
-write_csv2(clean_df_bis, "data/cleaned_BIS_monthly_CN.csv")
+write_csv2(clean_df_bis, "10_Data/11_Processed/cleaned_BIS_monthly_LG.csv")
 
 
 # ---------------------------------------------------------
@@ -77,3 +77,4 @@ ggplot(clean_df_bis, aes(x = Date, y = Total_Claims_USD_Millions)) +
     axis.title.x = element_text(margin = margin(t = 10)),
     axis.title.y = element_text(margin = margin(r = 10))
   )
+ggsave("20_Images/06_banking_claims_CN.png", width = 10, height = 6, dpi = 300)
