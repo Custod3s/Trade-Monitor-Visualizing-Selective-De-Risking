@@ -64,5 +64,6 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 4. Run `04_data_pull_BIS.R` & `06_bis_pull_large.R` - Pulls financial data from the BIS and Visualisation of Banking Claims (Table 2)
 5. Run `05_finance_x_imports_CN.R` - Combines trade & financial data (Table 3)
 6. Run `07_strucchange.R` - Statistical proof of the structural break
+7. Run `08_strucchange_control.R`- Confirm / Deny hypotheses of decoupling mechanism
 
 
