@@ -25,7 +25,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > While "Traditional" imports (Grey) exhibit resilience (100–110), "Strategic" imports (Blue) show a structural contraction (<85) following the announcement of the Economic Security Strategy.
 
 ![Trade & Finance Divergence](20_Images/05_grand_unification.png)
-> **Figure 2: The Dual De-Risking Sighting (Index: Jan 2023 = 100).**
+> **Table 2: The Dual De-Risking Sighting (Index: Jan 2023 = 100).**
 > The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains unaffected by the geopolitical shift.
 ---
 
