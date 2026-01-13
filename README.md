@@ -52,10 +52,6 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 * The structural break in strategic goods is **4.5x more intense** than in general trade, confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
 ---
 
-## 📂 Repository Structure
-* **data/**: Raw CSVs and processed RDS files.
-* **scripts/**: R code for ETL, Stats, and Viz.
-* **report/**: Final Quarto analysis.
 
 ## 🚀 How to Run
 1. Run `01_data_pull.R` - Pulls trade data from Eurostat
