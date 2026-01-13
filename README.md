@@ -21,10 +21,12 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 ## 📊 The "Money Plot": Evidence of Divergence
 
 ![Relative Trade Performance](20_Images/03_eu_trade_china_sector_indexed.png)
-> **Figure 1: Relative Trade Performance (Index: Jan 2023 = 100).**
+> **Table 1: Relative Trade Performance (Index: Jan 2023 = 100).**
 > While "Traditional" imports (Grey) exhibit resilience (100–110), "Strategic" imports (Blue) show a structural contraction (<85) following the announcement of the Economic Security Strategy.
 
-
+![Trade & Finance Divergence](20_Images/05_finance_x_imports_CN.R)
+> **Figure 2: The Dual De-Risking Sighting (Index: Jan 2023 = 100).**
+> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains unaffected by the geopolitical shift.
 ---
 
 ## 📂 Repository Structure
@@ -37,4 +39,5 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 2. Run `40_scripts/02_sitc_mapping.R`
 3. Run `40_scripts/03_first_look.R`
 4. Run `04_data_pull_BIS.R`
+5. Run `05_finance_x_imports_CN.R`
 
