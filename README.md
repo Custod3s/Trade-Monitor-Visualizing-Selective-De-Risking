@@ -9,6 +9,7 @@
 * **report/**: Final Quarto analysis.
 
 ## 🚀 How to Run
-1. Run `scripts/01_etl_mapping.R`
-2. Run `scripts/03_visualization.R`
+1. Run `40_scripts/01_data_pull.R`
+2. Run `40_scripts/02_sitc_mapping.R`
+3. Run `40_scripts/03_first_look.R`
 
