@@ -32,12 +32,13 @@ trade_indexed <- trade_data %>%
   
   # Apply 3-Month Rolling Average (Smoother lines)
   group_by(sector_group) %>%
-  mutate(smooth_value = rollmean(values, k = 3, fill = NA, align = "right")) %>%
+  mutate(smooth_value = rollmean(values, k = 3, fill = NA, align = "center")) %>%  
   
   # Index to Jan 2023 = 100
+  group_by(sector_group) %>%
   mutate(
-    # Find the value closest to Jan 2023
-    base_val = smooth_value[which.min(abs(date - as.Date("2023-01-01")))],
+    # Calculate the average value for the entire year of 2022
+    base_val = mean(smooth_value[format(date, "%Y") == "2022"], na.rm = TRUE),
     index_val = (smooth_value / base_val) * 100
   ) %>%
   select(date, sector_group, index_val)
@@ -50,15 +51,15 @@ View(trade_indexed)
 finance_indexed <- finance_data %>%
   mutate(
     # Index to Jan 2023 = 100
-    base_val = value[which.min(abs(date - as.Date("2023-01-01")))],
+    base_val = mean(value[format(date, "%Y") == "2022"], na.rm = TRUE),
     index_val = (value / base_val) * 100
   ) %>%
   select(date, sector_group, index_val)
 
 # 4. Merge and Filter Time Window
 # ---------------------------------------------------------
-plot_data <- bind_rows(trade_indexed, finance_indexed) %>%
-  filter(date >= "2022-01-01") # Zoom in to show the pre-strategy vs post-strategy
+plot_data <- bind_rows(trade_indexed, finance_indexed) # %>%
+        # filter(date >= "2022-01-01") # Zoom in to show the pre-strategy vs post-strategy
 
 # 5. Generate the "Money Plot"
 # ---------------------------------------------------------
@@ -66,7 +67,7 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
   
   # Reference Lines
   geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-  geom_vline(xintercept = as.Date("2023-01-01"), color = "#D9534F", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2022-11-01"), color = "#D9534F", linetype = "dashed") +
   
   # The Data Lines
   geom_line(linewidth = 1.2) +
@@ -101,5 +102,5 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
 # 6. Save Output
 # ---------------------------------------------------------
 print(p)
-ggsave("20_Images/05_grand_unification.png", width = 10, height = 6, dpi = 300)
+ggsave("20_Images/05_grand_unification_No_zoom.png", width = 10, height = 6, dpi = 300)
 

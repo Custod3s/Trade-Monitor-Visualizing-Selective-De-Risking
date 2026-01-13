@@ -4,9 +4,8 @@ library(ggplot2)
 library(lubridate)
 library(zoo)
 
-setwd("/Users/alex/Programming/ECB_Data_Challenge")
 
-trade_data <- read_csv("data/01_data_clean_sitc.csv", 
+trade_data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv", 
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
 View(trade_data)
 
@@ -17,7 +16,7 @@ plot_data <- trade_data %>%
   summarise(total_trade_value = sum(values, na.rm = TRUE), .groups = 'drop') %>%
   group_by(sector_group) %>%
   mutate(
-    rolling_avg = rollmean(total_trade_value, k = 6, fill = NA, align = "right")
+    rolling_avg = rollmean(total_trade_value, k = 6, fill = NA, align = "center")
   )
 
 
@@ -30,9 +29,8 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
        x = "Time",
        y = "Trade Value (USD)",
        color = "Sector Group") +
-  scale_color_manual(values = c("High-Tech & Strategic" = "blue", 
-                                     "Traditional & Basic" = "green", 
-                                     "Other" = "gray")) +
+  scale_color_manual(values = c("High-Tech & Strategic" = "#004494", 
+                                     "Traditional & Basic" = "#555555")) +
   theme(text = element_text(size = 14)) + 
   geom_vline(xintercept = as.Date("2023-01-01"), 
                                                    linetype = "dashed", 
@@ -40,13 +38,16 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
                                                    linewidth = 1) +
   
   annotate("text", 
-           x = as.Date("2023-01-01"), # Place text slightly to the right of the line
+           x = as.Date("2022-11-01"), # Place text slightly to the right of the line
            y = 28000,                 # Place it high up (adjust based on your Y-axis)
-           label = "Start of Divergence\n(EU Economic Security Strategy)", 
-           hjust = 0,                 # Left-align text
+           label = "Start of Divergence", 
+           hjust = 1,                 # Left-align text
            color = "#D9534F", 
            fontface = "bold",
-           size = 4)
+           size = 4) +
+  scale_y_continuous(
+    labels = function(x) paste(x / 1000, "Mrd") 
+  )
 
 ggsave("20_Images/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
 
@@ -54,20 +55,32 @@ ggsave("20_Images/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
 # Calculate Index (Jan 2023 = 100)
 View(plot_data)
 
-plot_data_indexed <- plot_data %>%
+plot_data_indexed <- trade_data %>%
+  filter(grepl("CN_X_HK", partner)) %>%
+  filter(sector_group %in% c("High-Tech & Strategic", "Traditional & Basic")) %>%
+  
+  # Aggregate up to monthly totals (summing sub-sectors)
+  group_by(date, sector_group) %>%
+  summarise(values = sum(values, na.rm = TRUE), .groups = "drop") %>%
+  
+  # Apply 3-Month Rolling Average (Smoother lines)
+  group_by(sector_group) %>%
+  mutate(smooth_value = rollmean(values, k = 3, fill = NA, align = "center")) %>%  
+  
+  # Index to Jan 2023 = 100
   group_by(sector_group) %>%
   mutate(
-    # Find the value in Jan 2023 (or closest date) to use as baseline
-    base_value = total_trade_value[which.min(abs(date - as.Date("2023-01-01")))],
-    index_value = (rolling_avg / base_value) * 100
+    # Calculate the average value for the entire year of 2022
+    base_val = mean(smooth_value[format(date, "%Y") == "2022"], na.rm = TRUE),
+    index_val = (smooth_value / base_val) * 100
   ) %>%
-  filter(date >= "2022-01-01") # Zoom in on the relevant period
+  select(date, sector_group, index_val)
 
 # Plot the Index
-ggplot(plot_data_indexed, aes(x = date, y = index_value, color = sector_group)) +
+ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
   geom_line(linewidth = 1.2) +
   geom_hline(yintercept = 100, linetype = "dotted") + # The "No Change" line
-  geom_vline(xintercept = as.Date("2023-03-01"), linetype = "dashed", color = "#D9534F") +
+  geom_vline(xintercept = as.Date("2022-11-01"), linetype = "dashed", color = "#D9534F") +
   theme_minimal() +
   labs(
     title = "Relative Trade Performance (Index: Jan 2023 = 100)",
