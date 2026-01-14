@@ -54,12 +54,13 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 
 
 ## 🚀 How to Run
-1. Run `01_data_pull.R` - Pulls trade data from Eurostat
-2. Run `02_sitc_mapping.R` - Categorizes trade data according to SITC codes
-3. Run `40_scripts/03_first_look.R` - Creates a first look (Table 1)
-4. Run `04_data_pull_BIS.R` & `06_bis_pull_large.R` - Pulls financial data from the BIS and Visualisation of Banking Claims (Table 2)
-5. Run `05_finance_x_imports_CN.R` - Combines trade & financial data (Table 3)
-6. Run `07_strucchange.R` - Statistical proof of the structural break
-7. Run `08_strucchange_control.R`- Confirm / Deny hypotheses of decoupling mechanism
+1. Run `00_style.R`- Create a common theme for plots and visual across the whole project
+2. Run `01_data_pull.R` - Pulls trade data from Eurostat
+3. Run `02_sitc_mapping.R` - Categorizes trade data according to SITC codes
+4. Run `40_scripts/03_first_look.R` - Creates a first look (Table 1)
+5. Run `04_data_pull_BIS.R` & `06_bis_pull_large.R` - Pulls financial data from the BIS and Visualisation of Banking Claims (Table 2)
+6. Run `05_finance_x_imports_CN.R` - Combines trade & financial data (Table 3)
+7. Run `07_strucchange.R` - Statistical proof of the structural break
+8. Run `08_strucchange_control.R`- Confirm / Deny hypotheses of decoupling mechanism
 
 
