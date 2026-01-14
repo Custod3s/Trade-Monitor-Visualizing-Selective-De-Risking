@@ -69,7 +69,7 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
   
   # Reference Lines
   geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-  geom_vline(xintercept = as.Date("2022-11-01"), color = "#D9534F", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2023-01-01"), color = "#D9534F", linetype = "dashed") +
   
   # The Data Lines
   geom_line(linewidth = 1.2) +
@@ -90,7 +90,7 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
   labs(
     title = "The Dual De-Risking: Trade & Finance Divergence",
     subtitle = "Since Jan 2023, EU Banks and High-Tech Importers have both reduced exposure.",
-    y = "Index (Jan 2023 = 100)",
+    y = "Index  NOV 2022 = 100)",
     x = "",
     caption = "Sources: Eurostat (Trade), BIS Locational Banking Statistics (Finance)"
   ) +

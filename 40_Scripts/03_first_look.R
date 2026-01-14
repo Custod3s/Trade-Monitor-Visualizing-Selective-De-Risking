@@ -22,7 +22,7 @@ plot_data <- trade_data %>%
 View(plot_data)
 
 ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
-  geom_line(size = 1.2) + theme_minimal() +
+  geom_line(size = 1.2) + theme_esc() +
   labs(title = "3-Month Rolling Average of EU Trade with China by Sector Group",
        x = "Time",
        y = "Trade Value (USD)",
@@ -36,7 +36,7 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
                                                    linewidth = 1) +
   
   annotate("text", 
-           x = as.Date("2022-11-01"), # Place text slightly to the right of the line
+           x = as.Date("2022-12-01"), # Place text slightly to the right of the line
            y = 28000,                 # Place it high up (adjust based on your Y-axis)
            label = "Start of Divergence", 
            hjust = 1,                 # Left-align text
@@ -44,7 +44,7 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
            fontface = "bold",
            size = 4) +
   scale_y_continuous(
-    labels = function(x) paste(x / 1000, "Mrd") 
+    labels = function(x) paste(x / 1000, "Billion") 
   )
 
 ggsave("20_Images/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
@@ -79,10 +79,15 @@ plot_data_indexed <- trade_data %>%
 ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
   geom_line(linewidth = 1.2) +
   geom_hline(yintercept = 100, linetype = "dotted") + # The "No Change" line
-  geom_vline(xintercept = as.Date("2022-11-01"), linetype = "dashed", color = "#D9534F") +
+  geom_vline(xintercept = as.Date("2023-01-01"), linetype = "dashed", color = "#D9534F") +
   theme_esc() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    plot.title = element_text(face = "bold", size = 14)
+  ) +
   labs(
-    title = "Relative Trade Performance (Index: Jan 2023 = 100)",
+    title = "Relative Trade Performance (Index: NOV 2022 = 100)",
     subtitle = "Since the EU Economic Security Strategy, High-Tech has underperformed Traditional trade.",
     y = "Import Volume (Index 100 = Jan 2023)",
     x = "Date",
@@ -90,4 +95,6 @@ ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
   ) +
   scale_color_manual(values = c("High-Tech & Strategic"   = "#005f73",
                                 "Traditional & Basic" = "#94a3b8"))
+  
+
 ggsave("20_Images/03_eu_trade_china_sector_indexed.png", width = 10, height = 6)
