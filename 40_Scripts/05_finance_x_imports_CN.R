@@ -16,9 +16,11 @@ trade_data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv",
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
 View(trade_data)
 
-finance_data <- read_delim("10_Data/12_Raw/BIS_Financial_Exposure_EU_CN_2020-2025.csv", 
-                             delim = ";", escape_double = FALSE, col_types = cols(date = col_date(format = "%Y-%m-%d")), 
-                             trim_ws = TRUE)
+finance_data <- read_delim("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv", 
+                           delim = ";", escape_double = FALSE, col_types = cols(date = col_date(format = "%Y-%m-%d")), 
+                           locale = locale(decimal_mark = ",", grouping_mark = ""), 
+                           trim_ws = TRUE)
+
 View(finance_data)
 
 # 2. Process Trade Data (Smooth & Index)
@@ -53,11 +55,12 @@ View(trade_indexed)
 finance_indexed <- finance_data %>%
   mutate(
     # Index to Jan 2023 = 100
-    base_val = mean(value[format(date, "%Y") == "2022"], na.rm = TRUE),
-    index_val = (value / base_val) * 100
+    base_val = mean(values[format(date, "%Y") == "2022"], na.rm = TRUE),
+    index_val = (values / base_val) * 100
   ) %>%
   select(date, sector_group, index_val)
 
+View(finance_indexed)
 # 4. Merge and Filter Time Window
 # ---------------------------------------------------------
 plot_data <- bind_rows(trade_indexed, finance_indexed) # %>%
