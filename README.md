@@ -30,7 +30,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 
 ![Trade & Finance Divergence](20_Images/05_grand_unification_No_zoom.png)
 > **Table 3: The Dual De-Risking Sighting (Index: Jan 2023 = 100).**
-> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains unaffected by the geopolitical shift.
+> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift.
 ---
 
 ## 🧮 Statistical Proof (Chow Test)
