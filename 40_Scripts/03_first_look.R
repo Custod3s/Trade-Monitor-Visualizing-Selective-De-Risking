@@ -3,7 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(lubridate)
 library(zoo)
-
+source("40_Scripts/00_style.R")
 
 trade_data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv", 
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
@@ -19,9 +19,7 @@ plot_data <- trade_data %>%
     rolling_avg = rollmean(total_trade_value, k = 6, fill = NA, align = "center")
   )
 
-
 View(plot_data)
-
 
 ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
   geom_line(size = 1.2) + theme_minimal() +
@@ -29,9 +27,9 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
        x = "Time",
        y = "Trade Value (USD)",
        color = "Sector Group") +
-  scale_color_manual(values = c("High-Tech & Strategic" = "#004494", 
-                                     "Traditional & Basic" = "#555555")) +
-  theme(text = element_text(size = 14)) + 
+  scale_color_manual(values =  c("High-Tech & Strategic"   = "#005f73",
+                                  "Traditional & Basic" = "#94a3b8")) +
+  theme_esc() + 
   geom_vline(xintercept = as.Date("2023-01-01"), 
                                                    linetype = "dashed", 
                                                    color = "#D9534F", # "Risk Red" color
@@ -76,12 +74,13 @@ plot_data_indexed <- trade_data %>%
   ) %>%
   select(date, sector_group, index_val)
 
+
 # Plot the Index
 ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
   geom_line(linewidth = 1.2) +
   geom_hline(yintercept = 100, linetype = "dotted") + # The "No Change" line
   geom_vline(xintercept = as.Date("2022-11-01"), linetype = "dashed", color = "#D9534F") +
-  theme_minimal() +
+  theme_esc() +
   labs(
     title = "Relative Trade Performance (Index: Jan 2023 = 100)",
     subtitle = "Since the EU Economic Security Strategy, High-Tech has underperformed Traditional trade.",
@@ -89,6 +88,6 @@ ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
     x = "Date",
     color = "Sector Groups"
   ) +
-  scale_color_manual(values = c("High-Tech & Strategic" = "#004494", 
-                                "Traditional & Basic" = "#555555"))
+  scale_color_manual(values = c("High-Tech & Strategic"   = "#005f73",
+                                "Traditional & Basic" = "#94a3b8"))
 ggsave("20_Images/03_eu_trade_china_sector_indexed.png", width = 10, height = 6)

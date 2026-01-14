@@ -7,6 +7,8 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(zoo)
+source("40_Scripts/00_style.R")
+
 
 # 1. Load the Two Datasets
 # ---------------------------------------------------------
@@ -74,9 +76,9 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
   
   # Custom Colors & Line Types
   scale_color_manual(values = c(
-    "High-Tech & Strategic" = "#004494",   # Deep Blue (Trade)
-    "Traditional & Basic" = "#999999",     # Grey (Control Group)
-    "Financial Exposure (BIS)" = "#D9534F" # Red (The Warning Signal)
+    "High-Tech & Strategic"   = "#005f73",  # Deep Teal (Strategic)
+    "Traditional & Basic" = "#94a3b8",  # Cool Grey (Background/Control)
+    "Financial Exposure (BIS)" = "#b91c1c"   # Bold Red (Warning/Capital Flight)
   )) +
   scale_linetype_manual(values = c(
     "High-Tech & Strategic" = "solid",
@@ -92,7 +94,7 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
     x = "",
     caption = "Sources: Eurostat (Trade), BIS Locational Banking Statistics (Finance)"
   ) +
-  theme_minimal() +
+  theme_esc() +
   theme(
     legend.position = "bottom",
     legend.title = element_blank(),

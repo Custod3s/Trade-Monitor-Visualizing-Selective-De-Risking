@@ -12,6 +12,7 @@ library(stringr)
 library(scales)
 library(ggplot2)
 library(lubridate)
+source("40_Scripts/00_style.R")
 
 # 1. Fetch Data
 # ---------------------------------------------------------
@@ -69,7 +70,7 @@ ggplot(clean_df_bis, aes(x = Date, y = Total_Claims_USD_Millions)) +
   scale_x_date(date_labels = "%Y", date_breaks = "1 year") +
   
   # Theme
-  theme_minimal(base_size = 14) +
+  theme_esc() +
   theme(
     plot.title = element_text(face = "bold", size = 16),
     plot.subtitle = element_text(color = "grey30"),
