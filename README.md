@@ -24,7 +24,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > **Table 1: Relative Trade Performance (Index: Jan 2023 = 100).**
 > While "Traditional" imports (Grey) exhibit resilience (100–110), "Strategic" imports (Blue) show a structural contraction (<85) following the announcement of the Economic Security Strategy.
 
-![Eurozone Banking Claims on CN](20_Images/06_banking_claims_CN.png)
+![Eurozone Banking Claims on CN](20_Images/06_banking_claims_CN_all_indic.png)
 > **Figure 2: Euro Area Banking Claims on China (Mrd. USD).**
 > Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
 
