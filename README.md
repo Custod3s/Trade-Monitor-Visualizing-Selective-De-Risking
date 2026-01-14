@@ -62,5 +62,6 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 6. Run `05_finance_x_imports_CN.R` - Combines trade & financial data (Table 3)
 7. Run `07_strucchange.R` - Statistical proof of the structural break
 8. Run `08_strucchange_control.R`- Confirm / Deny hypotheses of decoupling mechanism
+9. Run `09_dashboard.R`- Creates an interactive dashboard for presentation purposes
 
 
