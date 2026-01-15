@@ -59,12 +59,12 @@ if (file.exists("40_Scripts/00_style.R")) {
 load_data <- function() {
   tryCatch({
     # Load trade data
-    trade_data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv", 
+    trade_data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                            col_types = cols(date = col_date(format = "%Y-%m-%d")),
                            show_col_types = FALSE)
     
     # Load banking data
-    finance_data <- read_delim("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv", 
+    finance_data <- read_delim(here::here("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv"), 
                                delim = ";", 
                                escape_double = FALSE, 
                                col_types = cols(date = col_date(format = "%Y-%m-%d")), 

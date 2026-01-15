@@ -5,7 +5,7 @@ library(lubridate)
 library(zoo)
 source("40_Scripts/00_style.R")
 
-trade_data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv", 
+trade_data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
 View(trade_data)
 

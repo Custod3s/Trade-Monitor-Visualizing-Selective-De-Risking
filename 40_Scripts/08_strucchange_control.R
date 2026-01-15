@@ -5,7 +5,7 @@ library(readr)
 
 # 2. Load and Prepare Data
 # ---------------------------------------------------------
-data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv", 
+data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                  col_types = cols(date = col_date(format = "%Y-%m-%d")))
 View(data)
 
@@ -32,3 +32,19 @@ chow_test_control <- sctest(ts_control ~ 1, type = "Chow", point = 25)
 
 print("--- CONTROL GROUP RESULTS (Traditional Trade) ---")
 print(chow_test_control)
+
+# Save results for report
+results <- list(
+  break_date = as.character(break_date),
+  chow_statistic = chow_test$statistic,
+  chow_p_value = chow_test$p.value,
+  f_max = max(fs$Fstats, na.rm = TRUE)
+)
+
+saveRDS(results, here::here("30_Report/strucchange__control_results.rds"))
+write_csv(as_tibble(results), here::here("30_Report/strucchange_control_results.csv"))
+
+cat("\n=== STRUCTURAL BREAK ANALYSIS ===\n")
+cat("Break detected at:", results$break_date, "\n")
+cat("Chow statistic:", round(results$chow_statistic, 2), "\n")
+cat("P-value:", format(results$chow_p_value, scientific = TRUE), "\n")

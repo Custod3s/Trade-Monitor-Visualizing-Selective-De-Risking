@@ -2,10 +2,9 @@ library(dplyr)
 library(readr)
 library(tidyr)
 library(stringr)
-
-setwd("/Users/alex/Programming/ECB_Data_Challenge")
-
-trade_raw <- read_delim("Data/pulled_EU_CN_VN_US_2020-2025.csv", 
+# =====================================================
+# LOAD DATA FROM SAVED CSV
+trade_raw <- read_delim(here::here("10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.csv"), 
                         delim = ";", escape_double = FALSE, col_types = cols(freq = col_skip(), 
                                                                              stk_flow = col_skip(), geo = col_skip(), 
                                                                              TIME_PERIOD = col_date(format = "%Y-%m-%d")), 
@@ -59,6 +58,6 @@ df_categorized <- categorize_trade(df_clean) %>%
   select(date, partner, sector_group, values)
 View(df_categorized)
 
-write.csv(df_categorized, file = "10_Data/01_data_clean_sitc.csv", row.names = FALSE)
+write.csv(df_categorized, file = "10_Data/11_Processed/01_data_clean_sitc.csv", row.names = FALSE)
 
 

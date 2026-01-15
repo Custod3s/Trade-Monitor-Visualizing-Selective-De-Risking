@@ -2,7 +2,6 @@ library(eurostat)
 library(dplyr)
 library(readr)
 
-setwd("/Users/alex/Programming/ECB_Data_Challenge")
 # =====================================================
 # LOAD DATA FROM EUROSTAT API
 # =====================================================
@@ -69,5 +68,5 @@ View(trade_csv)
 
 write_csv2(
   trade_csv,
-  "10_data/pulled_EU_CN_VN_US_2020-2025.csv"
+  "10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.csv"
 )
