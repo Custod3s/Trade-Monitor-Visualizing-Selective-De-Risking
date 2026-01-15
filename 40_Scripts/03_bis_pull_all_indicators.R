@@ -69,7 +69,7 @@ clean_df_bis <- date_grid %>%
 View(clean_df_bis)
 # 4. Export Final Merged File
 # ---------------------------------------------------------
-write_csv2(clean_df_bis, "10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv") # Check your folder path!
+write_csv(clean_df_bis, "10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv")
 
 # 5. Visualization (Updated Column Name)
 # ---------------------------------------------------------

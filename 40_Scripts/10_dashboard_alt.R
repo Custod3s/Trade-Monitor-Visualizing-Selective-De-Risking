@@ -64,13 +64,9 @@ load_data <- function() {
                            show_col_types = FALSE)
     
     # Load banking data
-    finance_data <- read_delim(here::here("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv"), 
-                               delim = ";", 
-                               escape_double = FALSE, 
-                               col_types = cols(date = col_date(format = "%Y-%m-%d")), 
-                               locale = locale(decimal_mark = ",", grouping_mark = ""), 
-                               trim_ws = TRUE,
-                               show_col_types = FALSE)
+    finance_data <- read_csv(here::here("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv"), 
+                             col_types = cols(date = col_date(format = "%Y-%m-%d")),
+                             show_col_types = FALSE)
     
     list(trade = trade_data, finance = finance_data)
   }, error = function(e) {

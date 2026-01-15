@@ -16,10 +16,8 @@ trade_data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv")
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
 View(trade_data)
 
-finance_data <- read_delim("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv", 
-                           delim = ";", escape_double = FALSE, col_types = cols(date = col_date(format = "%Y-%m-%d")), 
-                           locale = locale(decimal_mark = ",", grouping_mark = ""), 
-                           trim_ws = TRUE)
+finance_data <- read_csv(here::here("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv"), 
+                         col_types = cols(date = col_date(format = "%Y-%m-%d")))
 
 View(finance_data)
 
