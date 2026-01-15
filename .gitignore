@@ -24,3 +24,11 @@ Thumbs.db
 # Credentials
 .env
 credentials.R
+
+# App - Files
+app.r
+rsconnect/
+rsconnect/*
+40_Scripts/app.r
+40_Scripts/rsconnect/
+40_Scripts/rsconnect/*
