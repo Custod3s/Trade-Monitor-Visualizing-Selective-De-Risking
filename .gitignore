@@ -2,3 +2,25 @@
 .Rhistory
 .RData
 .Ruserdata
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# R files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Data files
+10_Data/12_Raw/*.csv
+10_Data/12_Raw/*.xlsx
+10_Data/11_Processed/*.csv
+
+# Credentials
+.env
+credentials.R
