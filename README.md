@@ -33,16 +33,11 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift.
 ---
 
-### Methodology & Key Finding
+### Methodology
 
 Using structural break detection (Chow test) on monthly trade data 
 (2020-2025), we identify a statistically significant break in January 2023 
 coinciding with the EU Economic Security Strategy implementation.
-
-**Critical finding**: While both High-Tech (SITC 5+7) and Traditional 
-(SITC 6+8) sectors show significant structural breaks (p < 0.001), the 
-High-Tech break is **4.5 times more intense** (F = 55.12 vs F = 12.37), 
-providing empirical evidence of **selective** rather than general de-risking.
 
 **Hypothesis:**
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
