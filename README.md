@@ -18,7 +18,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 
 ---
 
-## 📊 The "Money Plot": Evidence of Divergence
+## ![📊 The "Money Plot": Evidence of Divergence](https://custod3s.shinyapps.io/data_challenge/)
 
 ![Relative Trade Performance](20_Images/Dashboard_Top.png)
 > **Table 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
