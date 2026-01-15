@@ -12,7 +12,6 @@ library(here)
 # ---------------------------------------------------------
 data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                  col_types = cols(date = col_date(format = "%Y-%m-%d")))
-View(data)
 
 # Filter for High-Tech Imports from China (The "Blue Line")
 ts_data <- data %>%

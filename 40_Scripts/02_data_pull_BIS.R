@@ -46,7 +46,6 @@ df_bis_monthly <- df_bis_clean %>%
 # 4. Save
 # ---------------------------------------------------------
 print(head(df_bis_monthly))
-View(df_bis_monthly)
 
 write_csv(
   df_bis_monthly,

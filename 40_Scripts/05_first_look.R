@@ -8,7 +8,6 @@ source("40_Scripts/00_style.R")
 
 trade_data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
-View(trade_data)
 
 
 plot_data <- trade_data %>%
@@ -20,7 +19,6 @@ plot_data <- trade_data %>%
     rolling_avg = rollmean(total_trade_value, k = 6, fill = NA, align = "center")
   )
 
-View(plot_data)
 
 ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
   geom_line(linewidth = 1.2) + theme_esc() +
@@ -52,7 +50,6 @@ ggsave("20_Images/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
 
 
 # Calculate Index (Jan 2023 = 100)
-View(plot_data)
 
 plot_data_indexed <- trade_data %>%
   filter(grepl("CN_X_HK", partner)) %>%

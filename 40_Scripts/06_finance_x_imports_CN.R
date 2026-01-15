@@ -15,12 +15,10 @@ source("40_Scripts/00_style.R")
 # ---------------------------------------------------------
 trade_data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                        col_types = cols(date = col_date(format = "%Y-%m-%d")))
-View(trade_data)
 
 finance_data <- read_csv(here::here("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv"), 
                          col_types = cols(date = col_date(format = "%Y-%m-%d")))
 
-View(finance_data)
 
 # 2. Process Trade Data (Smooth & Index)
 # ---------------------------------------------------------
@@ -46,7 +44,6 @@ trade_indexed <- trade_data %>%
   ) %>%
   select(date, sector_group, index_val)
 
-View(trade_indexed)
 
 # 3. Process Finance Data (Index Only)
 # ---------------------------------------------------------
@@ -59,7 +56,6 @@ finance_indexed <- finance_data %>%
   ) %>%
   select(date, sector_group, index_val)
 
-View(finance_indexed)
 # 4. Merge and Filter Time Window
 # ---------------------------------------------------------
 plot_data <- bind_rows(trade_indexed, finance_indexed) # %>%

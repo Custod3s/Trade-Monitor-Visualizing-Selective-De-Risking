@@ -9,7 +9,6 @@ trade_raw <- read_csv(here::here("10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.cs
                       col_types = cols(freq = col_skip(), stk_flow = col_skip(), 
                                        geo = col_skip(), TIME_PERIOD = col_date(format = "%Y-%m-%d")))
 
-View(trade_raw)
 
 df_clean <- trade_raw %>%
   # Standardize column names (optional but safer)
@@ -32,7 +31,6 @@ df_clean <- trade_raw %>%
   # Select only the columns you need for the analysis
   select(date, partner, sitc_code, values)
 
-View(df_clean)
 # Function to categorize SITC codes
 # Input: A dataframe with a column named 'sitc_code' (e.g., "5", "7", "64", etc.)
 categorize_trade <- function(df) {
@@ -55,7 +53,6 @@ categorize_trade <- function(df) {
 
 df_categorized <- categorize_trade(df_clean) %>%
   select(date, partner, sector_group, values)
-View(df_categorized)
 
 write.csv(df_categorized, file = "10_Data/11_Processed/01_data_clean_sitc.csv", row.names = FALSE)
 

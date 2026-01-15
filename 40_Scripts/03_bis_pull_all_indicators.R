@@ -23,7 +23,6 @@ df_bis_raw <- read_csv(bis_url, show_col_types = FALSE)
 eurozone_iso <- c("AT", "BE", "CY", "EE", "FI", "FR", "DE", "GR", 
                   "HR", "IE", "IT", "LV", "LT", "LU", "MT", "NL", 
                   "PT", "SK", "SI", "ES")
-View(df_bis_raw)
 
 # 3. Process & Interpolate
 # ---------------------------------------------------------
@@ -66,7 +65,6 @@ clean_df_bis <- date_grid %>%
   select(date, values, sector_group) %>%
   filter(!is.na(values)) # Remove any leading NAs if data started later than min_date
 
-View(clean_df_bis)
 # 4. Export Final Merged File
 # ---------------------------------------------------------
 write_csv(clean_df_bis, "10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv")

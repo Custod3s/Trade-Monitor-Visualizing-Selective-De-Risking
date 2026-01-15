@@ -60,7 +60,6 @@ trade_csv <- trade_raw %>%
     values
   ) %>%
   arrange(TIME_PERIOD, partner, sitc06)
-View(trade_csv)
 
 # =====================================================
 # EXPORT CSV
