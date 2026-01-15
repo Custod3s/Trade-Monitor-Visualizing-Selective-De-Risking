@@ -53,7 +53,7 @@ break_index <- which(time(ts_val) == 2023.0)
 chow_test_covid <- sctest(ts_val ~ 1, type = "Chow", point = break_index)
 
 print("--- CHOW TEST RESULTS ---")
-print(chow_test)
+print(chow_test_covid)
 
 ts_data_c <- data %>%
   filter(grepl("CN_X_HK", partner)) %>%

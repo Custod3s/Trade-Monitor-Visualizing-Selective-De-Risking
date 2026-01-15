@@ -87,9 +87,9 @@ ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
     plot.title = element_text(face = "bold", size = 14)
   ) +
   labs(
-    title = "Relative Trade Performance (Index: NOV 2022 = 100)",
+    title = "Relative Trade Performance (Index: 2022 Average = 100)",
     subtitle = "Since the EU Economic Security Strategy, High-Tech has underperformed Traditional trade.",
-    y = "Import Volume (Index 100 = Jan 2023)",
+    y = "Import Volume (Index 100 = 2022 Avg)",
     x = "Date",
     color = "Sector Groups"
   ) +

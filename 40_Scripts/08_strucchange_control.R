@@ -22,6 +22,28 @@ ts_data_control <- data %>%
 
 print(paste("Number of rows:", nrow(ts_data)))
 
+# Convert to Time Series Object (TS)
+# Start = Jan 2020 (Year 2020, Month 1), Frequency = 12 (Monthly)
+ts_val <- ts(ts_data_control$values, start = c(2020, 1), frequency = 12)
+
+# 3. The F-Statistics Test (Finding the Break)
+# ---------------------------------------------------------
+# This tests every single month to see where the biggest "break" in the trend is.
+fs <- Fstats(ts_val ~ 1)
+
+# Plot the F-Statistics (Visual Proof)
+plot(fs, main = "Structural Break Test (F-Statistics)")
+lines(breakpoints(fs))
+
+# 4. Extract the Exact Break Date
+# ---------------------------------------------------------
+bp <- breakpoints(ts_val ~ 1)
+break_date_index <- bp$breakpoints
+
+# Convert index back to a real date
+break_date <- time(ts_val)[break_date_index]
+print(paste("⚠️ STATISTICAL BREAK DETECTED AT:", break_date))
+
 # 3. Create Time Series
 # Start Jan 2021, Frequency 12
 ts_control <- ts(ts_data_control$values, start = c(2021, 1), frequency = 12)
@@ -36,7 +58,7 @@ print(chow_test_control)
 # Save results for report
 results <- list(
   break_date = as.character(break_date),
-  chow_statistic = chow_test$statistic,
+  chow_statistic = chow_test_control$statistic,
   chow_p_value = chow_test$p.value,
   f_max = max(fs$Fstats, na.rm = TRUE)
 )
