@@ -24,6 +24,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > **Table 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
 > * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Jan 2023.
 > * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
+
 ![Eurozone Banking Claims on CN](20_Images/Dashboard_Middle.png)
 > **Panel 2: Euro Area Banking Claims on China (Mrd. USD).**
 > Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
