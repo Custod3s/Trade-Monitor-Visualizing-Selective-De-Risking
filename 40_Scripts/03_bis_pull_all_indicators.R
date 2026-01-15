@@ -71,7 +71,7 @@ write_csv(clean_df_bis, "10_Data/11_Processed/cleaned_BIS_monthly_all_indicators
 
 # 5. Visualization (Updated Column Name)
 # ---------------------------------------------------------
-ggplot(clean_df_bis, aes(x = Date, y = values)) +
+ggplot(clean_df_bis, aes(x = date, y = values)) +
   # Using linewidth (new standard) to avoid warnings
   geom_line(color = "#2c3e50", linewidth = 1) + 
   geom_point(color = "#e74c3c", size = 2) +

@@ -36,7 +36,7 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
   
   annotate("text", 
            x = as.Date("2022-12-01"), # Place text slightly to the right of the line
-           y = 28000,                 # Place it high up (adjust based on your Y-axis)
+           y = 100,                 # Place it high up (adjust based on your Y-axis)
            label = "Start of Divergence", 
            hjust = 1,                 # Left-align text
            color = "#D9534F", 
