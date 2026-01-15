@@ -4,11 +4,9 @@ library(tidyr)
 library(stringr)
 # =====================================================
 # LOAD DATA FROM SAVED CSV
-trade_raw <- read_delim(here::here("10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.csv"), 
-                        delim = ";", escape_double = FALSE, col_types = cols(freq = col_skip(), 
-                                                                             stk_flow = col_skip(), geo = col_skip(), 
-                                                                             TIME_PERIOD = col_date(format = "%Y-%m-%d")), 
-                        trim_ws = TRUE)
+trade_raw <- read_csv(here::here("10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.csv"), 
+                      col_types = cols(freq = col_skip(), stk_flow = col_skip(), 
+                                       geo = col_skip(), TIME_PERIOD = col_date(format = "%Y-%m-%d")))
 
 View(trade_raw)
 

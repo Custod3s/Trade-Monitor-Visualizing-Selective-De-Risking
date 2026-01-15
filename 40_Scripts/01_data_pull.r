@@ -66,7 +66,7 @@ View(trade_csv)
 # EXPORT CSV
 # =====================================================
 
-write_csv2(
+write_csv(
   trade_csv,
   "10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.csv"
 )
