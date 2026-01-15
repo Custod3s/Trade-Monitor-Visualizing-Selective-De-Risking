@@ -490,7 +490,6 @@ server <- function(input, output, session) {
       scale_color_manual(values = partner_colors) +
       scale_y_continuous(labels = function(x) paste(x / 1000, "B")) +
       labs(
-        title = paste0(input$smooth_window, "-Month Rolling Avg: All Partners"),
         x = "Date",
         y = "Total Trade Value (USD)",
         color = "Trading Partner"
