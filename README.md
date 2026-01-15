@@ -33,9 +33,16 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift.
 ---
 
-## 🧮 Statistical Proof (Chow Test)
+### Methodology & Key Finding
 
-To confirm that the visual drop in High-Tech imports was not random volatility, we performed a **Chow Test for Structural Breaks**. We ran the model twice to control for the extreme volatility of the 2020 COVID shock.
+Using structural break detection (Chow test) on monthly trade data 
+(2020-2025), we identify a statistically significant break in January 2023 
+coinciding with the EU Economic Security Strategy implementation.
+
+**Critical finding**: While both High-Tech (SITC 5+7) and Traditional 
+(SITC 6+8) sectors show significant structural breaks (p < 0.001), the 
+High-Tech break is **4.5 times more intense** (F = 55.12 vs F = 12.37), 
+providing empirical evidence of **selective** rather than general de-risking.
 
 **Hypothesis:**
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
@@ -48,8 +55,23 @@ To confirm that the visual drop in High-Tech imports was not random volatility, 
 | **High-Tech (Strategic)** | `55.12` | `0.0000000002429` | **Massive Break** (Policy + Market) |
 | **Low-Tech (Control)** | `12.37` | `0.0007818` | **Moderate Break** (Market Only) |
 
+### Key Statistical Finding
+
+Both High-Tech and Traditional sectors show significant structural breaks at 
+Jan 2023 (p < 0.001), but the magnitude differs dramatically:
+
+- **High-Tech & Strategic**: F = 55.12 (p < 0.0001)
+- **Traditional & Basic**: F = 12.37 (p = 0.0008)
+- **Intensity Ratio**: 4.5x stronger in strategic sectors
+
+**Interpretation**: While all EU-China trade was affected by the 2023 policy 
+shift, strategic goods experienced a structural break 4.5 times more intense 
+than traditional goods, confirming targeted "selective de-risking" rather than 
+general trade reduction.
+
 **Conclusion:** 
-* The structural break in strategic goods is **4.5x more intense** than in general trade, confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
+* The structural break in strategic goods is **4.5x more intense** than in general trade,
+  confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
 ---
 
 
