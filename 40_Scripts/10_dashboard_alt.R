@@ -228,16 +228,21 @@ ui <- dashboardPage(
             
             h4("Methodology:"),
             tags$ul(
-              tags$li("Data Source: ECB Statistical Data Warehouse (2020-2025)"),
+              tags$li("Data Source: Eurostat (ECB Data Portal) & BIS (2020-2025)"),
               tags$li("Statistical Validation: Chow Test for Structural Breaks"),
-              tags$li("Break Point: January 2023 (Implementation of Economic Security Strategy)"),
-              tags$li("F-Statistic (High-Tech): 55.12 (p < 0.0001)")
+              tags$li("Break Point: January 2023 (EU Economic Security Strategy)"),
+              tags$li(strong("High-Tech F-Statistic: 55.12 (p < 0.0001)")),
+              tags$li(strong("Traditional F-Statistic: 12.37 (p < 0.001)")),
+              tags$li(strong("Intensity Ratio: 4.5x (High-Tech vs Traditional)"))
             ),
             
             h4("Interpretation:"),
-            p("The structural break in strategic goods is 4.5x more intense than in general trade, 
-              confirming that 'De-risking' effectively decoupled the high-tech sector beyond 
-              normal market fluctuations."),
+            p("Both sectors show significant structural breaks in January 2023, confirming 
+              the policy timing. However, the High-Tech break is  strong 4.5* more intense), 
+              than Traditional trade F = 55.12 vs F = 12.37, providing empirical evidence 
+              that EU 'de-risking' specifically targeted strategic sectors while maintaining 
+              traditional trade relationships. This validates the 'selective' nature of 
+              de-risking beyond normal market fluctuations."),
             
             hr(),
             
