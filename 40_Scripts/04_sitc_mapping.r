@@ -2,6 +2,7 @@ library(dplyr)
 library(readr)
 library(tidyr)
 library(stringr)
+library(here)
 # =====================================================
 # LOAD DATA FROM SAVED CSV
 trade_raw <- read_csv(here::here("10_Data/12_Raw/pulled_EU_CN_VN_US_2020-2025.csv"), 
