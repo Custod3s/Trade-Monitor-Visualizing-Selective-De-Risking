@@ -164,7 +164,7 @@ ui <- dashboardPage(
         # Visualization 1: Trade Overview (Two graphs side by side)
         fluidRow(
           box(
-            title = "1a. EU Imports from China by Sector (2020-2025)",
+            title = "1a. EU Imports from China (Traditional vs Strategic Sectors)",
             status = "primary",
             solidHeader = TRUE,
             width = 6,
@@ -440,28 +440,65 @@ server <- function(input, output, session) {
   # ==============================================================================
   
   output$trade_by_partner <- renderPlotly({
-    req(filtered_trade_data())
+    req(data_list$trade)
     
-    # Use the same smooth data, but keep it long for Stacked Area
-    plot_data <- filtered_trade_data() %>%
-      group_by(date, sector_group) %>%
-      summarise(values = sum(values, na.rm = TRUE), .groups = 'drop') %>%
+    # Filter for all partners and combine sectors
+    plot_data <- data_list$trade %>%
+      filter(
+        partner %in% c("CN_X_HK", "US", "VN", "EU27_2020_NEA20"),
+        date >= input$date_range[1],
+        date <= input$date_range[2]
+      ) %>%
+      # Sum all sectors per partner per date
+      group_by(date, partner) %>%
+      summarise(total_value = sum(values, na.rm = TRUE), .groups = 'drop') %>%
+      # Apply rolling average
+      group_by(partner) %>%
       arrange(date) %>%
-      group_by(sector_group) %>%
-      mutate(rolling_avg = rollmean(values, k = input$smooth_window, fill = NA, align = "right")) %>%
-      filter(!is.na(rolling_avg))
+      mutate(
+        rolling_avg = rollmean(total_value, k = input$smooth_window, fill = NA, align = "center")
+      ) %>%
+      ungroup() %>%
+      filter(!is.na(rolling_avg)) %>%
+      # Create readable labels
+      mutate(
+        partner_label = case_when(
+          partner == "CN_X_HK" ~ "China",
+          partner == "US" ~ "United States",
+          partner == "VN" ~ "Vietnam",
+          partner == "EU27_2020_NEA20" ~ "EU (Extra-EA)",
+          TRUE ~ partner
+        )
+      )
     
-    p <- ggplot(plot_data, aes(x = date, y = rolling_avg, fill = sector_group)) +
-      geom_area(alpha = 0.8, color = "white") +
-      geom_vline(xintercept = as.Date("2023-01-01"), linetype = "dotted", color = "white") +
-      
-      scale_fill_manual(values = esc_colors) +
+    # Define colors for partners
+    partner_colors <- c(
+      "China" = "#b91c1c",            # Red (matches your theme)
+      "United States" = "#0077b6",    # Blue
+      "Vietnam" = "#2d6a4f",          # Green
+      "EU (Extra-EA)" = "#94a3b8"     # Grey (matches Traditional color)
+    )
+    
+    p <- ggplot(plot_data, aes(x = date, y = rolling_avg, color = partner_label)) +
+      geom_line(linewidth = 1.2) +
+      geom_vline(
+        xintercept = as.Date("2023-01-01"), 
+        linetype = "dashed", 
+        color = "#D9534F", 
+        linewidth = 1
+      ) +
+      scale_color_manual(values = partner_colors) +
       scale_y_continuous(labels = function(x) paste(x / 1000, "B")) +
-      labs(title = NULL, x = NULL, y = "Total Volume") +
-      theme_esc() +
-      theme(legend.position = "none") # Legend is redundant next to Plot 1a
+      labs(
+        title = paste0(input$smooth_window, "-Month Rolling Avg: All Partners"),
+        x = "Date",
+        y = "Total Trade Value (USD)",
+        color = "Trading Partner"
+      ) +
+      theme_esc()
     
-    ggplotly(p, tooltip = c("x", "y", "fill"))
+    ggplotly(p, tooltip = c("x", "y", "colour")) %>%
+      layout(legend = list(orientation = "h", y = -0.15))
   })
   
   # ==============================================================================

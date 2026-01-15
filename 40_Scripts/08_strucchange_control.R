@@ -59,7 +59,7 @@ print(chow_test_control)
 results <- list(
   break_date = as.character(break_date),
   chow_statistic = chow_test_control$statistic,
-  chow_p_value = chow_test$p.value,
+  chow_p_value = chow_test_control$p.value,
   f_max = max(fs$Fstats, na.rm = TRUE)
 )
 
