@@ -21,15 +21,15 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 ## 📊 The "Money Plot": Evidence of Divergence
 
 ![Relative Trade Performance](20_Images/Dashboard_Top.png)
-> **Table 1: Visualizing Divergence:**
-> The dashboard compares Strategic High-Tech vs. Traditional import volumes (3-month rolling average). The red "De-Risking Gap" (Left) quantifies the underperformance of the strategic sector following the Jan 2023 Economic Security Strategy. The right-hand panel contextualizes this decline against total import volume, showing a shift in trade composition rather than a total collapse.
-
+> **Table 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
+> Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Jan 2023.
+> Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
 ![Eurozone Banking Claims on CN](20_Images/Dashboard_Middle.png)
-> **Table 2: Euro Area Banking Claims on China (Mrd. USD).**
+> **Panel 2: Euro Area Banking Claims on China (Mrd. USD).**
 > Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
 
 ![Trade & Finance Divergence](20_Images/Dashboard_Bottom.png)
-> **Table 3: The Dual De-Risking Sighting (Index: Avg 2022 = 100).**
+> **Panel 3: The Dual De-Risking Sighting (Index: Avg 2022 = 100).**
 > The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift.
 >
 >  [Dashboard Link](https://custod3s.shinyapps.io/data_challenge/)
