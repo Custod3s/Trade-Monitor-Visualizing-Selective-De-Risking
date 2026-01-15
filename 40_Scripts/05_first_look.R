@@ -22,7 +22,7 @@ plot_data <- trade_data %>%
 View(plot_data)
 
 ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
-  geom_line(size = 1.2) + theme_esc() +
+  geom_line(linewidth = 1.2) + theme_esc() +
   labs(title = "3-Month Rolling Average of EU Trade with China by Sector Group",
        x = "Time",
        y = "Trade Value (USD)",
