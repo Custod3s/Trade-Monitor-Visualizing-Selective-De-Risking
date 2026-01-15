@@ -1,157 +1,248 @@
-# Trade Monitor: Visualizing Selective De-Risking
+================================================================================
+EU-CHINA TRADE MONITOR: VISUALIZING SELECTIVE DE-RISKING
+ESC Data Challenge 2026 Submission
+================================================================================
 
-A data analysis and visualization project examining international trade patterns and financial exposure, with focus on selective de-risking in global trade relationships.
+PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+This project investigates whether the EU is successfully implementing 
+"selective de-risking" from China following the EU Economic Security Strategy 
+(January 2023). Using structural break detection and cross-domain analysis 
+(trade + finance), we provide empirical evidence that strategic sectors 
+experienced significantly stronger breaks than traditional sectors.
 
-## 📋 Project Overview
+KEY FINDING: High-Tech imports show a structural break 4.5x more intense than 
+Traditional imports (F=55.12 vs F=12.37, both p<0.001), confirming targeted 
+"selective de-risking" rather than general trade decline.
 
-This repository contains R-based analytical tools for processing, analyzing, and visualizing trade data from multiple sources including BIS (Bank for International Settlements) financial exposure data and international trade statistics.
 
-## 🏗️ Project Structure
+QUICK START
+--------------------------------------------------------------------------------
+1. Open R/RStudio
+2. Set working directory to the project root folder
+3. Run: source("00_BASE/run_all.R")
+4. Wait ~5-10 minutes for data download and processing
+5. Dashboard will open automatically in your browser
 
-```
-├── foundation.R                 # Core setup and configuration
+ALTERNATIVE: View the live dashboard at:
+https://[your-shinyapps-url].shinyapps.io/
+
+
+SYSTEM REQUIREMENTS
+--------------------------------------------------------------------------------
+- R version 4.0 or higher (tested on R 4.3+)
+- Internet connection (for data download from Eurostat and BIS APIs)
+- Recommended: 8GB RAM, modern web browser
+- Operating System: Windows, macOS, or Linux
+
+
+REPOSITORY STRUCTURE
+--------------------------------------------------------------------------------
+.
+├── 00_BASE/
+│   ├── README.txt             # This file
+│   ├── run_all.R              # Master script (runs entire analysis)
+│   └── foundation.R           # Project setup and configuration
 │
-├── 10_Data/                     # Data storage directory
-│   ├── 11_Processed/           # Cleaned and processed datasets
-│   │   ├── 01_data_clean_sitc.csv
-│   │   ├── cleaned_BIS_monthly_LG.csv
-│   │   └── cleaned_BIS_monthly_all_indic...
-│   └── 12_Raw/                 # Raw data files
-│       ├── API_links.txt
-│       ├── BIS_Financial_Exposure_EU_C...
-│       └── pulled_EU_CN_VN_US_2020-2...
+├── 10_Data/
+│   ├── 11_Processed/          # Cleaned datasets (created by scripts)
+│   └── 12_Raw/                # Raw data from APIs (created by scripts)
 │
-├── 20_Images/                   # Generated visualizations and plots
+├── 20_Images/                  # Generated visualizations (PNG, 300 dpi)
 │
-├── 30_Report/                   # Report outputs and documentation
+├── 30_Report/                  # Statistical results and documentation
+│   ├── strucchange_results.csv           # High-Tech structural break
+│   ├── strucchange_control_results.csv   # Traditional structural break
+│   └── chow_test_comparison.csv          # Comparative analysis
 │
-└── 40_Scripts/                  # Analysis and processing scripts
-    ├── 00_style.R              # Styling and theming configuration
-    ├── 01_data_pull.r          # Data retrieval from APIs
-    ├── 02_sitc_mapping.r       # SITC classification mapping
-    ├── 03_first_look.R         # Initial exploratory analysis
-    ├── 04_data_pull_BIS.R      # BIS data extraction
-    ├── 05_finance_x_imports_CN.R  # Cross-analysis: finance & imports
-    ├── 06_bis_pull_all_indicators.R  # Comprehensive BIS indicators
-    ├── 07_strucchange.R        # Structural change detection
-    ├── 08_strucchange_control.R  # Control analysis for structural changes
-    ├── 09_dashboard.R          # Main dashboard generation
-    └── 10_dashboard_alt.R      # Alternative dashboard view
-```
+├── 40_Scripts/                 # Analysis pipeline (run in order)
+│   ├── 00_style.R             # Custom theme and color palette
+│   ├── 01_data_pull.r         # Eurostat trade data (ECB Data Portal)
+│   ├── 02_data_pull_BIS.R     # BIS banking statistics
+│   ├── 03_bis_pull_all_indicators.R  # BIS comprehensive data
+│   ├── 04_sitc_mapping.r      # SITC classification processing
+│   ├── 05_first_look.R        # Exploratory visualizations
+│   ├── 06_finance_x_imports_CN.R  # Trade-finance integration
+│   ├── 07_strucchange.R       # Structural break detection (High-Tech)
+│   ├── 08_strucchange_control.R  # Control group analysis (Traditional)
+│   └── 09_dashboard.R         # Interactive Shiny dashboard
+│
+└── app.R                       # Shiny dashboard (for deployment)
 
-## 🚀 Getting Started
 
-### Prerequisites
+DATA SOURCES
+--------------------------------------------------------------------------------
+1. EUROSTAT External Trade Statistics (ECB Data Portal)
+   - Dataset: ext_st_easitc
+   - Coverage: EA20 imports from CN, US, VN, EU (2020-2025)
+   - Classification: SITC Rev. 4 (Sections 5, 6, 7, 8)
+   - Frequency: Monthly
+   - URL: https://ec.europa.eu/eurostat/data/database
 
-- R (version 4.0 or higher recommended)
-- RStudio (optional but recommended)
-- Required R packages (see Dependencies section)
+2. BIS Locational Banking Statistics
+   - Dataset: WS_LBS_D_PUB
+   - Coverage: Eurozone banking claims on China (2020-2025)
+   - Type: Cross-border positions, all sectors
+   - Frequency: Quarterly (interpolated to monthly)
+   - URL: https://stats.bis.org/
 
-### Installation
+Both datasets are publicly available and accessed via API.
 
-1. Clone the repository:
-```bash
-git clone https://github.com/Custod3s/Trade-Monitor-Visualizing-Selective-De-Risking.git
-cd Trade-Monitor-Visualizing-Selective-De-Risking
-```
 
-2. Open `foundation.R` in R/RStudio to set up the project environment
+METHODOLOGY
+--------------------------------------------------------------------------------
+1. Data Collection & Processing:
+   - Automated API retrieval from Eurostat and BIS
+   - SITC classification into strategic categories:
+     * High-Tech & Strategic: SITC 5 (Chemicals) + SITC 7 (Machinery)
+     * Traditional & Basic: SITC 6 (Manufactured goods) + SITC 8 (Misc. goods)
 
-3. Install required packages (automatically handled by foundation.R)
+2. Statistical Analysis:
+   - Chow test for structural breaks (January 2023 break point)
+   - F-statistics comparison between treatment and control groups
+   - Time series indexing to 2022 baseline
 
-## 📊 Data Sources
+3. Visualization:
+   - Rolling averages (3-6 month windows) for trend smoothing
+   - Indexed comparison charts (2022 = 100)
+   - Cross-domain integration (trade + finance)
+   - Interactive Shiny dashboard with filters
 
-The project integrates data from multiple sources:
 
-- **BIS (Bank for International Settlements)**: Financial exposure data
-- **International Trade APIs**: Trade flow statistics
-- **SITC Classification**: Standard International Trade Classification for product categorization
+KEY RESULTS
+--------------------------------------------------------------------------------
+STRUCTURAL BREAK ANALYSIS (January 2023):
 
-API endpoints and documentation links are stored in `10_Data/12_Raw/API_links.txt`
+High-Tech & Strategic Imports:
+  - Chow Test F-statistic: 55.12
+  - P-value: 2.429e-10 (p < 0.0001)
+  - Interpretation: HIGHLY SIGNIFICANT structural break
 
-## 🔄 Workflow
+Traditional & Basic Imports:
+  - Chow Test F-statistic: 12.37
+  - P-value: 0.0007818 (p < 0.001)
+  - Interpretation: Significant structural break
 
-### 1. Data Collection
-Run scripts in order:
-```r
-source("40_Scripts/01_data_pull.r")          # Pull trade data
-source("40_Scripts/04_data_pull_BIS.R")      # Pull BIS financial data
-source("40_Scripts/06_bis_pull_all_indicators.R")  # Pull all BIS indicators
-```
+COMPARATIVE FINDING:
+  - Intensity Ratio: 4.5x (55.12 / 12.37)
+  - Conclusion: Strategic sectors experienced targeted de-risking
+                4.5 times more intense than traditional sectors
 
-### 2. Data Processing
-```r
-source("40_Scripts/02_sitc_mapping.r")       # Map SITC classifications
-# Processed data saved to 10_Data/11_Processed/
-```
+POLICY IMPLICATION:
+  EU Economic Security Strategy successfully achieved differential impact,
+  confirming "selective" rather than general de-risking.
 
-### 3. Analysis
-```r
-source("40_Scripts/03_first_look.R")         # Exploratory analysis
-source("40_Scripts/05_finance_x_imports_CN.R")  # Cross-sectional analysis
-source("40_Scripts/07_strucchange.R")        # Detect structural breaks
-source("40_Scripts/08_strucchange_control.R")  # Control analysis
-```
 
-### 4. Visualization
-```r
-source("40_Scripts/09_dashboard.R")          # Generate main dashboard
-source("40_Scripts/10_dashboard_alt.R")      # Generate alternative views
-# Outputs saved to 20_Images/ and 30_Report/
-```
+OUTPUTS
+--------------------------------------------------------------------------------
+Generated files (after running run_all.R):
 
-## 📈 Key Features
+1. Visualizations (20_Images/):
+   - 02_eu_trade_china_sector_trends.png
+   - 03_eu_trade_china_sector_indexed.png
+   - 05_grand_unification_No_zoom.png
+   - 06_banking_claims_CN_all_indic.png
 
-- **Automated Data Retrieval**: Scripts for pulling data from multiple APIs
-- **SITC Mapping**: Standardized trade classification mapping
-- **Structural Break Analysis**: Detection of significant changes in trade patterns
-- **Financial-Trade Cross-Analysis**: Examining relationships between financial exposure and trade flows
-- **Interactive Dashboards**: Visual exploration of trade de-risking patterns
-- **Focus Regions**: Analysis of EU, China, Vietnam, and US trade relationships (2020-present)
+2. Statistical Results (30_Report/):
+   - strucchange_results.csv (High-Tech analysis)
+   - strucchange_control_results.csv (Traditional analysis)
+   - strucchange_results.rds (R data format)
+   - strucchange_control_results.rds (R data format)
 
-## 🔍 Analysis Components
+3. Processed Data (10_Data/11_Processed/):
+   - 01_data_clean_sitc.csv (trade data by sector)
+   - cleaned_BIS_monthly_all_indicators.csv (banking data)
 
-### Structural Change Detection
-The `strucchange` scripts identify statistically significant breaks in trade patterns that may indicate selective de-risking strategies.
 
-### Cross-Sectional Analysis
-Analysis of the relationship between financial exposure (from BIS data) and import patterns, particularly focusing on China-related trade flows.
+SCRIPT EXECUTION ORDER
+--------------------------------------------------------------------------------
+The run_all.R script executes in this order:
 
-### Dashboard Visualization
-Interactive visualizations showing:
-- Trade flow trends over time
-- Financial exposure patterns
-- Risk concentration indicators
-- Geographic distribution of trade relationships
+1. foundation.R              → Setup environment, load packages
+2. 01_data_pull.r            → Download Eurostat trade data (~2 min)
+3. 02_data_pull_BIS.R        → Download BIS banking data (basic)
+4. 03_bis_pull_all_indicators.R → Download BIS comprehensive data (~1 min)
+5. 04_sitc_mapping.r         → Process SITC classifications
+6. 05_first_look.R           → Generate exploratory plots
+7. 06_finance_x_imports_CN.R → Create unified trade-finance chart
+8. 07_strucchange.R          → Structural break test (High-Tech)
+9. 08_strucchange_control.R  → Structural break test (Traditional)
+10. 09_dashboard.R           → Launch interactive dashboard
 
-## 📝 Output
+Total execution time: ~5-10 minutes (depending on internet speed)
 
-Analysis outputs are organized as follows:
-- **Processed Data**: `10_Data/11_Processed/`
-- **Visualizations**: `20_Images/`
-- **Reports**: `30_Report/`
 
-## 🤝 Contributing
+TROUBLESHOOTING
+--------------------------------------------------------------------------------
+Common issues and solutions:
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. "Package not found" error:
+   → Run: source("00_BASE/foundation.R")
+   → This will auto-install missing packages
 
-## 📄 License
+2. "Cannot open connection" or API timeout:
+   → Check internet connection
+   → Eurostat/BIS servers may be temporarily down
+   → Wait 5 minutes and retry
 
-[Specify your license here]
+3. "Path not found" error:
+   → Ensure working directory is project root
+   → Run: setwd("[path-to-project]")
+   → Then: source("00_BASE/run_all.R")
 
-## 👥 Authors
+4. Dashboard won't launch:
+   → Check that data files exist in 10_Data/11_Processed/
+   → If missing, re-run scripts 01-04
+   → Verify packages: shiny, shinydashboard, plotly installed
 
-- [Your Name/Organization]
+5. "Permission denied" when writing files:
+   → Check folder permissions
+   → On Windows: Run RStudio as Administrator
+   → On Mac/Linux: Check write permissions on folders
 
-## 📧 Contact
 
-For questions or feedback, please open an issue on GitHub.
+CONTACT & SUPPORT
+--------------------------------------------------------------------------------
+Repository: https://github.com/Custod3s/Trade-Monitor-Visualizing-Selective-De-Risking
+Issues: Open an issue on GitHub
+Email: [Contact via GitHub]
 
-## 🙏 Acknowledgments
+For ESC Data Challenge 2026 inquiries:
+Email: external_statistics_conference@ecb.europa.eu
 
-- Bank for International Settlements (BIS) for financial statistics
-- [Other data providers and contributors]
 
----
+CITATION
+--------------------------------------------------------------------------------
+If you use this code or methodology, please cite:
 
-**Note**: Ensure all API keys and credentials are stored securely and never committed to version control. Use environment variables or a separate configuration file (added to `.gitignore`) for sensitive information.
+CUSTOD3S. (2026). "EU-China Trade Monitor: Visualizing Selective 
+De-Risking". ESC Data Challenge 2026 Submission.
+GitHub: https://github.com/Custod3s/Trade-Monitor-Visualizing-Selective-De-Risking
+
+
+ACKNOWLEDGMENTS
+--------------------------------------------------------------------------------
+- European Central Bank (ECB) for hosting the Data Challenge
+- Eurostat for external trade statistics
+- Bank for International Settlements (BIS) for banking statistics
+- National Bank of Poland (NBP) for special prize sponsorship
+
+
+LICENSE
+--------------------------------------------------------------------------------
+This project is shared for educational and research purposes.
+Data sources (Eurostat, BIS) retain their original licenses.
+
+
+VERSION HISTORY
+--------------------------------------------------------------------------------
+v1.0 (2026-01-15) - Initial submission for ESC Data Challenge 2026
+                  - Complete analysis pipeline
+                  - Interactive dashboard
+                  - Statistical validation
+
+
+================================================================================
+END OF README
+For questions, see TROUBLESHOOTING section or contact via GitHub
+================================================================================
