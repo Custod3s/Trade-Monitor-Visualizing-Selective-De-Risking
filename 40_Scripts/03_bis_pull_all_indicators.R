@@ -35,7 +35,6 @@ bis_quarterly <- df_bis_raw %>%
   ungroup() %>%
   # Convert "2023-Q1" string to a real Date (set to 1st month of quarter)
   mutate(date = as.Date(as.yearqtr(TIME_PERIOD, format = "%Y-Q%q")))
-View(bis_quarterly)
 
 # 3. The "Skeleton Key" (Force the Timeline)
 # ---------------------------------------------------------

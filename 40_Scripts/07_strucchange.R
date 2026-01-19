@@ -74,7 +74,7 @@ print(chow_test_covid)
 results <- list(
   break_date = as.character(break_date),
   chow_statistic = chow_test_covid$statistic,
-  chow_p_value = chow_test$p.value,
+  chow_p_value = chow_test_covid$p.value,
   f_max = max(fs$Fstats, na.rm = TRUE)
 )
 
