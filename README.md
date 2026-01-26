@@ -59,14 +59,10 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 **Results:**
 
 
-
-| Sector | F-Statistic | P-Value | Interpretation |
-
-| :--- | :--- | :--- | :--- |
-
-| **High-Tech (Strategic)** | `30.45` | `< 0.0001` | **Massive Break** (Policy + Market) |
-
-| **Low-Tech (Control)** | `0.38` | `0.5412` | **No Break** (Stable Trend) |
+| Sector                | F-Statistic | P-Value  | Interpretation                  |
+| :-------------------- | :---------- | :------- | :------------------------------ |
+| High-Tech (Strategic) | 30.45       | < 0.0001 | Massive Break (Policy + Market) |
+| Low-Tech (Control)    | 0.38        | 0.5412   | No Break (Stable Trend)         |
 
 
 
