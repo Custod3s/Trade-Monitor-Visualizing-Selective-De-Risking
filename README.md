@@ -62,7 +62,7 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 
 | Sector | F-Statistic | P-Value | Interpretation |
 
-| :---: | :---: | :---: | :---: |
+| --- | --- | --- | --- |
 
 | **High-Tech (Strategic)** | `30.45` | `< 0.0001` | **Massive Break** (Policy + Market) |
 
