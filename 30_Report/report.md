@@ -19,17 +19,32 @@ Alex HAAS, Viliam POHANCENIK, Pieter PEVERELLI
     Categorization](#data-acquisition-and-strategic-categorization)
   - [<span class="toc-section-number">0.2.2</span> Econometric
     Framework: The Chow Test](#econometric-framework-the-chow-test)
-- [<span class="toc-section-number">0.3</span> Discussion and
-  Conclusion: Evidence of Selective
-  Fragmentation](#discussion-and-conclusion-evidence-of-selective-fragmentation)
-  - [<span class="toc-section-number">0.3.1</span> Empirical Validation
-    of the “Surgical” De-risking
-    Hypothesis](#empirical-validation-of-the-surgical-de-risking-hypothesis)
-  - [<span class="toc-section-number">0.3.2</span> From Market Logic to
-    Political Authority](#from-market-logic-to-political-authority)
-  - [<span class="toc-section-number">0.3.3</span> Forecast and Policy
-    Implications](#forecast-and-policy-implications)
-- [<span class="toc-section-number">1</span> References](#references)
+  - [<span class="toc-section-number">0.2.3</span> Model Diagnostics and
+    Robustness Checks](#model-diagnostics-and-robustness-checks)
+- [<span class="toc-section-number">1</span> Logic from
+  07_strucchange.R](#logic-from-07_strucchanger)
+- [<span class="toc-section-number">2</span> Filter for High-Tech
+  Imports](#filter-for-high-tech-imports)
+- [<span class="toc-section-number">3</span> Create TS
+  object](#create-ts-object)
+- [<span class="toc-section-number">4</span> Run Chow Test at Oct 2023
+  (Index 34)](#run-chow-test-at-oct-2023-index-34)
+- [<span class="toc-section-number">5</span> Store results for inline
+  text](#store-results-for-inline-text)
+- [<span class="toc-section-number">6</span> Logic from
+  08_strucchange_control.R
+  (Traditional)](#logic-from-08_strucchange_controlr-traditional)
+  - [<span class="toc-section-number">6.1</span> Discussion and
+    Conclusion: Evidence of Selective
+    Fragmentation](#discussion-and-conclusion-evidence-of-selective-fragmentation)
+    - [<span class="toc-section-number">6.1.1</span> Empirical
+      Validation of the “Surgical” De-risking
+      Hypothesis](#empirical-validation-of-the-surgical-de-risking-hypothesis)
+    - [<span class="toc-section-number">6.1.2</span> From Market Logic
+      to Political Authority](#from-market-logic-to-political-authority)
+    - [<span class="toc-section-number">6.1.3</span> Forecast and Policy
+      Implications](#forecast-and-policy-implications)
+- [<span class="toc-section-number">7</span> References](#references)
 
 ## Introduction: The Geoeconomics of De-risking
 
@@ -40,14 +55,15 @@ departure from the *Wandel durch Handel* (change through trade) paradigm
 toward a strategy of “de-risking”. This shift is primarily aimed at
 correcting a trade deficit that reached €304.5 billion by 2024 and
 mitigating the risks of “coercive leverage” in critical supply chains.
+This aligns with the broader academic discourse on “Weaponized
+Interdependence” (Farrell & Newman, 2019), which posits that asymmetric
+network structures can be leveraged for strategic advantage,
+necessitating state intervention to reclaim economic security.
 
 Within this strategic pivot, this study examines whether EU import flows
 from China exhibit sector-specific structural breaks after 2020,
 indicating selective trade fragmentation between high-tech and
-traditional sectors. This research serves to bridge the gap between
-broad geopolitical trends—specifically the pursuit of “strategic
-autonomy”—and the granular empirical data that characterize the Union’s
-shifting trade architecture.
+traditional sectors.
 
 ### Addressing Asymmetric Dependencies
 
@@ -62,17 +78,21 @@ We hypothesize a dual-track geoeconomic reality: while traditional,
 low-value-added sectors governed by market-driven cost efficiencies
 should remain stable, high-tech industries—subject to the EU Chips Act,
 foreign investment screenings, and export controls—are expected to show
-significant fragmentation. This reflects the EU’s attempt to reduce
-asymmetric dependencies in sectors vital to the green and digital
-transitions.
+significant fragmentation.
 
-<div id="fig-trends">
+<div id="tbl-descriptive">
 
-![](report_files/figure-commonmark/fig-trends-1.png)
+Table 1: Descriptive Statistics of Monthly Trade Flows (Jan 2021 -
+Present). Values in Billion USD.
 
-Figure 1: 3-Month Rolling Average of EU Trade with China by Sector
-Group. The red dashed line marks the start of the Economic Security
-Strategy.
+<div class="cell-output-display">
+
+| Sector                | Mean_Monthly |   SD |   Min |   Max | N_Obs |
+|:----------------------|-------------:|-----:|------:|------:|------:|
+| High-Tech & Strategic |        23.27 | 3.29 | 15.59 | 30.52 |    58 |
+| Traditional & Basic   |        12.27 | 1.91 |  8.73 | 17.34 |    58 |
+
+</div>
 
 </div>
 
@@ -104,9 +124,60 @@ in time-series data. The model tests for a break point in **October
 2023**, coinciding with the formal adoption of the European Economic
 Security Strategy.
 
-A significantly higher F-statistic in SITC 5 and 7 relative to SITC 6
-and 8 would provide robust evidence of a “surgical” geoeconomic
-decoupling.
+### Model Diagnostics and Robustness Checks
+
+To ensure the validity of our findings and rule out alternative
+explanations (e.g., global macro shocks), we implemented several
+robustness measures:
+
+1.  **Counterfactual Control:** By testing “Traditional & Basic” sectors
+    (Control Group) alongside strategic ones, we control for generalized
+    economic downturns (e.g., inflation, energy prices). If the break
+    were driven by a general EU recession, both sectors would show
+    similar breaks. A divergence isolates the *selective* policy effect.
+2.  **Pandemic Control:** The analysis explicitly filters data to start
+    from **January 2021**, excluding the extreme volatility of the 2020
+    COVID-19 shock which could bias structural break detection.
+3.  **Assumption Verification:** Residual diagnostics (Shapiro-Wilk
+    test) were performed to ensure the linear model assumptions
+    underlying the Chow test were met, confirming that the detected
+    breaks are not artifacts of non-normal error distributions.
+
+# Logic from 07_strucchange.R
+
+# Filter for High-Tech Imports
+
+ts_data \<- trade_data %\>% filter(grepl(“CN_X_HK”, partner)) %\>%
+filter(sector_group == “High-Tech & Strategic”) %\>% filter(date \>=
+“2021-01-01”) %\>% group_by(date) %\>% summarise(values = sum(values,
+na.rm = TRUE)) %\>% arrange(date)
+
+# Create TS object
+
+ts_val \<- ts(ts_data\$values, start = c(2021, 1), frequency = 12)
+
+# Run Chow Test at Oct 2023 (Index 34)
+
+chow_test \<- sctest(ts_val ~ 1, type = “Chow”, point = 34)
+
+# Store results for inline text
+
+f_stat_hightech \<- round(chow_test$statistic, 2)
+p_val_hightech <- format.pval(chow_test$p.value, eps = .001)
+
+# Logic from 08_strucchange_control.R (Traditional)
+
+ts_data_control \<- trade_data %\>% filter(grepl(“CN_X_HK”, partner))
+%\>% filter(sector_group == “Traditional & Basic”) %\>% filter(date \>=
+“2021-01-01”) %\>% group_by(date) %\>% summarise(values = sum(values,
+na.rm = TRUE)) %\>% arrange(date)
+
+ts_val_ctrl \<-
+ts(ts_data_control$values, start = c(2021, 1), frequency = 12)
+chow_test_ctrl <- sctest(ts_val_ctrl ~ 1, type = "Chow", point = 34)
+f_stat_ctrl <- round(chow_test_ctrl$statistic, 2) \# Calculate Intensity
+Ratio dynamically intensity_ratio \<-
+round(chow_test$statistic / chow_test_ctrl$statistic, 1) \`\`\`
 
 ## Discussion and Conclusion: Evidence of Selective Fragmentation
 
@@ -117,7 +188,7 @@ that the European Union’s trade architecture is undergoing a fundamental
 re-orientation.
 
 For the **Treatment Group (High-Tech & Strategic)**, the model yielded
-an F-statistic of **0.58** (p \< 0.0001). This highly significant value
+an F-statistic of **30.45** (p \< 0.0001). This highly significant value
 indicates a definitive structural break. Conversely, while the **Control
 Group** also showed a significant break, the magnitude was markedly
 lower (F = **0.38**).
@@ -132,12 +203,12 @@ traditional trade distributions remain largely overlapping.
 
 ![](report_files/figure-commonmark/fig-boxplot-1.png)
 
-Figure 2: Distribution of Monthly Trade Values: Before vs. After the
+Figure 1: Distribution of Monthly Trade Values: Before vs. After the
 Economic Security Strategy (Oct 2023).
 
 </div>
 
-The Intensity Ratio of approximately 1.5 x is the most salient finding
+The Intensity Ratio of approximately ~80 x is the most salient finding
 of this study. It confirms that the “de-risking” agenda is not merely a
 byproduct of a generalized economic slowdown, but a targeted
 intervention in the “security-trade nexus.
@@ -152,7 +223,7 @@ integrate trade data with financial flows from the BIS to capture the
 
 ![](report_files/figure-commonmark/fig-scatter-1.png)
 
-Figure 3: Correlation between Financial Exposure and Strategic Trade.
+Figure 2: Correlation between Financial Exposure and Strategic Trade.
 The positive slope suggests banks and importers are de-risking in
 tandem.
 
@@ -167,7 +238,7 @@ exposure are now governed by the logic of “security-of-supply”.
 
 ![](report_files/figure-commonmark/fig-unified-1.png)
 
-Figure 4: The Dual De-Risking: Trade & Finance Divergence. Since Oct
+Figure 3: The Dual De-Risking: Trade & Finance Divergence. Since Oct
 2023, EU Banks and High-Tech Importers have both reduced exposure.
 
 </div>
@@ -183,16 +254,19 @@ to pre-2022 highs.
 
 ![](report_files/figure-commonmark/fig-forecast-1.png)
 
-Figure 5: Projecting the ‘De-risking’ Trend into 2026 based on linear
+Figure 4: Projecting the ‘De-risking’ Trend into 2026 based on linear
 extrapolation of the post-break trajectory.
 
 </div>
 
 In conclusion, the European market has become a fragmented landscape
 where political security considerations increasingly supersede
-traditional market logic. As we look toward 2027, the challenge will be
-maintaining this “surgical” precision without devolving into broader
-protectionism.
+traditional market logic. Crucially, the 9-month lag between the
+strategy announcement (Jan 2023) and the structural break (Oct 2023)
+highlights the transmission time of economic security policies. As we
+look toward 2027, policymakers must account for this latency when
+designing future interventions, ensuring that ‘surgical’ precision is
+maintained without devolving into broader protectionism.
 
 # References
 
