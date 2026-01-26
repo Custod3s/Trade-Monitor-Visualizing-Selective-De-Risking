@@ -62,7 +62,7 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 
 | Sector | F-Statistic | P-Value | Interpretation |
 
-| :--- | :--- | :--- | :--- |
+| :---: | :---: | :---: | :---: |
 
 | **High-Tech (Strategic)** | `30.45` | `< 0.0001` | **Massive Break** (Policy + Market) |
 
@@ -107,6 +107,6 @@ Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 8. Run `08_strucchange.R` - Statistical proof of the structural break
 9. Run `09_strucchange_control.R` - Confirm / Deny hypotheses of decoupling mechanism
 10. Run `10_prediction.R` - Forecast/Prediction models
-11. Run `11_dashboard.R`, `12_dashboard_alt.R` & `13_dashboard_v2.R` & `13_dashboard_v3.R` - Create interactive dashboards for presentation purposes
+11. Run `11_dashboard.R`, `12_dashboard_alt.R` & `13_dashboard_v2.R` & `14_dashboard_v3.R` - Create interactive dashboards for presentation purposes
 
 
