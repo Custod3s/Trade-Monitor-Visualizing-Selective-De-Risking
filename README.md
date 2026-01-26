@@ -86,9 +86,6 @@ Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 
 **Interpretation**: While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade completely untouched.
 
-**Conclusion:** 
-* The structural break in strategic goods is **4.5x more intense** than in general trade,
-  confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
 ---
 
 
