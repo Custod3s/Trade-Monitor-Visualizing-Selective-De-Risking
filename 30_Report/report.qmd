@@ -5,11 +5,10 @@ author: "Alex HAAS, Viliam POHANCENIK, Pieter PEVERELLI"
 date: last-modified
 format:
   html:
-    theme: flatly
+    theme: cosmo
     toc: true
-    code-fold: true
-    self-contained: true
-  pdf:
+    number-sections: true
+  gfm:
     toc: true
     number-sections: true
 editor: source
