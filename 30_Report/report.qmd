@@ -1,0 +1,69 @@
+---
+title: "EU-China Trade Monitor: Visualizing Selective De-Risking"
+subtitle: "Is the EU successfully 'de-risking' from China?"
+date: last-modified
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+---
+
+## Executive Summary
+
+This project investigates the hypothesis of **"Selective Fragmentation"** in EU-China trade relations. Following the [Joint Communication on a European Economic Security Strategy (2023)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52023JC0020), the EU aimed to reduce dependency in strategic sectors ("de-risking") while maintaining general economic openness.
+
+Using monthly trade data from the **ECB Statistical Data Warehouse (2020–2025)** and the **BIS**, this analysis separates import flows into **High-Tech/Strategic** (SITC 5+7) and **Traditional/Basic** (SITC 6+8) sectors.
+
+**Key Finding:**
+Visual and statistical analysis confirms a **structural divergence** beginning in **January 2023**. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%, supporting the hypothesis that de-risking is occurring with "precision" rather than as a broad decoupling.
+
+[Dashboard Link](https://custod3s.shinyapps.io/data_challenge/)
+
+---
+
+## The "Money Plot": Evidence of Divergence
+
+### Relative Trade Performance
+
+![**Table 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain. <br> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Jan 2023. <br> * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.](../20_Images/Dashboard_Top.png)
+
+### Eurozone Banking Claims on China
+
+![**Panel 2: Euro Area Banking Claims on China (Mrd. USD).** <br> Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.](../20_Images/Dashboard_Middle.png)
+
+### Trade & Finance Divergence
+
+![**Panel 3: The Dual De-Risking Sighting (Index: Avg 2022 = 100).** <br> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift.](../20_Images/Dashboard_Bottom.png)
+
+---
+
+## Methodology
+
+Using structural break detection (Chow test) on monthly trade data (2020-2025), we identify a statistically significant break in January 2023 coinciding with the EU Economic Security Strategy implementation.
+
+**Hypothesis:**
+
+*   **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
+*   **Break Point Tested:** January 2023 (Implementation of Economic Security Strategy).
+
+### Results
+
+| Sector | F-Statistic | P-Value | Interpretation |
+| :--- | :--- | :--- | :--- |
+| **High-Tech (Strategic)** | `55.12` | `0.0000000002429` | **Massive Break** (Policy + Market) |
+| **Low-Tech (Control)** | `12.37` | `0.0007818` | **Moderate Break** (Market Only) |
+
+### Key Statistical Finding
+
+Both High-Tech and Traditional sectors show significant structural breaks at Jan 2023 (p < 0.001), but the magnitude differs dramatically:
+
+*   **High-Tech & Strategic**: F = 55.12 (p < 0.0001)
+*   **Traditional & Basic**: F = 12.37 (p = 0.0008)
+*   **Intensity Ratio**: 4.5x stronger in strategic sectors
+
+**Interpretation**: While all EU-China trade was affected by the 2023 policy shift, strategic goods experienced a structural break 4.5 times more intense than traditional goods, confirming targeted "selective de-risking" rather than general trade reduction.
+
+### Conclusion
+
+The structural break in strategic goods is **4.5x more intense** than in general trade, confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
