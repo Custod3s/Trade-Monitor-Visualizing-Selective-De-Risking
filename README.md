@@ -25,12 +25,12 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 ## [📊 The "Money Plot": Evidence of Divergence](https://custod3s.shinyapps.io/data_challenge/)
 
 ![Relative Trade Performance](20_Images/Dashboard_Top.png)
-> **Table 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
+> **Panel 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
 > * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Oct 2023.
 > * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
 
 ![Banking Claims & Forecast](20_Images/Dashboard_Middle.png)
-> **Table 1: EU Banking Claims in CN & Trend Forecast.** The dashboard showcases the EU banking claims in CHINA and a possible forecast of future trends.
+> **Panel 2: EU Banking Claims in CN & Trend Forecast.** The dashboard showcases the EU banking claims in CHINA and a possible forecast of future trends.
 > * Panel 2a (The "Claims"): Declining banking claims indicate financial de-risking - Eurozone banks are reducing their capital exposure to China. The synchronized decline with strategic trade suggests a coordinated 'dual de-risking' across both real economy (goods) and financial sectors.
 > * Panel 2b (The "Trend"): This forecast illustrates the 'New Normal'. Unlike the stable pre-2023 trend, the post-2023 trajectory shows a structural decline. If policy and market conditions remain unchanged, this model predicts where the relationship is heading.
 
