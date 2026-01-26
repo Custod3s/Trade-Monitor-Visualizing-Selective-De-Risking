@@ -30,12 +30,16 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 > * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
 
 ![Eurozone Banking Claims on CN](20_Images/Dashboard_Middle.png)
-> **Panel 2: Euro Area Banking Claims on China (Mrd. USD).**
-> Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
+> **Panel 2a: Euro Area Banking Claims on China (Mrd. USD).**
+> Declining banking claims indicate financial de-risking - Eurozone banks are reducing their capital exposure to China. The synchronized decline with strategic trade suggests a coordinated 'dual de-risking' across both real economy (goods) and financial sectors.
+
+![Strategic Trade Forecast](20_Images/07_forecast_linear.png)
+> **Panel 2b: Strategic Trade Forecast (2026).**
+> This forecast illustrates the 'New Normal'. Unlike the stable pre-2023 trend, the post-2023 trajectory shows a structural decline. If policy and market conditions remain unchanged, this model predicts where the relationship is heading.
 
 ![Trade & Finance Divergence](20_Images/Dashboard_Bottom.png)
 > **Panel 3: The Dual De-Risking Sighting (Index: Avg 2022 = 100).**
-> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift.
+> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift since Oct 2023.
 >
 ---
 
@@ -86,6 +90,12 @@ Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 
 **Interpretation**: While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade completely untouched.
 
+<<<<<<< HEAD
+=======
+**Conclusion:** 
+* The structural break in strategic goods is **~80x more intense** than in general trade,
+  confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
+>>>>>>> c5b4ad0 (Update readme)
 ---
 
 
@@ -100,6 +110,9 @@ Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 8. Run `08_strucchange.R` - Statistical proof of the structural break
 9. Run `09_strucchange_control.R` - Confirm / Deny hypotheses of decoupling mechanism
 10. Run `10_prediction.R` - Forecast/Prediction models
+<<<<<<< HEAD
 11. Run `11_dashboard.R`, `12_dashboard_alt.R` & `13_dashboard_v2.R` & `14_dashboard_v3.R` - Create interactive dashboards for presentation purposes
+=======
+11. Run `14_dashboard_v3.R` - The main interactive dashboard (final version).
 
 
