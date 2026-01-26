@@ -51,7 +51,7 @@ coinciding with the EU Economic Security Strategy implementation.
 To ensure the validity of the Chow test, we performed the following diagnostic checks on the linear model residuals (Script `07_precon_check.R`):
 *   **Normality:** Verified using the **Shapiro-Wilk test** and visual inspection of **QQ Plots**.
 *   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** to check for serial dependence in the time series.
-    *   [📄 View Visual ACF Plot](20_Images/Visual%20ACF.pdf)
+    *   ![📄 View Visual ACF Plot](20_Images/Visual%20ACF.pdf)
 *   **Homoscedasticity:** Visual inspection of residuals over time to confirm constant variance and rule out heteroscedasticity.
 
 **Results:**
