@@ -147,7 +147,7 @@ ui <- dashboardPage(
     div(
       style = "padding: 15px; color: white; font-size: 11px;",
       p(strong("📅 Key Date:")),
-      p("Jan 2023: EU Economic Security Strategy"),
+      p("Oct 2023: EU Economic Security Strategy (Lagged Effect)"),
       br(),
       p(strong("📊 Data Sources:")),
       p(HTML("<a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank' style='color: #90CAF9;'>• Eurostat (Trade Data)</a>")),
@@ -290,7 +290,7 @@ ui <- dashboardPage(
             
             h4("Key Findings:"),
             tags$ul(
-              tags$li(strong("Strategic/High-Tech imports (SITC 5+7):"), " ~15% structural decline since Jan 2023"),
+              tags$li(strong("Strategic/High-Tech imports (SITC 5+7):"), " ~15% structural decline since Oct 2023"),
               tags$li(strong("Traditional/Basic imports (SITC 6+8):"), " Stabilized near baseline levels"),
               tags$li(strong("Banking exposure:"), " Synchronized contraction indicating systemic de-risking")
             ),
@@ -310,14 +310,13 @@ ui <- dashboardPage(
             tags$ul(
               tags$li(HTML("Data Source: <a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank'>Eurostat</a> (Trade) & <a href='https://stats.bis.org/api/v2/data/dataflow/BIS/WS_LBS_D_PUB/1.0/Q..C.A.USD....5A.A.CN?startPeriod=2020-01-01&endPeriod=2025-12-31&format=csv' target='_blank'>BIS</a> (Banking) (2020-2025)")),
               tags$li("Statistical Validation: Chow Test for Structural Breaks"),
-              tags$li("Break Point: January 2023 (Implementation of Economic Security Strategy)"),
+              tags$li("Break Point: October 2023 (Implementation of Economic Security Strategy)"),
               tags$li("F-Statistic (High-Tech): 55.12 (p < 0.0001)")
             ),
             
             h4("Interpretation:"),
-            p("The structural break in strategic goods is 4.5x more intense than in general trade, 
-              confirming that 'De-risking' effectively decoupled the high-tech sector beyond 
-              normal market fluctuations."),
+            p("While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). 
+              This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade completely untouched."),
             
             hr(),
             
@@ -361,7 +360,7 @@ server <- function(input, output, session) {
       
       h4("Key Features:"),
       tags$ul(
-        tags$li(strong("Red Dashed Line (Jan 2023):"), " Marks the implementation of the EU Economic Security Strategy"),
+        tags$li(strong("Red Dashed Line (Oct 2023):"), " Marks the implementation of the EU Economic Security Strategy"),
         tags$li(strong("De-Risking Gap:"), " The red shaded area between lines shows the divergence between sectors (toggle on/off in sidebar)")
       ),
       
@@ -374,9 +373,8 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p("Since January 2023, High-Tech imports have declined significantly (~15%) while Traditional imports 
-        have remained relatively stable, providing evidence of 'selective' de-risking rather than 
-        broad-based decoupling.")
+      p("While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). 
+        This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade completely untouched.")
     ))
   })
   
@@ -398,7 +396,7 @@ server <- function(input, output, session) {
       
       h4("Key Features:"),
       tags$ul(
-        tags$li(strong("Red Dashed Line (Jan 2023):"), " Marks the policy shift date"),
+        tags$li(strong("Red Dashed Line (Oct 2023):"), " Marks the policy shift date"),
         tags$li(strong("All Sectors:"), " Unlike Graph 1a, this combines all SITC categories for each partner")
       ),
       
@@ -435,7 +433,7 @@ server <- function(input, output, session) {
       tags$ul(
         tags$li(strong("Red Line:"), " Shows total banking claims over time"),
         tags$li(strong("Points:"), " Each dot represents a data point"),
-        tags$li(strong("Red Dashed Line (Jan 2023):"), " Policy implementation date")
+        tags$li(strong("Red Dashed Line (Oct 2023):"), " Policy implementation date")
       ),
       
       h4("Interactive Controls:"),
@@ -486,7 +484,7 @@ server <- function(input, output, session) {
       h4("Interpretation:"),
       p(strong("The 'Dual De-Risking' Pattern:")),
       p("Both High-Tech imports (blue) and Banking exposure (red dashed) decline in parallel 
-        after January 2023, while Traditional trade (grey) remains stable. This synchronized 
+        after October 2023, while Traditional trade (grey) remains stable. This synchronized 
         divergence provides empirical evidence that EU de-risking is:"),
       tags$ul(
         tags$li(strong("Selective:"), " Targets strategic sectors, not all trade"),
@@ -511,7 +509,7 @@ server <- function(input, output, session) {
       h4("Methodology:"),
       tags$ul(
         tags$li(strong("Model:"), " Linear Regression (OLS) trained on post-break data"),
-        tags$li(strong("Training Period:"), " Jan 2023 - Present (The 'De-risking' Era)"),
+        tags$li(strong("Training Period:"), " Oct 2023 - Present (The 'De-risking' Era)"),
         tags$li(strong("Forecast Horizon:"), " Next 12 months")
       ),
       
@@ -520,7 +518,7 @@ server <- function(input, output, session) {
         tags$li(strong("Solid Blue Line:"), " Historical observed data"),
         tags$li(strong("Dashed Blue Line:"), " Projected future values"),
         tags$li(strong("Shaded Area:"), " 95% Confidence Interval (Range of probable outcomes)"),
-        tags$li(strong("Red Dashed Line:"), " The Jan 2023 structural break point")
+        tags$li(strong("Red Dashed Line:"), " The Oct 2023 structural break point")
       ),
       
       h4("Interpretation:"),
@@ -722,12 +720,12 @@ server <- function(input, output, session) {
     
     # 5. Add remaining elements
     p <- p +
-      geom_vline(xintercept = as.Date("2023-01-01"), 
+      geom_vline(xintercept = as.Date("2023-10-01"), 
                  linetype = "dashed", 
                  color = "#D9534F", 
                  linewidth = 1) +
       annotate("text", 
-               x = as.Date("2023-08-01"), 
+               x = as.Date("2024-04-01"), 
                y = min(data_smooth$rolling_avg, na.rm = TRUE) * 1.05,
                label = "Start of Divergence", 
                hjust = 0,
@@ -786,7 +784,7 @@ server <- function(input, output, session) {
     
     p <- ggplot(plot_data, aes(x = date, y = rolling_avg, color = partner_label)) +
       geom_line(linewidth = 1.2) +
-      geom_vline(xintercept = as.Date("2023-01-01"), 
+      geom_vline(xintercept = as.Date("2023-10-01"), 
                  linetype = "dashed", 
                  color = "#D9534F", 
                  linewidth = 1) +
@@ -814,7 +812,7 @@ server <- function(input, output, session) {
     p <- ggplot(filtered_finance_data(), aes(x = date, y = values)) +
       geom_line(color = esc_colors["Financial Exposure (BIS)"], linewidth = 1.2) +
       geom_point(color = esc_colors["Financial Exposure (BIS)"], size = 1.5, alpha = 0.6) +
-      geom_vline(xintercept = as.Date("2023-01-01"), 
+      geom_vline(xintercept = as.Date("2023-10-01"), 
                  linetype = "dashed", 
                  color = "#D9534F", 
                  linewidth = 1) +
@@ -846,7 +844,7 @@ server <- function(input, output, session) {
       arrange(date)
     
     # 2. Build Model (Post-Break)
-    df_train <- df_hist %>% filter(date >= as.Date("2023-01-01"))
+    df_train <- df_hist %>% filter(date >= as.Date("2023-10-01"))
     
     # Check if we have enough data to model
     validate(need(nrow(df_train) > 3, "Not enough post-2023 data for forecasting."))
@@ -880,14 +878,14 @@ server <- function(input, output, session) {
                 color = "#005f73", linetype = "dashed", linewidth = 1.2) +
       geom_ribbon(data = df_forecast, aes(x = date, ymin = lower, ymax = upper), 
                   fill = "#005f73", alpha = 0.15) +
-      geom_vline(xintercept = as.Date("2023-01-01"), 
+      geom_vline(xintercept = as.Date("2023-10-01"), 
                  linetype = "dashed",  
                  color = "#D9534F",    
                  linewidth = 1) +   
       scale_y_continuous(labels = function(x) paste(round(x / 1000, 1), "B")) +
       labs(
         title = "Projecting the 'De-risking' Trend",
-        subtitle = "Linear extrapolation (Jan 2023 - Present)",
+        subtitle = "Linear extrapolation (Oct 2023 - Present)",
         x = "Date", y = "Trade Value (USD)"
       ) +
       theme_esc()
@@ -928,7 +926,7 @@ server <- function(input, output, session) {
     
     p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linetype = sector_group)) +
       geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-      geom_vline(xintercept = as.Date("2023-01-01"), color = "#D9534F", linetype = "dashed") +
+      geom_vline(xintercept = as.Date("2023-10-01"), color = "#D9534F", linetype = "dashed") +
       geom_line(linewidth = 1.2) +
       scale_color_manual(values = esc_colors) +
       scale_linetype_manual(values = c(
@@ -938,9 +936,10 @@ server <- function(input, output, session) {
       )) +
       labs(
         title = "The Dual De-Risking: Trade & Finance Divergence",
-        subtitle = "Since Jan 2023, EU Banks and High-Tech Importers have reduced exposure",
+        subtitle = "Since Oct 2023, EU Banks and High-Tech Importers have reduced exposure",
         y = "Index (2022 Avg = 100)",
         x = "Date",
+        caption = "Sources: Eurostat (Trade), BIS (Finance)",
         color = "Sector Group"
       ) +
       guides(linetype = "none") +

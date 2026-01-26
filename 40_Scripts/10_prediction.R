@@ -26,9 +26,9 @@ df_hist <- data %>%
 
 # 2. Build the Model (The "New Normal" Trend)
 # ------------------------------------------------------------------------------
-# We train the model ONLY on data AFTER the structural break (Jan 2023)
+# We train the model ONLY on data AFTER the structural break (Oct 2023)
 df_train <- df_hist %>%
-  filter(date >= as.Date("2023-01-01"))
+  filter(date >= as.Date("2023-10-01"))
 
 # Linear Model: Value depends on Time
 model_lm <- lm(values ~ date, data = df_train)
@@ -76,7 +76,7 @@ p_forecast <- ggplot() +
               fill = "#005f73", alpha = 0.15) +
   
   # D. Structural Break Line (Matches Dashboard Style EXACTLY)
-  geom_vline(xintercept = as.Date("2023-01-01"), 
+  geom_vline(xintercept = as.Date("2023-10-01"), 
              linetype = "dashed",  
              color = "#D9534F",    
              linewidth = 1.2) +   
@@ -85,8 +85,8 @@ p_forecast <- ggplot() +
   annotate("text", x = as.Date("2022-06-01"), y = min(df_hist$values), 
            label = "Historical Trend", hjust = 1, color = "#005f73", size = 4) +
   
-  annotate("text", x = as.Date("2023-04-01"), y = max(df_hist$values), 
-           label = "Policy Shift (Jan '23)", hjust = 0, color = "#D9534F", fontface = "bold", size = 4) +
+  annotate("text", x = as.Date("2024-01-01"), y = max(df_hist$values), 
+           label = "Policy Shift (Oct '23)", hjust = 0, color = "#D9534F", fontface = "bold", size = 4) +
   
   # E. Theme & Formatting (FIXED SCALING)
   # Data is in Millions -> Divide by 1000 to get Billions
@@ -96,7 +96,7 @@ p_forecast <- ggplot() +
   
   labs(
     title = "Projecting the 'De-risking' Trend into 2026",
-    subtitle = "Linear extrapolation of the post-break trajectory (Jan 2023 - Present)",
+    subtitle = "Linear extrapolation of the post-break trajectory (Oct 2023 - Present)",
     x = "Date", y = "Trade Value (USD)",
     caption = "Model: OLS Linear Regression on Post-Break Data (95% CI)"
   ) +

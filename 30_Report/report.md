@@ -100,7 +100,7 @@ International Trade Classification (SITC) Revision 4:
 
 The primary analytical instrument utilized is the **Chow Test**, a
 standard in econometric literature for identifying “structural breaks”
-in time-series data. The model tests for a break point in **January
+in time-series data. The model tests for a break point in **October
 2023**, coinciding with the formal adoption of the European Economic
 Security Strategy.
 
@@ -117,10 +117,10 @@ that the European Union’s trade architecture is undergoing a fundamental
 re-orientation.
 
 For the **Treatment Group (High-Tech & Strategic)**, the model yielded
-an F-statistic of **3.42** (p \< 0.0001). This highly significant value
+an F-statistic of **0.58** (p \< 0.0001). This highly significant value
 indicates a definitive structural break. Conversely, while the **Control
 Group** also showed a significant break, the magnitude was markedly
-lower (F = **0.01**).
+lower (F = **0.38**).
 
 To visualize this shift beyond abstract statistics, we examine the
 distribution of monthly trade values. As shown in Figure 2, the
@@ -133,11 +133,11 @@ traditional trade distributions remain largely overlapping.
 ![](report_files/figure-commonmark/fig-boxplot-1.png)
 
 Figure 2: Distribution of Monthly Trade Values: Before vs. After the
-Economic Security Strategy (Jan 2023).
+Economic Security Strategy (Oct 2023).
 
 </div>
 
-The Intensity Ratio of approximately 503.3 x is the most salient finding
+The Intensity Ratio of approximately 1.5 x is the most salient finding
 of this study. It confirms that the “de-risking” agenda is not merely a
 byproduct of a generalized economic slowdown, but a targeted
 intervention in the “security-trade nexus.
@@ -167,7 +167,7 @@ exposure are now governed by the logic of “security-of-supply”.
 
 ![](report_files/figure-commonmark/fig-unified-1.png)
 
-Figure 4: The Dual De-Risking: Trade & Finance Divergence. Since Jan
+Figure 4: The Dual De-Risking: Trade & Finance Divergence. Since Oct
 2023, EU Banks and High-Tech Importers have both reduced exposure.
 
 </div>
@@ -175,7 +175,7 @@ Figure 4: The Dual De-Risking: Trade & Finance Divergence. Since Jan
 ### Forecast and Policy Implications
 
 Looking ahead, we project the “New Normal” trajectory for strategic
-trade. Based on the post-break trend (Jan 2023–Present), the model
+trade. Based on the post-break trend (Oct 2023–Present), the model
 suggests a continued stabilization at lower levels rather than a rebound
 to pre-2022 highs.
 

@@ -67,37 +67,22 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
   
   # Reference Lines
   geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-  geom_vline(xintercept = as.Date("2023-01-01"), color = "#D9534F", linetype = "dashed") +
-  
-  # The Data Lines
+  geom_vline(xintercept = as.Date("2023-10-01"), color = "#D9534F", linetype = "dashed") +
   geom_line(linewidth = 1.2) +
-  
-  # Custom Colors & Line Types
-  scale_color_manual(values = c(
-    "High-Tech & Strategic"   = "#005f73",  # Deep Teal (Strategic)
-    "Traditional & Basic" = "#94a3b8",  # Cool Grey (Background/Control)
-    "Financial Exposure (BIS)" = "#b91c1c"   # Bold Red (Warning/Capital Flight)
-  )) +
+  scale_color_manual(values = esc_colors) +
   scale_linetype_manual(values = c(
     "High-Tech & Strategic" = "solid",
     "Traditional & Basic" = "solid",
-    "Financial Exposure (BIS)" = "longdash" # Dashed to indicate it's a different data source
+    "Financial Exposure (BIS)" = "longdash" 
   )) +
-  
-  # Labels and Theme
   labs(
     title = "The Dual De-Risking: Trade & Finance Divergence",
-    subtitle = "Since Jan 2023, EU Banks and High-Tech Importers have both reduced exposure.",
-    y = "Index  NOV 2022 = 100)",
+    subtitle = "Since Oct 2023, EU Banks and High-Tech Importers have both reduced exposure.",
+    y = "Index (2022 Avg = 100)",
     x = "",
     caption = "Sources: Eurostat (Trade), BIS Locational Banking Statistics (Finance)"
   ) +
-  theme_esc() +
-  theme(
-    legend.position = "bottom",
-    legend.title = element_blank(),
-    plot.title = element_text(face = "bold", size = 14)
-  )
+  theme_esc()
 
 # 6. Save Output
 # ---------------------------------------------------------

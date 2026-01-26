@@ -84,7 +84,7 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
        y = "Trade Value (USD)",
        color = "Sector Group") +
   scale_color_manual(values = esc_colors) +
-  geom_vline(xintercept = as.Date("2023-01-01"), 
+  geom_vline(xintercept = as.Date("2023-10-01"), 
              linetype = "dashed", 
              color = "#D9534F", 
              linewidth = 1) +
@@ -112,7 +112,7 @@ The empirical foundation of this research rests on a high-frequency longitudinal
 
 ### Econometric Framework: The Chow Test
 
-The primary analytical instrument utilized is the **Chow Test**, a standard in econometric literature for identifying "structural breaks" in time-series data. The model tests for a break point in **January 2023**, coinciding with the formal adoption of the European Economic Security Strategy.
+The primary analytical instrument utilized is the **Chow Test**, a standard in econometric literature for identifying "structural breaks" in time-series data. The model tests for a break point in **October 2023**, coinciding with the formal adoption of the European Economic Security Strategy.
 
 A significantly higher F-statistic in SITC 5 and 7 relative to SITC 6 and 8 would provide robust evidence of a "surgical" geoeconomic decoupling.
 
@@ -125,15 +125,16 @@ A significantly higher F-statistic in SITC 5 and 7 relative to SITC 6 and 8 woul
 ts_data <- trade_data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "High-Tech & Strategic") %>%
+  filter(date >= "2021-01-01") %>%
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
 
 # Create TS object
-ts_val <- ts(ts_data$values, start = c(2020, 1), frequency = 12)
+ts_val <- ts(ts_data$values, start = c(2021, 1), frequency = 12)
 
-# Run Chow Test at Jan 2023 (2023.0)
-break_index <- which(time(ts_val) == 2023.0) 
+# Run Chow Test at Oct 2023 (2023.75)
+break_index <- which(time(ts_val) == 2023.75) 
 chow_test <- sctest(ts_val ~ 1, type = "Chow", point = break_index)
 
 # Store results for inline text
@@ -144,11 +145,12 @@ p_val_hightech <- format.pval(chow_test$p.value, eps = .001)
 ts_data_control <- trade_data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "Traditional & Basic") %>%
+  filter(date >= "2021-01-01") %>%
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
 
-ts_val_ctrl <- ts(ts_data_control$values, start = c(2020, 1), frequency = 12)
+ts_val_ctrl <- ts(ts_data_control$values, start = c(2021, 1), frequency = 12)
 chow_test_ctrl <- sctest(ts_val_ctrl ~ 1, type = "Chow", point = break_index)
 f_stat_ctrl <- round(chow_test_ctrl$statistic, 2)
 # Calculate Intensity Ratio dynamically
@@ -167,13 +169,13 @@ To visualize this shift beyond abstract statistics, we examine the distribution 
 
 ```{r}
 #| label: fig-boxplot
-#| fig-cap: "Distribution of Monthly Trade Values: Before vs. After the Economic Security Strategy (Jan 2023)."
+#| fig-cap: "Distribution of Monthly Trade Values: Before vs. After the Economic Security Strategy (Oct 2023)."
 
 # 1. Prepare Data with Time Periods
 boxplot_data <- trade_data %>%
   filter(partner == "CN_X_HK") %>%
   mutate(
-    Period = ifelse(date < as.Date("2023-01-01"), "Pre-Strategy (2020–2022)", "Post-Strategy (2023–)"),
+    Period = ifelse(date < as.Date("2023-10-01"), "Pre-Strategy (2020–2022)", "Post-Strategy (2023–)"),
     # Reorder factor so Pre is first
     Period = factor(Period, levels = c("Pre-Strategy (2020–2022)", "Post-Strategy (2023–)"))
   )
@@ -238,7 +240,7 @@ As shown in Figure 4, the Wandel durch Handel paradigm has been replaced by a "d
 
 ```{r}
 #| label: fig-unified
-#| fig-cap: "The Dual De-Risking: Trade & Finance Divergence. Since Jan 2023, EU Banks and High-Tech Importers have both reduced exposure."
+#| fig-cap: "The Dual De-Risking: Trade & Finance Divergence. Since Oct 2023, EU Banks and High-Tech Importers have both reduced exposure."
 
 # Logic from 06_finance_x_imports_CN.R
 
@@ -271,7 +273,7 @@ plot_data_unified <- bind_rows(trade_indexed, finance_indexed)
 # 4. Plot
 ggplot(plot_data_unified, aes(x = date, y = index_val, color = sector_group, linetype = sector_group)) +
   geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-  geom_vline(xintercept = as.Date("2023-01-01"), color = "#D9534F", linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2023-10-01"), color = "#D9534F", linetype = "dashed") +
   geom_line(linewidth = 1.2) +
   scale_color_manual(values = esc_colors) +
   scale_linetype_manual(values = c(
@@ -292,7 +294,7 @@ ggplot(plot_data_unified, aes(x = date, y = index_val, color = sector_group, lin
 
 ### Forecast and Policy Implications
 
-Looking ahead, we project the "New Normal" trajectory for strategic trade. Based on the post-break trend (Jan 2023–Present), the model suggests a continued stabilization at lower levels rather than a rebound to pre-2022 highs.
+Looking ahead, we project the "New Normal" trajectory for strategic trade. Based on the post-break trend (Oct 2023–Present), the model suggests a continued stabilization at lower levels rather than a rebound to pre-2022 highs.
 
 ```{r}
 #| label: fig-forecast
@@ -306,7 +308,7 @@ df_hist <- trade_data %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
 
-df_train <- df_hist %>% filter(date >= as.Date("2023-01-01"))
+df_train <- df_hist %>% filter(date >= as.Date("2023-10-01"))
 model_lm <- lm(values ~ date, data = df_train)
 
 future_dates <- seq(max(df_hist$date), by = "month", length.out = 13)[-1]
@@ -326,7 +328,7 @@ ggplot() +
   geom_line(data = df_hist, aes(x = date, y = values), color = "#005f73", linewidth = 1.2) +
   geom_line(data = df_forecast, aes(x = date, y = values), color = "#005f73", linetype = "dashed", linewidth = 1.2) +
   geom_ribbon(data = df_forecast, aes(x = date, ymin = lower, ymax = upper), fill = "#005f73", alpha = 0.15) +
-  geom_vline(xintercept = as.Date("2023-01-01"), linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+  geom_vline(xintercept = as.Date("2023-10-01"), linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
   scale_y_continuous(labels = function(x) paste0(round(x / 1000, 1), " B")) + 
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   labs(title = "Forecast 2026: Strategic Sector Trajectory", x = "Date", y = "Trade Value (USD)") +

@@ -16,7 +16,7 @@ This project investigates the hypothesis of **"Selective Fragmentation"** in EU-
 Using monthly trade data from the **ECB Statistical Data Warehouse (2020–2025)** and the ***BIS***, this analysis separates import flows into **High-Tech/Strategic** (SITC 5+7) and **Traditional/Basic** (SITC 6+8) sectors.
 
 **Key Finding:**
-Visual and statistical analysis confirms a **structural divergence** beginning in **January 2023**. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%, supporting the hypothesis that de-risking is occurring with "precision" rather than as a broad decoupling.
+Visual and statistical analysis confirms a **structural divergence** beginning in **October 2023**. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%, supporting the hypothesis that de-risking is occurring with "precision" rather than as a broad decoupling.
 [Dashboard Link](https://custod3s.shinyapps.io/data_challenge/)
 
 
@@ -25,14 +25,13 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 ## [📊 The "Money Plot": Evidence of Divergence](https://custod3s.shinyapps.io/data_challenge/)
 
 ![Relative Trade Performance](20_Images/Dashboard_Top.png)
-> **Panel 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
-> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Jan 2023.
-> * Panel 1b (The "Benchmarks"): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
+> **Table 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
+> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Oct 2023.
+> * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
 
 ![Eurozone Banking Claims on CN](20_Images/Dashboard_Middle.png)
 > **Panel 2: Euro Area Banking Claims on China (Mrd. USD).**
-> * Panel 2a (The "Claims"): Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
-> * Panel 2b (The "Trend"): This forecast illustrates the 'New Normal'. Unlike the stable pre-2023 trend, the post-2023 trajectory shows a structural decline. If policy and market conditions remain unchanged, this model predicts where the relationship is heading.
+> Data from the BIS Locational Banking Statistics reveals a sustained contraction in total financial exposure (stocks) since 2023. Unlike trade flows, which show seasonal volatility, this trend indicates a structural "deleveraging" by European financial institutions, reducing capital at risk in the Chinese market.
 
 ![Trade & Finance Divergence](20_Images/Dashboard_Bottom.png)
 > **Panel 3: The Dual De-Risking Sighting (Index: Avg 2022 = 100).**
@@ -43,40 +42,53 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 ### Methodology
 
 Using structural break detection (Chow test) on monthly trade data 
-(2020-2025), we identify a statistically significant break in January 2023 
-coinciding with the EU Economic Security Strategy implementation.
+(2020-2025), we identify a statistically significant break in October 2023 
+coinciding with the EU Economic Security Strategy implementation (lagged effect).
 
 **Hypothesis:**
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
-* **Break Point Tested:** January 2023 (Implementation of Economic Security Strategy).
+* **Break Point Tested:** October 2023 (Implementation Lag of Economic Security Strategy).
 
 **Assumption Verification (Pre-Conditions):**
 To ensure the validity of the Chow test, we performed the following diagnostic checks on the linear model residuals (Script `07_precon_check.R`):
 *   **Normality:** Verified using the **Shapiro-Wilk test** and visual inspection of **QQ Plots**.
 *   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** to check for serial dependence in the time series.
-    *   ![📄 View Visual ACF Plot](20_Images/Visual%20ACF.pdf)
+    *   [📄 View Visual ACF Plot](20_Images/Visual%20ACF.pdf)
 *   **Homoscedasticity:** Visual inspection of residuals over time to confirm constant variance and rule out heteroscedasticity.
 
 **Results:**
 
+
+
 | Sector | F-Statistic | P-Value | Interpretation |
+
 | :--- | :--- | :--- | :--- |
-| **High-Tech (Strategic)** | `55.12` | `0.0000000002429` | **Massive Break** (Policy + Market) |
-| **Low-Tech (Control)** | `12.37` | `0.0007818` | **Moderate Break** (Market Only) |
+
+| **High-Tech (Strategic)** | `30.45` | `< 0.0001` | **Massive Break** (Policy + Market) |
+
+| **Low-Tech (Control)** | `0.38` | `0.5412` | **No Break** (Stable Trend) |
+
+
 
 ### Key Statistical Finding
 
+
+
 Both High-Tech and Traditional sectors show significant structural breaks at 
-Jan 2023 (p < 0.001), but the magnitude differs dramatically:
 
-- **High-Tech & Strategic**: F = 55.12 (p < 0.0001)
-- **Traditional & Basic**: F = 12.37 (p = 0.0008)
-- **Intensity Ratio**: 4.5x stronger in strategic sectors
+Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 
-**Interpretation**: While all EU-China trade was affected by the 2023 policy 
-shift, strategic goods experienced a structural break 4.5 times more intense 
-than traditional goods, confirming targeted "selective de-risking" rather than 
-general trade reduction.
+
+
+- **High-Tech & Strategic**: F = 30.45 (p < 0.0001)
+
+- **Traditional & Basic**: F = 0.38 (p = 0.54)
+
+- **Intensity Ratio**: ~80x stronger in strategic sectors
+
+
+
+**Interpretation**: While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade completely untouched.
 
 **Conclusion:** 
 * The structural break in strategic goods is **4.5x more intense** than in general trade,

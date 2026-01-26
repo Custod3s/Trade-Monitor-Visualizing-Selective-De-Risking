@@ -29,22 +29,19 @@ ggplot(plot_data, aes(x = date, y = rolling_avg, color = sector_group)) +
   scale_color_manual(values =  c("High-Tech & Strategic"   = "#005f73",
                                   "Traditional & Basic" = "#94a3b8")) +
   theme_esc() + 
-  geom_vline(xintercept = as.Date("2023-01-01"), 
-                                                   linetype = "dashed", 
-                                                   color = "#D9534F", # "Risk Red" color
-                                                   linewidth = 1) +
-  
+  geom_vline(xintercept = as.Date("2023-10-01"), 
+             linetype = "dashed", 
+             color = "#D9534F", 
+             linewidth = 1) +
   annotate("text", 
-           x = as.Date("2022-12-01"), # Place text slightly to the right of the line
-           y = 100,                 # Place it high up (adjust based on your Y-axis)
+           x = as.Date("2022-12-01"), 
+           y = max(plot_data$rolling_avg, na.rm = TRUE),
            label = "Start of Divergence", 
-           hjust = 1,                 # Left-align text
+           hjust = 1,
            color = "#D9534F", 
            fontface = "bold",
            size = 4) +
-  scale_y_continuous(
-    labels = function(x) paste(x / 1000, "Billion") 
-  )
+  scale_y_continuous(labels = function(x) paste(x / 1000, "B"))
 
 ggsave("20_Images/02_eu_trade_china_sector_trends.png", width = 10, height = 6)
 
@@ -77,7 +74,7 @@ plot_data_indexed <- trade_data %>%
 ggplot(plot_data_indexed, aes(x = date, y = index_val, color = sector_group)) +
   geom_line(linewidth = 1.2) +
   geom_hline(yintercept = 100, linetype = "dotted") + # The "No Change" line
-  geom_vline(xintercept = as.Date("2023-01-01"), linetype = "dashed", color = "#D9534F") +
+  geom_vline(xintercept = as.Date("2023-10-01"), linetype = "dashed", color = "#D9534F") +
   theme_esc() +
   theme(
     legend.position = "bottom",
