@@ -47,6 +47,13 @@ coinciding with the EU Economic Security Strategy implementation.
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
 * **Break Point Tested:** January 2023 (Implementation of Economic Security Strategy).
 
+**Assumption Verification (Pre-Conditions):**
+To ensure the validity of the Chow test, we performed the following diagnostic checks on the linear model residuals (Script `07_precon_check.R`):
+*   **Normality:** Verified using the **Shapiro-Wilk test** and visual inspection of **QQ Plots**.
+*   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** to check for serial dependence in the time series.
+    *   [📄 View Visual ACF Plot](20_Images/Visual%20ACF.pdf)
+*   **Homoscedasticity:** Visual inspection of residuals over time to confirm constant variance and rule out heteroscedasticity.
+
 **Results:**
 
 | Sector | F-Statistic | P-Value | Interpretation |
@@ -77,14 +84,14 @@ general trade reduction.
 ## 🚀 How to Run
 1. Run `00_style.R`- Create a common theme for plots and visual across the whole project
 2. Run `01_data_pull.R` - Pulls trade data from Eurostat
-3. Run `02_data_pull_BIS.R` & `03_bis_pull_all_indicatsors.R` - Pulls financial data from the BIS and Visualisation of Banking Claims (Table 2)
+3. Run `02_data_pull_BIS.R` & `03_bis_pull_all_indicators.R` - Pulls financial data from the BIS and Visualisation of Banking Claims (Table 2)
 4. Run `04_sitc_mapping.R` - Categorizes trade data according to SITC codes
 5. Run `05_first_look.R` - Creates a first look (Table 1)
-6. Run `06_finance_x_imports_CN.R` - Combines trades& financial data (Table 3)
-7. Run `07_strucchange.R` - Statistical proof of the structural break
-8. Run `08_strucchange_control.R`- Confirm / Deny hypotheses of decoupling mechanism
-9. Run `09_dashboard.R` & `10_dashboard_alt.R` & `11_dashboard_v2.R` - Creates an interactive dashboard for presentation purposes
-10. Run `12_precon_check.R`- Check wether the preconditions for the CHOW test are met
-11. Run `13_prediction.R`- Create a trend prediction based on historical data
+6. Run `06_finance_x_imports_CN.R` - Combines trade & financial data (Table 3)
+7. Run `07_precon_check.R` - Diagnostic checks for model assumptions (Normality, Autocorrelation, Homoscedasticity)
+8. Run `08_strucchange.R` - Statistical proof of the structural break
+9. Run `09_strucchange_control.R` - Confirm / Deny hypotheses of decoupling mechanism
+10. Run `10_prediction.R` - Forecast/Prediction models
+11. Run `11_dashboard.R`, `12_dashboard_alt.R` & `13_dashboard_v2.R` - Create interactive dashboards for presentation purposes
 
 
