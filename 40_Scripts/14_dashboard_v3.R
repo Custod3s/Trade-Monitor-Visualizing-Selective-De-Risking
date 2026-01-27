@@ -354,7 +354,7 @@ ui <- dashboardPage(
             tags$ul(
               tags$li(HTML("Data Source: <a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank'>Eurostat</a> (Trade) & <a href='https://stats.bis.org/api/v2/data/dataflow/BIS/WS_LBS_D_PUB/1.0/Q..C.A.USD....5A.A.CN?startPeriod=2020-01-01&endPeriod=2025-12-31&format=csv' target='_blank'>BIS</a> (Banking) (2020-2025)")),
               tags$li("Statistical Validation: Chow Test for Structural Breaks"),
-              tags$li(paste0("Break Point: ", format(optimal_break_date, "%B %Y"), " (Implementation of Economic Security Strategy)")),
+              tags$li(paste0("Break Point: ", format(optimal_break_date, "%B %Y"), " (Compound Shock: Econ. Security Strategy + EV Probe + US Controls)")),
               tags$li(paste0("F-Statistic (High-Tech): ", ht_f_stat, " (p ", ht_p_val, ")"))
             ),
             
@@ -417,8 +417,8 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p(paste0("While strategic trade collapsed (F=", ht_f_stat, "), traditional trade showed significantly less structural change (F=", ct_f_stat, "). ",
-               "This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade largely untouched."))
+      p(paste0("Visualizes the internal structural break within Chinese imports. Since ", format(optimal_break_date, "%b %Y"), ", strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey).")),
+      p(paste0("While strategic trade collapsed (F=", ht_f_stat, "), traditional trade showed significantly less structural change (F=", ct_f_stat, "). This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade largely untouched."))
     ))
   })
   
@@ -488,7 +488,9 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p(paste0("Analyze the banking exposure trend following ", format(optimal_break_date, "%b %Y"), ". A divergent rise in claims despite falling trade would suggest a 'Localization Paradox' (local-for-local investment), while a synchronized decline would indicate broad-based financial de-risking."))
+      p(strong("The 'Localization Paradox':")),
+      p(paste0("While trade flows fell, banking claims rose/stabilized post-", format(optimal_break_date, "%b %Y"), ". This suggests EU firms are substituting imports with local production ('In China, For China').")),
+      p("To de-risk supply chains (fewer imports), companies paradoxically had to 're-risk' balance sheets (capital investment for local factories), driving up financial exposure.")
     ))
   })
   
@@ -525,8 +527,8 @@ server <- function(input, output, session) {
       
       h4("Interpretation:"),
       p(strong("The 'Substitution Effect':")),
-      p(paste0("This chart investigates if the decline in 'Strategic' imports (Blue) is mirrored by a divergent trend in EU Banking Exposure (Red Dashed) after ", format(optimal_break_date, "%b %Y"), ". A divergence would confirm a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories).")),
-      p("The statistical validation (Chow Test) confirms the structural break point used for this comparison.")
+      p(paste0("The structural decline in 'Strategic' imports (Blue) is mirrored by a divergent rise in EU Banking Exposure (Red Dashed) after ", format(optimal_break_date, "%b %Y"), ".")),
+      p("This confirms a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories). The break triggered a 'Local-for-Local' strategy: EU firms stopped importing but started investing to maintain market share.")
     ))
   })
   
