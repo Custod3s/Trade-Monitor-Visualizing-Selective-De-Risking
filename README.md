@@ -49,6 +49,7 @@ coinciding with the EU Economic Security Strategy implementation (lagged effect)
 **Hypothesis:**
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
 * **Break Point Tested:** October 2023 (Implementation Lag of Economic Security Strategy).
+* **Timeframe Note:** The structural break analysis (`08_strucchange.R`) intentionally restricts the search window to start from **January 2022** (excluding 2020-2021 data). This was done to filter out the extreme "COVID Recovery Noise" (e.g., supply chain bullwhip effects in late 2021) that would otherwise mask the more subtle policy-driven break in late 2023.
 
 **Assumption Verification (Pre-Conditions):**
 To ensure the validity of the Chow test, we performed the following diagnostic checks on the linear model residuals (Script `07_precon_check.R`):
@@ -104,5 +105,6 @@ Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 9. Run `09_strucchange_control.R` - Confirm / Deny hypotheses of decoupling mechanism
 10. Run `10_prediction.R` - Forecast/Prediction models
 11. Run `14_dashboard_v3.R` - The main interactive dashboard
+12. Run `15_update_documentation.R` - Automatically updates this README with the latest stats
 
 

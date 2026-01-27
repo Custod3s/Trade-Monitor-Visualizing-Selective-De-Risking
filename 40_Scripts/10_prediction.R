@@ -7,6 +7,8 @@
 library(dplyr)
 library(readr)
 library(ggplot2)
+library(here)
+library(lubridate)
 
 # Ensure this points to your style file correctly
 source("40_Scripts/00_style.R")
@@ -26,9 +28,14 @@ df_hist <- data %>%
 
 # 2. Build the Model (The "New Normal" Trend)
 # ------------------------------------------------------------------------------
-# We train the model ONLY on data AFTER the structural break (Oct 2023)
+# Load Break Date
+break_results <- readRDS(here::here("30_Report/strucchange_results.rds"))
+optimal_break_date <- as.Date(break_results$break_date)
+print(paste("Modeling based on break date:", optimal_break_date))
+
+# We train the model ONLY on data AFTER the structural break
 df_train <- df_hist %>%
-  filter(date >= as.Date("2023-10-01"))
+  filter(date >= optimal_break_date)
 
 # Linear Model: Value depends on Time
 model_lm <- lm(values ~ date, data = df_train)
@@ -76,7 +83,7 @@ p_forecast <- ggplot() +
               fill = "#005f73", alpha = 0.15) +
   
   # D. Structural Break Line (Matches Dashboard Style EXACTLY)
-  geom_vline(xintercept = as.Date("2023-10-01"), 
+  geom_vline(xintercept = optimal_break_date, 
              linetype = "dashed",  
              color = "#D9534F",    
              linewidth = 1.2) +   
@@ -85,8 +92,9 @@ p_forecast <- ggplot() +
   annotate("text", x = as.Date("2022-06-01"), y = min(df_hist$values), 
            label = "Historical Trend", hjust = 1, color = "#005f73", size = 4) +
   
-  annotate("text", x = as.Date("2024-01-01"), y = max(df_hist$values), 
-           label = "Policy Shift (Oct '23)", hjust = 0, color = "#D9534F", fontface = "bold", size = 4) +
+  annotate("text", x = optimal_break_date %m+% months(3), y = max(df_hist$values), 
+           label = paste("Policy Shift (", format(optimal_break_date, "%b '%y"), ")", sep=""), 
+           hjust = 0, color = "#D9534F", fontface = "bold", size = 4) +
   
   # E. Theme & Formatting (FIXED SCALING)
   # Data is in Millions -> Divide by 1000 to get Billions
@@ -96,7 +104,7 @@ p_forecast <- ggplot() +
   
   labs(
     title = "Projecting the 'De-risking' Trend into 2026",
-    subtitle = "Linear extrapolation of the post-break trajectory (Oct 2023 - Present)",
+    subtitle = paste0("Linear extrapolation of the post-break trajectory (", format(optimal_break_date, "%b %Y"), " - Present)"),
     x = "Date", y = "Trade Value (USD)",
     caption = "Model: OLS Linear Regression on Post-Break Data (95% CI)"
   ) +

@@ -15,11 +15,12 @@ data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"),
                  col_types = cols(date = col_date(format = "%Y-%m-%d")))
 
 # Filter for High-Tech Imports from China (The "Blue Line")
-# We start from 2021 to exclude COVID noise, matching script 4.5
+# We start from 2022 to exclude post-COVID volatility (2021 noise), 
+# ensuring we detect policy shifts rather than pandemic recovery anomalies.
 ts_data <- data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "High-Tech & Strategic") %>%
-  filter(date >= "2021-01-01") %>%
+  filter(date >= "2022-01-01") %>%
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
@@ -27,8 +28,8 @@ ts_data <- data %>%
 print(paste("Number of rows:", nrow(ts_data)))
 
 # Convert to Time Series Object (TS)
-# Start = Jan 2021 (Year 2021, Month 1), Frequency = 12 (Monthly)
-ts_val <- ts(ts_data$values, start = c(2021, 1), frequency = 12)
+# Start = Jan 2022 (Year 2022, Month 1), Frequency = 12 (Monthly)
+ts_val <- ts(ts_data$values, start = c(2022, 1), frequency = 12)
 
 # 3. The F-Statistics Test (Finding the Break)
 # ---------------------------------------------------------
@@ -54,11 +55,11 @@ print(paste("⚠️ STATISTICAL BREAK DETECTED AT:", break_date))
 bp <- breakpoints(ts_val ~ 1)
 optimal_break_index <- bp$breakpoints[1]
 
-# If no break found, default to Oct 2023 (34) as fallback
-if(is.na(optimal_break_index)) { optimal_break_index <- 34 }
+# If no break found, default to Oct 2023 (22) as fallback - adjusted index for 2022 start (Oct 2023 is 22nd month from Jan 2022)
+if(is.na(optimal_break_index)) { optimal_break_index <- 22 }
 
 # Convert index to date for reporting
-optimal_break_date <- as.Date("2021-01-01") %m+% months(optimal_break_index - 1)
+optimal_break_date <- as.Date("2022-01-01") %m+% months(optimal_break_index - 1)
 print(paste("🔹 Optimal Break Point Used:", format(optimal_break_date, "%B %Y")))
 
 # Run Chow Test at this dynamically found point

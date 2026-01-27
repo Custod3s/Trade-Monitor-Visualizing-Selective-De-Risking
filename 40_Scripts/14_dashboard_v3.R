@@ -16,6 +16,50 @@ library(readr)
 library(ggplot2)
 library(zoo)
 library(lubridate)
+library(here)
+
+# Load Structural Break Date & Statistics
+# ------------------------------------------------------------------------------
+# 1. High-Tech (Strategic) Results
+results_hightech <- tryCatch({
+  readRDS("30_Report/strucchange_results.rds")
+}, error = function(e) {
+  warning("Could not load High-Tech results.")
+  list(break_date = "2023-10-01", chow_statistic = NA, chow_p_value = NA) 
+})
+
+# 2. Control (Traditional) Results
+results_control <- tryCatch({
+  readRDS("30_Report/strucchange__control_results.rds") # Note: Matches filename in script 09
+}, error = function(e) {
+  warning("Could not load Control results.")
+  list(chow_statistic = NA, chow_p_value = NA)
+})
+
+# 3. Process Variables for UI
+optimal_break_date <- as.Date(results_hightech$break_date)
+
+# Helper for P-values
+fmt_p <- function(p) {
+  if (is.null(p) || is.na(p)) return("N/A")
+  if (p < 0.0001) return("< 0.0001")
+  return(paste0("= ", round(p, 4)))
+}
+
+# Helper for F-stats
+fmt_f <- function(f) {
+  if (is.null(f) || is.na(f)) return("N/A")
+  return(round(f, 2))
+}
+
+# Formatted Strings for Text
+ht_f_stat <- fmt_f(results_hightech$chow_statistic)
+ht_p_val  <- fmt_p(results_hightech$chow_p_value)
+ct_f_stat <- fmt_f(results_control$chow_statistic)
+ct_p_val  <- fmt_p(results_control$chow_p_value)
+
+print(paste("Dashboard using break date:", optimal_break_date))
+print(paste("Stats Loaded -> HT F:", ht_f_stat, "p:", ht_p_val, "| Control F:", ct_f_stat, "p:", ct_p_val))
 
 # ==============================================================================
 # LOAD CUSTOM THEME & DATA
@@ -147,7 +191,7 @@ ui <- dashboardPage(
     div(
       style = "padding: 15px; color: white; font-size: 11px;",
       p(strong("📅 Key Date:")),
-      p("Oct 2023: EU Economic Security Strategy (Lagged Effect)"),
+      p(paste0(format(optimal_break_date, "%b %Y"), ": EU Economic Security Strategy (Lagged Effect)")),
       br(),
       p(strong("📊 Data Sources:")),
       p(HTML("<a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank' style='color: #90CAF9;'>• Eurostat (Trade Data)</a>")),
@@ -310,13 +354,13 @@ ui <- dashboardPage(
             tags$ul(
               tags$li(HTML("Data Source: <a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank'>Eurostat</a> (Trade) & <a href='https://stats.bis.org/api/v2/data/dataflow/BIS/WS_LBS_D_PUB/1.0/Q..C.A.USD....5A.A.CN?startPeriod=2020-01-01&endPeriod=2025-12-31&format=csv' target='_blank'>BIS</a> (Banking) (2020-2025)")),
               tags$li("Statistical Validation: Chow Test for Structural Breaks"),
-              tags$li("Break Point: October 2023 (Implementation of Economic Security Strategy)"),
-              tags$li("F-Statistic (High-Tech): 55.12 (p < 0.0001)")
+              tags$li(paste0("Break Point: ", format(optimal_break_date, "%B %Y"), " (Implementation of Economic Security Strategy)")),
+              tags$li(paste0("F-Statistic (High-Tech): ", ht_f_stat, " (p ", ht_p_val, ")"))
             ),
             
             h4("Interpretation:"),
-            p("While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). 
-              This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade completely untouched."),
+            p(paste0("While strategic trade collapsed (F=", ht_f_stat, "), traditional trade showed significantly less structural change (F=", ct_f_stat, "). ",
+                     "This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade largely untouched.")),
             
             hr(),
             
@@ -360,7 +404,7 @@ server <- function(input, output, session) {
       
       h4("Key Features:"),
       tags$ul(
-        tags$li(strong("Red Dashed Line (Oct 2023):"), " Marks the implementation of the EU Economic Security Strategy"),
+        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Marks the detected structural break point"),
         tags$li(strong("De-Risking Gap:"), " The red shaded area between lines shows the divergence between sectors (toggle on/off in sidebar)")
       ),
       
@@ -373,8 +417,8 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p("While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). 
-        This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade completely untouched.")
+      p(paste0("While strategic trade collapsed (F=", ht_f_stat, "), traditional trade showed significantly less structural change (F=", ct_f_stat, "). ",
+               "This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade largely untouched."))
     ))
   })
   
@@ -396,7 +440,7 @@ server <- function(input, output, session) {
       
       h4("Key Features:"),
       tags$ul(
-        tags$li(strong("Red Dashed Line (Oct 2023):"), " Marks the policy shift date"),
+        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Marks the structural break point"),
         tags$li(strong("All Sectors:"), " Unlike Graph 1a, this combines all SITC categories for each partner")
       ),
       
@@ -433,7 +477,7 @@ server <- function(input, output, session) {
       tags$ul(
         tags$li(strong("Red Line:"), " Shows total banking claims over time"),
         tags$li(strong("Points:"), " Each dot represents a data point"),
-        tags$li(strong("Red Dashed Line (Oct 2023):"), " Policy implementation date")
+        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Structural break point")
       ),
       
       h4("Interactive Controls:"),
@@ -444,8 +488,7 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p("Initially, declining claims indicated financial de-risking. However, the post-October 2023 rise in claims reveals a 'Localization Paradox'. 
-        To de-risk supply chains (fewer imports), EU firms paradoxically had to 're-risk' balance sheets by increasing capital investment for local production ('In China, For China').")
+      p(paste0("Analyze the banking exposure trend following ", format(optimal_break_date, "%b %Y"), ". A divergent rise in claims despite falling trade would suggest a 'Localization Paradox' (local-for-local investment), while a synchronized decline would indicate broad-based financial de-risking."))
     ))
   })
   
@@ -482,9 +525,8 @@ server <- function(input, output, session) {
       
       h4("Interpretation:"),
       p(strong("The 'Substitution Effect':")),
-      p("The structural decline in 'Strategic' imports (Blue) is mirrored by a *divergent* rise in EU Banking Exposure (Red Dashed) after late 2023. This confirms a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories). The 'break' in Oct 2023 triggered a 'Local-for-Local' strategy: EU firms stopped importing but started investing to maintain market share."),
-      p("The statistical validation (Chow Test) confirms this is a structural break, 
-        not random market volatility.")
+      p(paste0("This chart investigates if the decline in 'Strategic' imports (Blue) is mirrored by a divergent trend in EU Banking Exposure (Red Dashed) after ", format(optimal_break_date, "%b %Y"), ". A divergence would confirm a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories).")),
+      p("The statistical validation (Chow Test) confirms the structural break point used for this comparison.")
     ))
   })
   
@@ -712,7 +754,7 @@ server <- function(input, output, session) {
     
     # 5. Add remaining elements
     p <- p +
-      geom_vline(xintercept = as.Date("2023-10-01"), 
+      geom_vline(xintercept = optimal_break_date, 
                  linetype = "dashed", 
                  color = "#D9534F", 
                  linewidth = 1) +
@@ -776,7 +818,7 @@ server <- function(input, output, session) {
     
     p <- ggplot(plot_data, aes(x = date, y = rolling_avg, color = partner_label)) +
       geom_line(linewidth = 1.2) +
-      geom_vline(xintercept = as.Date("2023-10-01"), 
+      geom_vline(xintercept = optimal_break_date, 
                  linetype = "dashed", 
                  color = "#D9534F", 
                  linewidth = 1) +
@@ -795,7 +837,7 @@ server <- function(input, output, session) {
   })
   
   # ==============================================================================
-  # PLOT 2: BANKING CLAIMS
+  # PLOT 2a: BANKING CLAIMS
   # ==============================================================================
   
   output$banking_chart <- renderPlotly({
@@ -804,7 +846,7 @@ server <- function(input, output, session) {
     p <- ggplot(filtered_finance_data(), aes(x = date, y = values)) +
       geom_line(color = esc_colors["Financial Exposure (BIS)"], linewidth = 1.2) +
       geom_point(color = esc_colors["Financial Exposure (BIS)"], size = 1.5, alpha = 0.6) +
-      geom_vline(xintercept = as.Date("2023-10-01"), 
+      geom_vline(xintercept = optimal_break_date, 
                  linetype = "dashed", 
                  color = "#D9534F", 
                  linewidth = 1) +
@@ -836,7 +878,7 @@ server <- function(input, output, session) {
       arrange(date)
     
     # 2. Build Model (Post-Break)
-    df_train <- df_hist %>% filter(date >= as.Date("2023-10-01"))
+    df_train <- df_hist %>% filter(date >= optimal_break_date)
     
     # Check if we have enough data to model
     validate(need(nrow(df_train) > 3, "Not enough post-2023 data for forecasting."))
@@ -870,14 +912,14 @@ server <- function(input, output, session) {
                 color = "#005f73", linetype = "dashed", linewidth = 1.2) +
       geom_ribbon(data = df_forecast, aes(x = date, ymin = lower, ymax = upper), 
                   fill = "#005f73", alpha = 0.15) +
-      geom_vline(xintercept = as.Date("2023-10-01"), 
+      geom_vline(xintercept = optimal_break_date, 
                  linetype = "dashed",  
                  color = "#D9534F",    
                  linewidth = 1) +   
       scale_y_continuous(labels = function(x) paste(round(x / 1000, 1), "B")) +
       labs(
         title = "Projecting the 'De-risking' Trend",
-        subtitle = "Linear extrapolation (Oct 2023 - Present)",
+        subtitle = paste0("Linear extrapolation (", format(optimal_break_date, "%b %Y"), " - Present)"),
         x = "Date", y = "Trade Value (USD)"
       ) +
       theme_esc()
@@ -918,7 +960,7 @@ server <- function(input, output, session) {
     
     p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linetype = sector_group)) +
       geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-      geom_vline(xintercept = as.Date("2023-10-01"), color = "#D9534F", linetype = "dashed") +
+      geom_vline(xintercept = optimal_break_date, color = "#D9534F", linetype = "dashed") +
       geom_line(linewidth = 1.2) +
       scale_color_manual(values = esc_colors) +
       scale_linetype_manual(values = c(
@@ -928,7 +970,7 @@ server <- function(input, output, session) {
       )) +
       labs(
         title = "The Dual De-Risking: Trade & Finance Divergence",
-        subtitle = "Since Oct 2023, EU Banks and High-Tech Importers have reduced exposure",
+        subtitle = paste0("Since ", format(optimal_break_date, "%b %Y"), ", EU Banks and High-Tech Importers have reduced exposure"),
         y = "Index (2022 Avg = 100)",
         x = "Date",
         caption = "Sources: Eurostat (Trade), BIS (Finance)",
