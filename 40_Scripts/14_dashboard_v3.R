@@ -192,8 +192,8 @@ ui <- dashboardPage(
     div(
       style = "padding: 15px; color: white; font-size: 11px;",
       p(strong("📅 Timeline Key:")),
-      p(tags$span(style="color: #94a3b8;", "•••"), " May 2023: G7 Hiroshima Consensus (Signal)"),
-      p(tags$span(style="color: #D9534F;", "---"), paste0(" June 2023: Strategy Pub. & Market Impact")),
+      p(tags$span(style="color: #D9534F;", "---"), " May 2023: G7 Hiroshima Consensus (Signal)"),
+      p(tags$span(style="color: #94a3b8;", "•••"), paste0(" June 2023: Strategy Pub. & Market Impact")),
       p("Analysis window restricted to post-May 2023 search to isolate strategy era."),
       br(),
       p(strong("📊 Data Sources:")),
