@@ -78,7 +78,7 @@ results <- list(
   f_max = max(fs$Fstats, na.rm = TRUE)
 )
 
-saveRDS(results, here::here("30_Report/strucchange__control_results.rds"))
+saveRDS(results, here::here("30_Report/strucchange_control_results.rds"))
 write_csv(as_tibble(results), here::here("30_Report/strucchange_control_results.csv"))
 
 cat("\n=== STRUCTURAL BREAK ANALYSIS ===\n")

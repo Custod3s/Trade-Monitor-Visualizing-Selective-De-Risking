@@ -30,7 +30,7 @@ results_hightech <- tryCatch({
 
 # 2. Control (Traditional) Results
 results_control <- tryCatch({
-  readRDS("30_Report/strucchange__control_results.rds") # Note: Matches filename in script 09
+  readRDS("30_Report/strucchange_control_results.rds") # Note: Matches filename in script 09
 }, error = function(e) {
   warning("Could not load Control results.")
   list(chow_statistic = NA, chow_p_value = NA)
@@ -875,6 +875,7 @@ server <- function(input, output, session) {
     # 1. Prepare Data
     df_hist <- data_list$trade %>%
       filter(partner == "CN_X_HK", sector_group == "High-Tech & Strategic") %>%
+      filter(date >= "2022-01-01") %>% 
       group_by(date) %>%
       summarise(values = sum(values, na.rm = TRUE), .groups = 'drop') %>%
       arrange(date)

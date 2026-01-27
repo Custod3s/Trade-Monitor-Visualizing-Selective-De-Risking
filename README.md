@@ -16,7 +16,7 @@ This project investigates the hypothesis of **"Selective Fragmentation"** in EU-
 Using monthly trade data from the **ECB Statistical Data Warehouse (2020–2025)** and the ***BIS***, this analysis separates import flows into **High-Tech/Strategic** (SITC 5+7) and **Traditional/Basic** (SITC 6+8) sectors.
 
 **Key Finding:**
-Visual and statistical analysis confirms a **structural divergence** beginning in **November 2023**. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%. This break coincides with a regulatory "perfect storm" in late 2023: the operationalization of the EU Economic Security Strategy, the launch of the EV anti-subsidy probe, and the alignment with tightened US export controls (Oct 17, 2023).
+Visual and statistical analysis confirms a **structural divergence** in the months following the strategy release. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%. The algorithm identifies the most significant break point in **November 2023**, suggesting a ~5-month "Implementation Lag" between the June announcement and the market's tangible reaction (coinciding with the US export controls and EV probe).
 [Dashboard Link](https://custod3s.shinyapps.io/data_challenge/)
 
 
@@ -26,7 +26,7 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 
 ![Relative Trade Performance](20_Images/Dashboard_Top.png)
 > **Panel 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
-> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) since Nov 2023.
+> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) following the Strategy implementation (Nov 2023).
 > * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
 
 ![Banking Claims & Forecast](20_Images/Dashboard_Middle.png)
@@ -43,20 +43,22 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 ### Methodology
 
 Using structural break detection (Chow test) on monthly trade data 
-(2022-2025), we identify a statistically significant break in November 2023.
-This timing corresponds with the "regulatory shockwave" of late 2023: the alignment of the EU Economic Security Strategy with new US export controls (Oct 17) and the launch of the EU's anti-subsidy probe into Chinese EVs.
+(2022-2025), we searched for the optimal break point *following* the June 2023 Strategy release.
+The algorithm identified **November 2023** as the statistically most significant structural shift in the post-strategy era, corresponding with the "Implementation Lag" and subsequent regulatory actions (EV Probe, US Controls).
 
 **Hypothesis:**
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
-* **Break Point Tested:** November 2023 (Compound Effect: Economic Security Strategy Implementation + US Export Controls + EU Anti-Subsidy Probes).
+* **Break Point Tested:** Dynamic Search (Restricted to Post-June 2023). We identify the point of maximum structural deviation occurring *after* the release of the Economic Security Strategy.
 * **Timeframe Note:** The structural break analysis (`08_strucchange.R`) intentionally restricts the search window to start from **January 2022** (excluding 2020-2021 data). This was done to filter out the extreme "COVID Recovery Noise" (e.g., supply chain bullwhip effects in late 2021) that would otherwise mask the more subtle policy-driven break in late 2023.
 
 **Assumption Verification (Pre-Conditions):**
 To ensure the validity of the Chow test, we performed the following diagnostic checks on the linear model residuals (Script `07_precon_check.R`):
 *   **Normality:** Verified using the **Shapiro-Wilk test** and visual inspection of **QQ Plots**.
+    *   [📄 View QQ Plot](20_Images/07_normality_qq.png)
 *   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** to check for serial dependence in the time series.
-    *   [📄 View Visual ACF Plot](20_Images/Visual%20ACF.pdf)
+    *   [📄 View Visual ACF Plot](20_Images/07_autocorrelation_acf.png)
 *   **Homoscedasticity:** Visual inspection of residuals over time to confirm constant variance and rule out heteroscedasticity.
+    *   [📄 View Residuals Plot](20_Images/07_heteroscedasticity.png)
 
 **Results:**
 

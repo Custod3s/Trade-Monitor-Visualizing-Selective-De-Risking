@@ -17,8 +17,8 @@ if (file.exists(here("30_Report/strucchange_results.rds"))) {
 }
 
 # Control Results
-if (file.exists(here("30_Report/strucchange__control_results.rds"))) {
-  res_ct <- readRDS(here("30_Report/strucchange__control_results.rds"))
+if (file.exists(here("30_Report/strucchange_control_results.rds"))) {
+  res_ct <- readRDS(here("30_Report/strucchange_control_results.rds"))
 } else {
   stop("Control results not found. Run 09_strucchange_control.R first.")
 }
@@ -63,7 +63,8 @@ if (length(line_ht_idx) > 0) {
 # Pattern: Starts with "| Low-Tech (Control)"
 line_ct_idx <- which(str_detect(readme_lines, "\\| Low-Tech \\(Control\\)"))
 if (length(line_ct_idx) > 0) {
-  readme_lines[line_ct_idx] <- sprintf("| Low-Tech (Control)    | %s        | %s   | Minor Deviation (Stable Trend)  |", ct_f, ct_p)
+  interp_ct <- if(res_ct$chow_p_value < 0.05) "Significant Break (General Volatility)" else "No Break (Stable Trend)"
+  readme_lines[line_ct_idx] <- sprintf("| Low-Tech (Control)    | %s        | %s   | %s |", ct_f, ct_p, interp_ct)
 }
 
 # B. Update the Key Statistical Finding Bullet Points

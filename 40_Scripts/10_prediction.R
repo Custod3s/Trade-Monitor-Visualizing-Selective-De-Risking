@@ -19,9 +19,11 @@ data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv",
                  col_types = cols(date = col_date(format = "%Y-%m-%d")))
 
 # Prepare High-Tech Series
+# Filter: Start from 2022 to exclude COVID noise (matching Script 08)
 df_hist <- data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "High-Tech & Strategic") %>%
+  filter(date >= "2022-01-01") %>% 
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
@@ -93,7 +95,7 @@ p_forecast <- ggplot() +
            label = "Historical Trend", hjust = 1, color = "#005f73", size = 4) +
   
   annotate("text", x = optimal_break_date %m+% months(3), y = max(df_hist$values), 
-           label = paste("Policy Shift (", format(optimal_break_date, "%b '%y"), ")", sep=""), 
+           label = paste("Policy Impact (", format(optimal_break_date, "%b '%y"), ")", sep=""), 
            hjust = 0, color = "#D9534F", fontface = "bold", size = 4) +
   
   # E. Theme & Formatting (FIXED SCALING)

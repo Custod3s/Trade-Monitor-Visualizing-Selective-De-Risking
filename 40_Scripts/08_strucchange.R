@@ -51,12 +51,37 @@ print(paste("⚠️ STATISTICAL BREAK DETECTED AT:", break_date))
 
 # 5. The Chow Test (Confirmation)
 # ---------------------------------------------------------
-# Instead of hardcoding, we use the optimal break point found by the F-stats
-bp <- breakpoints(ts_val ~ 1)
-optimal_break_index <- bp$breakpoints[1]
+# STRATEGY IMPACT ANALYSIS:
+# We look for the most significant break specifically AFTER the Strategy Release (June 2023).
+# This allows for "Implementation Lag" (e.g., market reacting in Oct/Nov) without
+# picking up earlier noise (like the 2022 Energy Crisis).
 
-# If no break found, default to Oct 2023 (22) as fallback - adjusted index for 2022 start (Oct 2023 is 22nd month from Jan 2022)
-if(is.na(optimal_break_index)) { optimal_break_index <- 22 }
+# Get the F-statistics series
+fs_ts <- fs$Fstats
+
+# Define the search window: Start searching from June 2023 (2023.417 in decimal year)
+# 2023 + (5/12) = 2023.41666... (June is the 6th month, so index 6, but usually time(ts) is year + (month-1)/12)
+search_start_time <- 2023 + (5/12) 
+
+# Filter F-stats to only include dates >= June 2023
+window_fs <- window(fs_ts, start = search_start_time)
+
+# Find the time index where F-statistic is MAXIMUM in this window
+max_fs_index <- which.max(window_fs)
+optimal_break_time <- time(window_fs)[max_fs_index]
+
+# Convert this time (e.g., 2023.833) back to an integer index relative to the full series start (Jan 2022)
+# Formula: (Year - Start_Year) * 12 + Month
+optimal_break_date_val <- date_decimal(as.numeric(optimal_break_time))
+# Round to nearest month to be safe (date_decimal can be slighty off)
+optimal_break_date <- round_date(optimal_break_date_val, unit = "month")
+
+# Calculate the 1-based index for the Chow Test "point" parameter
+# ts_val starts Jan 2022. 
+start_date <- as.Date("2022-01-01")
+optimal_break_index <- length(seq(from = start_date, to = optimal_break_date, by = "month"))
+
+print(paste("🔹 STRATEGY IMPACT SEARCH: Max structural shift (Reaction) found at", format(optimal_break_date, "%B %Y")))
 
 # Convert index to date for reporting
 optimal_break_date <- as.Date("2022-01-01") %m+% months(optimal_break_index - 1)

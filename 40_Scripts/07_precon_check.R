@@ -15,9 +15,11 @@ data <- read_csv("10_Data/11_Processed/01_data_clean_sitc.csv",
                  col_types = cols(date = col_date(format = "%Y-%m-%d")))
 
 # Isolate the High-Tech Time Series
+# Filter: Start from 2022 to match the Structural Break Analysis (script 08)
 ts_df <- data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "High-Tech & Strategic") %>%
+  filter(date >= "2022-01-01") %>% 
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
@@ -37,8 +39,10 @@ shapiro_res <- shapiro.test(residuals)
 print(shapiro_res)
 
 # Visual: QQ Plot
+png("20_Images/07_normality_qq.png", width = 800, height = 600)
 qqnorm(residuals, main = "Normality Check (QQ Plot)")
 qqline(residuals, col = "red", lwd = 2)
+dev.off()
 
 
 # 4. DIAGNOSTIC 2: AUTOCORRELATION (The ACF Plot)
@@ -47,7 +51,9 @@ qqline(residuals, col = "red", lwd = 2)
 # If the bars extend beyond the blue dashed lines, correlation exists.
 
 print("--- 2. AUTOCORRELATION CHECK (Visual ACF) ---")
+png("20_Images/07_autocorrelation_acf.png", width = 800, height = 600)
 acf(residuals, main = "Autocorrelation of Residuals (ACF)")
+dev.off()
 
 # 5. DIAGNOSTIC 3: HETEROSCEDASTICITY (Visual)
 # ------------------------------------------------------------------------------
@@ -63,6 +69,8 @@ p_het <- ggplot(data.frame(x = ts_df$date, y = residuals), aes(x=x, y=y)) +
        x = "Date", y = "Residuals") +
   theme_esc()
 
+ggsave("20_Images/07_heteroscedasticity.png", plot = p_het, width = 8, height = 6)
+
 print(p_het)
 
 # 6. INTERPRETATION GUIDE
@@ -71,4 +79,4 @@ cat("\n--- HOW TO READ THE ACF PLOT ---\n")
 cat("1. Look at the vertical bars starting from Lag 1.\n")
 cat("2. The Blue Dashed Lines are the 'Significance Threshold'.\n")
 cat("3. If the bar at Lag 1 crosses the blue line, the data is 'Sticky' (Autocorrelated).\n")
-cat("4. VERDICT: Since your F-Stat is 55.1, you can tolerate some stickiness.\n")
+cat("4. VERDICT: Given the strong structural breaks expected in this analysis, slight autocorrelation is often tolerable.\n")
