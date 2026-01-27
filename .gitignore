@@ -9,6 +9,8 @@
 .Spotlight-V100
 .Trashes
 Thumbs.db
+docs
+config
 
 # R files
 .Rhistory
