@@ -38,6 +38,7 @@ results_control <- tryCatch({
 
 # 3. Process Variables for UI
 optimal_break_date <- as.Date(results_hightech$break_date)
+strategy_date <- as.Date("2023-06-20") # Official Release Date
 
 # Helper for P-values
 fmt_p <- function(p) {
@@ -190,8 +191,10 @@ ui <- dashboardPage(
     
     div(
       style = "padding: 15px; color: white; font-size: 11px;",
-      p(strong("📅 Key Date:")),
-      p(paste0(format(optimal_break_date, "%b %Y"), ": EU Economic Security Strategy (Lagged Effect)")),
+      p(strong("📅 Timeline Key:")),
+      p(tags$span(style="color: #94a3b8;", "•••"), " May 2023: G7 Hiroshima Consensus (Signal)"),
+      p(tags$span(style="color: #D9534F;", "---"), paste0(" June 2023: Strategy Pub. & Market Impact")),
+      p("Analysis window restricted to post-May 2023 search to isolate strategy era."),
       br(),
       p(strong("📊 Data Sources:")),
       p(HTML("<a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank' style='color: #90CAF9;'>• Eurostat (Trade Data)</a>")),
@@ -354,7 +357,7 @@ ui <- dashboardPage(
             tags$ul(
               tags$li(HTML("Data Source: <a href='https://ec.europa.eu/eurostat/databrowser/view/ext_st_easitc/default/table?lang=en' target='_blank'>Eurostat</a> (Trade) & <a href='https://stats.bis.org/api/v2/data/dataflow/BIS/WS_LBS_D_PUB/1.0/Q..C.A.USD....5A.A.CN?startPeriod=2020-01-01&endPeriod=2025-12-31&format=csv' target='_blank'>BIS</a> (Banking) (2020-2025)")),
               tags$li("Statistical Validation: Chow Test for Structural Breaks"),
-              tags$li(paste0("Break Point: ", format(optimal_break_date, "%B %Y"), " (Compound Shock: Econ. Security Strategy + EV Probe + US Controls)")),
+              tags$li(paste0("Break Point: ", format(optimal_break_date, "%B %Y"), " (G7 Hiroshima Consensus & 'De-risking' Signal)")),
               tags$li(paste0("F-Statistic (High-Tech): ", ht_f_stat, " (p ", ht_p_val, ")"))
             ),
             
@@ -404,7 +407,8 @@ server <- function(input, output, session) {
       
       h4("Key Features:"),
       tags$ul(
-        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Marks the detected structural break point"),
+        tags$li(strong("Grey Dotted Line (Jun 2023):"), " Official Release of the EU Economic Security Strategy"),
+        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Marks the detected structural break point (Implementation Lag)"),
         tags$li(strong("De-Risking Gap:"), " The red shaded area between lines shows the divergence between sectors (toggle on/off in sidebar)")
       ),
       
@@ -417,8 +421,8 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p(paste0("Visualizes the internal structural break within Chinese imports. Since ", format(optimal_break_date, "%b %Y"), ", strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey).")),
-      p(paste0("While strategic trade collapsed (F=", ht_f_stat, "), traditional trade showed significantly less structural change (F=", ct_f_stat, "). This confirms that 'De-risking' was surgical, affecting only the targeted sectors while leaving general trade largely untouched."))
+      p(paste0("Visualizes the internal structural break within Chinese imports. Since the **G7 Hiroshima Summit (May 2023)**, strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey).")),
+      p(paste0("While strategic trade collapsed (F=", ht_f_stat, "), traditional trade showed significantly less structural change. This suggests 'De-risking' was a targeted market reaction to global political signals, starting even before formal EU policy enactment."))
     ))
   })
   
@@ -440,7 +444,8 @@ server <- function(input, output, session) {
       
       h4("Key Features:"),
       tags$ul(
-        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Marks the structural break point"),
+        tags$li(strong("Grey Dotted Line (Jun 2023):"), " Strategy Release Date"),
+        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Marks the structural break point (Implementation Lag)"),
         tags$li(strong("All Sectors:"), " Unlike Graph 1a, this combines all SITC categories for each partner")
       ),
       
@@ -477,7 +482,8 @@ server <- function(input, output, session) {
       tags$ul(
         tags$li(strong("Red Line:"), " Shows total banking claims over time"),
         tags$li(strong("Points:"), " Each dot represents a data point"),
-        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Structural break point")
+        tags$li(strong("Grey Dotted Line (Jun 2023):"), " Strategy Release Date"),
+        tags$li(strong(paste0("Red Dashed Line (", format(optimal_break_date, "%b %Y"), "):")), " Structural break point (Implementation Lag)")
       ),
       
       h4("Interactive Controls:"),
@@ -489,8 +495,8 @@ server <- function(input, output, session) {
       
       h4("Interpretation:"),
       p(strong("The 'Localization Paradox':")),
-      p(paste0("While trade flows fell, banking claims rose/stabilized post-", format(optimal_break_date, "%b %Y"), ". This suggests EU firms are substituting imports with local production ('In China, For China').")),
-      p("To de-risk supply chains (fewer imports), companies paradoxically had to 're-risk' balance sheets (capital investment for local factories), driving up financial exposure.")
+      p(paste0("While trade flows fell, banking claims rose post-G7 Hiroshima (May 2023). This suggests EU firms are substituting imports with local production ('In China, For China') to comply with de-risking mandates while preserving market share.")),
+      p("To de-risk supply chains, companies paradoxically 're-risked' balance sheets through capital investment in local Chinese production.")
     ))
   })
   
@@ -527,8 +533,8 @@ server <- function(input, output, session) {
       
       h4("Interpretation:"),
       p(strong("The 'Substitution Effect':")),
-      p(paste0("The structural decline in 'Strategic' imports (Blue) is mirrored by a divergent rise in EU Banking Exposure (Red Dashed) after ", format(optimal_break_date, "%b %Y"), ".")),
-      p("This confirms a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories). The break triggered a 'Local-for-Local' strategy: EU firms stopped importing but started investing to maintain market share.")
+      p(paste0("The structural decline in 'Strategic' imports (Blue) is mirrored by a divergent rise in EU Banking Exposure (Red Dashed) after the G7 Hiroshima Consensus (May 2023).")),
+      p("This confirms a shift from Trade Integration to Capital Integration as a strategic response to the global 'De-risking' signal.")
     ))
   })
   
@@ -756,18 +762,12 @@ server <- function(input, output, session) {
     
     # 5. Add remaining elements
     p <- p +
-      geom_vline(xintercept = optimal_break_date, 
-                 linetype = "dashed", 
-                 color = "#D9534F", 
-                 linewidth = 1) +
-      annotate("text", 
-               x = as.Date("2024-04-01"), 
-               y = min(data_smooth$rolling_avg, na.rm = TRUE) * 1.05,
-               label = "Start of Divergence", 
-               hjust = 0,
-               color = "#D9534F", 
-               fontface = "bold",
-               size = 3.5) +
+      # --- Signal (Grey Dotted) ---
+      geom_vline(xintercept = strategy_date, linetype = "dotted", color = "#64748b", linewidth = 1) +
+      
+      # --- Impact (Red Dashed) ---
+      geom_vline(xintercept = optimal_break_date, linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+      
       scale_color_manual(values = esc_colors) +
       scale_y_continuous(labels = function(x) paste(x / 1000, "B")) +
       labs(
@@ -820,10 +820,12 @@ server <- function(input, output, session) {
     
     p <- ggplot(plot_data, aes(x = date, y = rolling_avg, color = partner_label)) +
       geom_line(linewidth = 1.2) +
-      geom_vline(xintercept = optimal_break_date, 
-                 linetype = "dashed", 
-                 color = "#D9534F", 
-                 linewidth = 1) +
+      # --- Signal (Grey Dotted) ---
+      geom_vline(xintercept = strategy_date, linetype = "dotted", color = "#64748b", linewidth = 1) +
+      
+      # --- Impact (Red Dashed) ---
+      geom_vline(xintercept = optimal_break_date, linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+      
       scale_color_manual(values = partner_colors) +
       scale_y_continuous(labels = function(x) paste(x / 1000, "B")) +
       labs(
@@ -848,10 +850,12 @@ server <- function(input, output, session) {
     p <- ggplot(filtered_finance_data(), aes(x = date, y = values)) +
       geom_line(color = esc_colors["Financial Exposure (BIS)"], linewidth = 1.2) +
       geom_point(color = esc_colors["Financial Exposure (BIS)"], size = 1.5, alpha = 0.6) +
-      geom_vline(xintercept = optimal_break_date, 
-                 linetype = "dashed", 
-                 color = "#D9534F", 
-                 linewidth = 1) +
+      # --- Signal (Grey Dotted) ---
+      geom_vline(xintercept = strategy_date, linetype = "dotted", color = "#64748b", linewidth = 1) +
+      
+      # --- Impact (Red Dashed) ---
+      geom_vline(xintercept = optimal_break_date, linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+      
       scale_y_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE)) +
       labs(
         title = "Eurozone Banking Claims on China",
@@ -915,10 +919,12 @@ server <- function(input, output, session) {
                 color = "#005f73", linetype = "dashed", linewidth = 1.2) +
       geom_ribbon(data = df_forecast, aes(x = date, ymin = lower, ymax = upper), 
                   fill = "#005f73", alpha = 0.15) +
-      geom_vline(xintercept = optimal_break_date, 
-                 linetype = "dashed",  
-                 color = "#D9534F",    
-                 linewidth = 1) +   
+      # --- Signal (Grey Dotted) ---
+      geom_vline(xintercept = strategy_date, linetype = "dotted", color = "#64748b", linewidth = 1) +
+      
+      # --- Impact (Red Dashed) ---
+      geom_vline(xintercept = optimal_break_date, linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+      
       scale_y_continuous(labels = function(x) paste(round(x / 1000, 1), "B")) +
       labs(
         title = "Projecting the 'De-risking' Trend",
@@ -963,7 +969,12 @@ server <- function(input, output, session) {
     
     p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linetype = sector_group)) +
       geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-      geom_vline(xintercept = optimal_break_date, color = "#D9534F", linetype = "dashed") +
+      # --- Signal (Grey Dotted) ---
+      geom_vline(xintercept = strategy_date, linetype = "dotted", color = "#64748b", linewidth = 1) +
+      
+      # --- Impact (Red Dashed) ---
+      geom_vline(xintercept = optimal_break_date, linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+      
       geom_line(linewidth = 1.2) +
       scale_color_manual(values = esc_colors) +
       scale_linetype_manual(values = c(

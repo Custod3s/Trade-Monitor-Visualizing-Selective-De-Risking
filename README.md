@@ -16,9 +16,7 @@ This project investigates the hypothesis of **"Selective Fragmentation"** in EU-
 Using monthly trade data from the **ECB Statistical Data Warehouse (2020–2025)** and the ***BIS***, this analysis separates import flows into **High-Tech/Strategic** (SITC 5+7) and **Traditional/Basic** (SITC 6+8) sectors.
 
 **Key Finding:**
-Visual and statistical analysis confirms a **structural divergence** in the months following the strategy release. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%. The algorithm identifies the most significant break point in **November 2023**, suggesting a ~5-month "Implementation Lag" between the June announcement and the market's tangible reaction (coinciding with the US export controls and EV probe).
-[Dashboard Link](https://custod3s.shinyapps.io/data_challenge/)
-
+Visual and statistical analysis confirms a **structural divergence** beginning in **May 2023**. While traditional imports have stabilized near baseline levels, strategic high-tech imports have structurally declined by ~15%. The algorithm identifies the most significant break point in **May 2023**, coinciding exactly with the **G7 Hiroshima Summit (19-21 May)** where "De-risking" was formally adopted as a global consensus. This suggests that the market reacted to the **political signal** of the G7 and Ursula von der Leyen's earlier "De-risking" speech (March 30) before the official EU Strategy document was even published in June.
 
 ---
 
@@ -26,29 +24,30 @@ Visual and statistical analysis confirms a **structural divergence** in the mont
 
 ![Relative Trade Performance](20_Images/Dashboard_Top.png)
 > **Panel 1: Dashboard Overview.** The dashboard captures the dual dynamics of the EU's shifting supply chain.
-> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports, where strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey) following the Strategy implementation (Nov 2023).
-> * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners (US, Vietnam, Rest of EU). This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating.
+> * Panel 1a (The "Gap"): Visualizes the internal structural break within Chinese imports. Since the **G7 Hiroshima Summit (May 2023)**, strategic High-Tech flows (Blue) have decoupled from the Traditional baseline (Grey), reacting to the global signal even before formal EU policy.
+> * Panel 1b (The Benchmarks): Contextualizes China's decline against alternative trading partners. This comparison highlights whether the "lost" Chinese volume is being substituted by "Friend-shoring" partners or simply evaporating in response to the de-risking mandate.
 
 ![Banking Claims & Forecast](20_Images/Dashboard_Middle.png)
 > **Panel 2: EU Banking Claims in CN & Trend Forecast.** The dashboard showcases the EU banking claims in CHINA and a possible forecast of future trends.
-> * Panel 2a (The "Claims"): **The Localization Paradox.** While trade flows fell, banking claims *rose* post-Nov 2023. This reveals that EU firms are substituting imports with local production ("In China, For China"). To de-risk supply chains (fewer imports), companies paradoxically had to "re-risk" balance sheets (capital investment for local factories), driving up financial exposure.
-> * Panel 2b (The "Trend"): This forecast illustrates the 'New Normal'. Unlike the stable pre-2023 trend, the post-2023 trajectory shows a structural decline. If policy and market conditions remain unchanged, this model predicts where the relationship is heading.
+> * Panel 2a (The "Claims"): **The Localization Paradox.** While trade flows fell, banking claims *rose* post-May 2023. This suggests that in response to the **G7 de-risking mandate**, EU firms are substituting imports with local production ("In China, For China") to maintain market access while reducing supply chain exposure.
+> * Panel 2b (The "Trend"): This forecast illustrates the 'New Normal'. Unlike the stable pre-G7 trend, the post-Hiroshima trajectory shows a structural decline in high-tech imports.
 
 ![Trade & Finance Divergence](20_Images/Dashboard_Bottom.png)
 > **Panel 3: The Substitution Effect (Index: Avg 2022 = 100).**
-> The structural decline in "Strategic" imports (Blue) is mirrored by a *divergent* rise in EU Banking Exposure (Red Dashed) after late 2023 (Nov). This confirms a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories). The "break" in Nov 2023 triggered a "Local-for-Local" strategy: EU firms stopped importing but started investing to maintain market share.
+> The structural decline in "Strategic" imports (Blue) is mirrored by a *divergent* rise in EU Banking Exposure (Red Dashed) after the **G7 Hiroshima Consensus (May 2023)**. This confirms a rapid shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories) as firms front-run regulatory risk.
 >
 ---
 
 ### Methodology
 
 Using structural break detection (Chow test) on monthly trade data 
-(2022-2025), we searched for the optimal break point *following* the June 2023 Strategy release.
-The algorithm identified **November 2023** as the statistically most significant structural shift in the post-strategy era, corresponding with the "Implementation Lag" and subsequent regulatory actions (EV Probe, US Controls).
+(2022-2025), we searched for the optimal break point starting from **May 2023** (accounting for anticipatory effects).
+The algorithm identified **May 2023** as the statistically most significant structural shift. This timing corresponds with the **"Signaling Shockwave"**: the combination of Ursula von der Leyen's landmark "De-risking" speech (March 30) and the formal adoption of de-risking by the G7 leaders in Hiroshima (May 19-21).
 
 **Hypothesis:**
 * **Null Hypothesis ($H_0$):** No structural break exists (trend is stable).
-* **Break Point Tested:** Dynamic Search (Restricted to Post-June 2023). We identify the point of maximum structural deviation occurring *after* the release of the Economic Security Strategy.
+* **Break Point Tested:** Dynamic Search (Restricted to **May 2023** onwards). 
+    *   *Rationale:* We start the search two months prior to the official Strategy release (June 2023) to capture potential **anticipatory effects** (market "pricing-in" of leaks or drafts) and ensure boundary stability for the statistical test. We then identify the point of maximum structural deviation occurring within this "Strategy Era."
 * **Timeframe Note:** The structural break analysis (`08_strucchange.R`) intentionally restricts the search window to start from **January 2022** (excluding 2020-2021 data). This was done to filter out the extreme "COVID Recovery Noise" (e.g., supply chain bullwhip effects in late 2021) that would otherwise mask the more subtle policy-driven break in late 2023.
 
 **Assumption Verification (Pre-Conditions):**
@@ -65,8 +64,8 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 
 | Sector                | F-Statistic | P-Value  | Interpretation                  |
 | :-------------------- | :---------- | :------- | :------------------------------ |
-| High-Tech (Strategic) | 38.78       | < 0.0001 | Massive Break (Policy + Market) |
-| Low-Tech (Control)    | 24.05        | < 0.0001   | Minor Deviation (Stable Trend)  |
+| High-Tech (Strategic) | 21.80       | < 0.0001 | Massive Break (Policy + Market) |
+| Low-Tech (Control)    | 5.52        | 0.0232   | Significant Break (General Volatility) |
 
 
 
@@ -86,17 +85,17 @@ Nov 2023 (p < 0.001), but the magnitude differs dramatically:
 
 
 
-- **High-Tech & Strategic**: F = 38.78 (p < 0.0001)
+- **High-Tech & Strategic**: F = 21.80 (p < 0.0001)
 
-- **Traditional & Basic**: F = 24.05 (p < 0.0001)
+- **Traditional & Basic**: F = 5.52 (p 0.0232)
 
-- **Intensity Ratio**: ~2x stronger in strategic sectors
+- **Intensity Ratio**: ~4x stronger in strategic sectors
 
 
 
-**Interpretation**: While strategic trade collapsed (F=38.78), traditional trade showed significantly less structural change (F=24.05). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade largely untouched.
+**Interpretation**: While strategic trade collapsed (F=21.80), traditional trade showed significantly less structural change (F=5.52). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade largely untouched.
 
-**Conclusion**: The structural break in strategic goods is **~2x more intense** than in general trade,
+**Conclusion**: The structural break in strategic goods is **~4x more intense** than in general trade,
   confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
 
 

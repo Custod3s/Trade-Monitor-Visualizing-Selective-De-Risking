@@ -59,11 +59,12 @@ print(paste("⚠️ STATISTICAL BREAK DETECTED AT:", break_date))
 # Get the F-statistics series
 fs_ts <- fs$Fstats
 
-# Define the search window: Start searching from June 2023 (2023.417 in decimal year)
-# 2023 + (5/12) = 2023.41666... (June is the 6th month, so index 6, but usually time(ts) is year + (month-1)/12)
-search_start_time <- 2023 + (5/12) 
+# Define the search window: Start searching from May 2023 (2023 + 4/12)
+# We include 1-2 months before the release (June) to account for 
+# potential anticipatory effects (rumors, leaks, pricing-in).
+search_start_time <- 2023 + (4/12) 
 
-# Filter F-stats to only include dates >= June 2023
+# Filter F-stats to only include dates >= May 2023
 window_fs <- window(fs_ts, start = search_start_time)
 
 # Find the time index where F-statistic is MAXIMUM in this window
