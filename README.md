@@ -64,7 +64,7 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 | Sector                | F-Statistic | P-Value  | Interpretation                  |
 | :-------------------- | :---------- | :------- | :------------------------------ |
 | High-Tech (Strategic) | 38.78       | < 0.0001 | Massive Break (Policy + Market) |
-| Low-Tech (Control)    | 0.38        | 0.5412   | No Break (Stable Trend)         |
+| Low-Tech (Control)    | 24.05        | < 0.0001   | Minor Deviation (Stable Trend)  |
 
 
 
@@ -88,7 +88,7 @@ Nov 2023 (p < 0.001), but the magnitude differs dramatically:
 
 - **Traditional & Basic**: F = 24.05 (p < 0.0001)
 
-- **Intensity Ratio**: ~80x stronger in strategic sectors
+- **Intensity Ratio**: ~2x stronger in strategic sectors
 
 
 

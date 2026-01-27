@@ -54,14 +54,14 @@ readme_lines <- read_lines(readme_path)
 # ------------------------------------------------------------------------------
 
 # A. Update the Results Table
-# Pattern: Starts with "| High-Tech (Strategic) |"
-line_ht_idx <- which(str_detect(readme_lines, "\\| High-Tech \\(Strategic\\) \\|"))
+# Pattern: Starts with "| High-Tech (Strategic)"
+line_ht_idx <- which(str_detect(readme_lines, "\\| High-Tech \\(Strategic\\)"))
 if (length(line_ht_idx) > 0) {
   readme_lines[line_ht_idx] <- sprintf("| High-Tech (Strategic) | %s       | %s | Massive Break (Policy + Market) |", ht_f, ht_p)
 }
 
-# Pattern: Starts with "| Low-Tech (Control) |"
-line_ct_idx <- which(str_detect(readme_lines, "\\| Low-Tech \\(Control\\) \\|"))
+# Pattern: Starts with "| Low-Tech (Control)"
+line_ct_idx <- which(str_detect(readme_lines, "\\| Low-Tech \\(Control\\)"))
 if (length(line_ct_idx) > 0) {
   readme_lines[line_ct_idx] <- sprintf("| Low-Tech (Control)    | %s        | %s   | Minor Deviation (Stable Trend)  |", ct_f, ct_p)
 }
@@ -81,7 +81,7 @@ if (length(line_bull_ct) > 0) {
 
 # C. Update Intensity Ratio
 # Pattern: "- **Intensity Ratio**: ~"
-line_ratio <- which(str_detect(readme_lines, "- \\*\\*Intensity Ratio\\*\\*: ~ "))
+line_ratio <- which(str_detect(readme_lines, "- \\*\\*Intensity Ratio\\*\\*: ~"))
 if (length(line_ratio) > 0) {
   readme_lines[line_ratio] <- sprintf("- **Intensity Ratio**: ~%sx stronger in strategic sectors", ratio)
 }
