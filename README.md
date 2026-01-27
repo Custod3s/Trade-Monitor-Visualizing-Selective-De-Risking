@@ -31,12 +31,12 @@ Visual and statistical analysis confirms a **structural divergence** beginning i
 
 ![Banking Claims & Forecast](20_Images/Dashboard_Middle.png)
 > **Panel 2: EU Banking Claims in CN & Trend Forecast.** The dashboard showcases the EU banking claims in CHINA and a possible forecast of future trends.
-> * Panel 2a (The "Claims"): Declining banking claims indicate financial de-risking - Eurozone banks are reducing their capital exposure to China. The synchronized decline with strategic trade suggests a coordinated 'dual de-risking' across both real economy (goods) and financial sectors.
+> * Panel 2a (The "Claims"): **The Localization Paradox.** While trade flows fell, banking claims *rose* post-Oct 2023. This reveals that EU firms are substituting imports with local production ("In China, For China"). To de-risk supply chains (fewer imports), companies paradoxically had to "re-risk" balance sheets (capital investment for local factories), driving up financial exposure.
 > * Panel 2b (The "Trend"): This forecast illustrates the 'New Normal'. Unlike the stable pre-2023 trend, the post-2023 trajectory shows a structural decline. If policy and market conditions remain unchanged, this model predicts where the relationship is heading.
 
 ![Trade & Finance Divergence](20_Images/Dashboard_Bottom.png)
-> **Panel 3: The Dual De-Risking Sighting (Index: Avg 2022 = 100).**
-> The structural decline in "Strategic" imports (Blue) is mirrored by a synchronized contraction in EU Banking Exposure (Red Dashed). This correlation confirms that "de-risking" is systemic, spanning both the real economy (goods) and the financial sector (capital), while "Traditional" trade (Grey) remains only mildly affected by the geopolitical shift since Oct 2023.
+> **Panel 3: The Substitution Effect (Index: Avg 2022 = 100).**
+> The structural decline in "Strategic" imports (Blue) is mirrored by a *divergent* rise in EU Banking Exposure (Red Dashed) after late 2023. This confirms a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories). The "break" in Oct 2023 triggered a "Local-for-Local" strategy: EU firms stopped importing but started investing to maintain market share.
 >
 ---
 

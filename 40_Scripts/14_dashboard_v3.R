@@ -444,9 +444,8 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p("Declining banking claims indicate financial de-risking - Eurozone banks are reducing 
-        their capital exposure to China. The synchronized decline with strategic trade suggests 
-        a coordinated 'dual de-risking' across both real economy (goods) and financial sectors.")
+      p("Initially, declining claims indicated financial de-risking. However, the post-October 2023 rise in claims reveals a 'Localization Paradox'. 
+        To de-risk supply chains (fewer imports), EU firms paradoxically had to 're-risk' balance sheets by increasing capital investment for local production ('In China, For China').")
     ))
   })
   
@@ -482,15 +481,8 @@ server <- function(input, output, session) {
       ),
       
       h4("Interpretation:"),
-      p(strong("The 'Dual De-Risking' Pattern:")),
-      p("Both High-Tech imports (blue) and Banking exposure (red dashed) decline in parallel 
-        after October 2023, while Traditional trade (grey) remains stable. This synchronized 
-        divergence provides empirical evidence that EU de-risking is:"),
-      tags$ul(
-        tags$li(strong("Selective:"), " Targets strategic sectors, not all trade"),
-        tags$li(strong("Systemic:"), " Spans both goods (trade) and capital (finance)"),
-        tags$li(strong("Policy-Driven:"), " Timing aligns with Economic Security Strategy")
-      ),
+      p(strong("The 'Substitution Effect':")),
+      p("The structural decline in 'Strategic' imports (Blue) is mirrored by a *divergent* rise in EU Banking Exposure (Red Dashed) after late 2023. This confirms a shift from **Trade Integration** (buying goods) to **Capital Integration** (funding local factories). The 'break' in Oct 2023 triggered a 'Local-for-Local' strategy: EU firms stopped importing but started investing to maintain market share."),
       p("The statistical validation (Chow Test) confirms this is a structural break, 
         not random market volatility.")
     ))

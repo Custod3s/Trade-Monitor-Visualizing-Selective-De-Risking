@@ -223,23 +223,21 @@ integrate trade data with financial flows from the BIS to capture the
 
 ![](report_files/figure-commonmark/fig-scatter-1.png)
 
-Figure 2: Correlation between Financial Exposure and Strategic Trade.
-The positive slope suggests banks and importers are de-risking in
-tandem.
+Figure 2: The Localization Paradox. The divergence between rising financial exposure and falling strategic trade reveals a "Local-for-Local" substitution strategy.
 
 </div>
 
 As shown in Figure 4, the Wandel durch Handel paradigm has been replaced
-by a “dual-track” reality. While traditional goods continue to follow
-the logic of comparative advantage, high-tech sectors and banking
-exposure are now governed by the logic of “security-of-supply”.
+by a “substitution” reality. While traditional goods continue to follow
+the logic of comparative advantage, high-tech sectors are shifting from
+**Trade Integration** to **Capital Integration**.
 
 <div id="fig-unified">
 
 ![](report_files/figure-commonmark/fig-unified-1.png)
 
-Figure 3: The Dual De-Risking: Trade & Finance Divergence. Since Oct
-2023, EU Banks and High-Tech Importers have both reduced exposure.
+Figure 3: The Substitution Effect: Trade & Finance Divergence. Since Oct
+2023, EU Banks have *increased* exposure (Capital Investment) while Importers have *reduced* flows (Trade De-risking).
 
 </div>
 

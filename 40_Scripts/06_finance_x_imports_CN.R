@@ -76,8 +76,8 @@ p <- ggplot(plot_data, aes(x = date, y = index_val, color = sector_group, linety
     "Financial Exposure (BIS)" = "longdash" 
   )) +
   labs(
-    title = "The Dual De-Risking: Trade & Finance Divergence",
-    subtitle = "Since Oct 2023, EU Banks and High-Tech Importers have both reduced exposure.",
+    title = "The Substitution Effect: Trade vs Finance Divergence",
+    subtitle = "Since Oct 2023, EU Banks increased exposure (Capital) while Importers cut flows (Trade).",
     y = "Index (2022 Avg = 100)",
     x = "",
     caption = "Sources: Eurostat (Trade), BIS Locational Banking Statistics (Finance)"
