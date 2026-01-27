@@ -7,7 +7,7 @@
 #              results from the ESC Data Challenge 2026 submission.
 #
 # Usage: source("00_BASE/run_all.R")
-# Time: ~5-10 minutes (depending on internet connection)
+# Time: ~10-15 minutes (depending on internet connection)
 # ==============================================================================
 
 # Clear console for clean output
@@ -26,7 +26,7 @@ start_time <- Sys.time()
 # ==============================================================================
 # STEP 0: ENVIRONMENT SETUP
 # ==============================================================================
-cat("STEP 0/10: Setting up environment...\n")
+cat("STEP 0/12: Setting up environment...\n")
 cat("------------------------------------------------------------------------\n")
 
 # Source foundation script (handles all package installation and setup)
@@ -41,7 +41,7 @@ if (file.exists("00_BASE/foundation.R")) {
 # ==============================================================================
 # STEP 1: DATA COLLECTION - EUROSTAT TRADE DATA
 # ==============================================================================
-cat("STEP 1/10: Downloading Eurostat trade data...\n")
+cat("STEP 1/12: Downloading Eurostat trade data...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Source: Eurostat External Trade Statistics (ECB Data Portal)\n")
 cat("Dataset: ext_st_easitc (Monthly, 2020-2025)\n")
@@ -60,7 +60,7 @@ tryCatch({
 # ==============================================================================
 # STEP 2: DATA COLLECTION - BIS BANKING DATA (BASIC)
 # ==============================================================================
-cat("STEP 2/10: Downloading BIS banking statistics (basic)...\n")
+cat("STEP 2/12: Downloading BIS banking statistics (basic)...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Source: BIS Locational Banking Statistics\n")
 cat("Expected time: ~30 seconds\n\n")
@@ -77,7 +77,7 @@ tryCatch({
 # ==============================================================================
 # STEP 3: DATA COLLECTION - BIS COMPREHENSIVE DATA
 # ==============================================================================
-cat("STEP 3/10: Downloading BIS comprehensive indicators...\n")
+cat("STEP 3/12: Downloading BIS comprehensive indicators...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Source: BIS Locational Banking Statistics (All Eurozone countries)\n")
 cat("Expected time: ~1 minute\n\n")
@@ -95,7 +95,7 @@ tryCatch({
 # ==============================================================================
 # STEP 4: DATA PROCESSING - SITC CLASSIFICATION
 # ==============================================================================
-cat("STEP 4/10: Processing SITC classifications...\n")
+cat("STEP 4/12: Processing SITC classifications...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Categorizing trade data into strategic sectors:\n")
 cat("  - High-Tech & Strategic: SITC 5 (Chemicals) + SITC 7 (Machinery)\n")
@@ -114,7 +114,7 @@ tryCatch({
 # ==============================================================================
 # STEP 5: EXPLORATORY ANALYSIS
 # ==============================================================================
-cat("STEP 5/10: Generating exploratory visualizations...\n")
+cat("STEP 5/12: Generating exploratory visualizations...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Creating initial trade trend plots for EU-China imports\n\n")
 
@@ -131,7 +131,7 @@ tryCatch({
 # ==============================================================================
 # STEP 6: CROSS-DOMAIN INTEGRATION
 # ==============================================================================
-cat("STEP 6/10: Creating unified trade-finance visualization...\n")
+cat("STEP 6/12: Creating unified trade-finance visualization...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Integrating Eurostat trade data with BIS banking statistics\n\n")
 
@@ -145,15 +145,29 @@ tryCatch({
 })
 
 # ==============================================================================
-# STEP 7: STRUCTURAL BREAK ANALYSIS - HIGH-TECH
+# STEP 7: PRE-CONDITION CHECKS
 # ==============================================================================
-cat("STEP 7/10: Running structural break test (High-Tech sector)...\n")
+cat("STEP 7/12: Verifying statistical assumptions...\n")
+cat("------------------------------------------------------------------------\n")
+cat("Checking Normality and Autocorrelation for time series analysis\n\n")
+
+tryCatch({
+  source("40_Scripts/07_precon_check.R")
+  cat("✓ Pre-condition checks complete\n\n")
+}, error = function(e) {
+  warning("⚠ Error in pre-condition checks: ", e$message, "\n\n")
+})
+
+# ==============================================================================
+# STEP 8: STRUCTURAL BREAK ANALYSIS - HIGH-TECH
+# ==============================================================================
+cat("STEP 8/12: Running structural break test (High-Tech sector)...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Chow test for High-Tech & Strategic imports from China\n")
 cat("Break point: January 2023 (EU Economic Security Strategy)\n\n")
 
 tryCatch({
-  source("40_Scripts/07_strucchange.R")
+  source("40_Scripts/08_strucchange.R")
   cat("✓ Structural break analysis complete (High-Tech)\n")
   cat("  Results saved to: 30_Report/strucchange_results.csv\n")
   
@@ -170,15 +184,15 @@ tryCatch({
 })
 
 # ==============================================================================
-# STEP 8: STRUCTURAL BREAK ANALYSIS - TRADITIONAL (CONTROL)
+# STEP 9: STRUCTURAL BREAK ANALYSIS - TRADITIONAL (CONTROL)
 # ==============================================================================
-cat("STEP 8/10: Running structural break test (Traditional sector - CONTROL)...\n")
+cat("STEP 9/12: Running structural break test (Traditional sector - CONTROL)...\n")
 cat("------------------------------------------------------------------------\n")
 cat("Chow test for Traditional & Basic imports from China\n")
 cat("Control group analysis to validate High-Tech findings\n\n")
 
 tryCatch({
-  source("40_Scripts/08_strucchange_control.R")
+  source("40_Scripts/09_strucchange_control.R")
   cat("✓ Control group analysis complete (Traditional)\n")
   cat("  Results saved to: 30_Report/strucchange_control_results.csv\n")
   
@@ -212,9 +226,23 @@ tryCatch({
 })
 
 # ==============================================================================
-# STEP 9: INTERACTIVE DASHBOARD
+# STEP 10: PREDICTION MODEL
 # ==============================================================================
-cat("STEP 9/10: Preparing interactive dashboard...\n")
+cat("STEP 10/12: Running predictive modelling...\n")
+cat("------------------------------------------------------------------------\n")
+cat("Generating linear trend extrapolations for 2026 scenarios\n\n")
+
+tryCatch({
+  source("40_Scripts/10_prediction.R")
+  cat("✓ Prediction modelling complete\n\n")
+}, error = function(e) {
+  warning("⚠ Error in prediction modelling: ", e$message, "\n\n")
+})
+
+# ==============================================================================
+# STEP 11: INTERACTIVE DASHBOARD
+# ==============================================================================
+cat("STEP 11/12: Preparing interactive dashboard...\n")
 cat("------------------------------------------------------------------------\n")
 cat("The Shiny dashboard will launch in your default web browser.\n")
 cat("You can explore the data interactively with date range and sector filters.\n\n")
@@ -246,7 +274,7 @@ if (user_input != "n" && user_input != "no") {
       cat("      Close the browser tab to stop the dashboard.\n\n")
       
       # Run the dashboard
-      shiny::runApp("40_Scripts/09_dashboard.R")
+      shiny::runApp("40_Scripts/11_dashboard.R")
       
     } else {
       warning("⚠ Required data files not found. Dashboard cannot launch.\n")
@@ -260,10 +288,10 @@ if (user_input != "n" && user_input != "no") {
 }
 
 # ==============================================================================
-# STEP 10: FINAL SUMMARY
+# STEP 12: FINAL SUMMARY
 # ==============================================================================
 cat("\n")
-cat("STEP 10/10: Analysis Complete!\n")
+cat("STEP 12/12: Analysis Complete!\n")
 cat("========================================================================\n\n")
 
 # Calculate total execution time
@@ -345,7 +373,7 @@ cat("NEXT STEPS\n")
 cat("------------------------------------------------------------------------\n")
 cat("1. Review generated visualizations in 20_Images/\n")
 cat("2. Check statistical results in 30_Report/\n")
-cat("3. Re-launch dashboard: source('40_Scripts/09_dashboard.R')\n")
+cat("3. Re-launch dashboard: source('40_Scripts/11_dashboard.R')\n")
 cat("4. For live version, visit: https://[your-shinyapps-url].shinyapps.io/\n\n")
 
 cat("TROUBLESHOOTING\n")
