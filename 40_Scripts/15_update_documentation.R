@@ -95,7 +95,7 @@ if (length(line_interp) > 0) {
 }
 
 # E. Update Conclusion (Intensity)
-line_concl <- which(str_detect(readme_lines, "The structural break in strategic goods is \*\*~"))
+line_concl <- which(str_detect(readme_lines, "The structural break in strategic goods is \\*\\*~"))
 if (length(line_concl) > 0) {
   readme_lines[line_concl] <- sprintf("**Conclusion**: The structural break in strategic goods is **~%sx more intense** than in general trade,", ratio)
 }

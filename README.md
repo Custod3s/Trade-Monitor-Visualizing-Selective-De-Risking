@@ -63,7 +63,7 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 
 | Sector                | F-Statistic | P-Value  | Interpretation                  |
 | :-------------------- | :---------- | :------- | :------------------------------ |
-| High-Tech (Strategic) | 30.45       | < 0.0001 | Massive Break (Policy + Market) |
+| High-Tech (Strategic) | 38.78       | < 0.0001 | Massive Break (Policy + Market) |
 | Low-Tech (Control)    | 0.38        | 0.5412   | No Break (Stable Trend)         |
 
 
@@ -78,17 +78,17 @@ Oct 2023 (p < 0.001), but the magnitude differs dramatically:
 
 
 
-- **High-Tech & Strategic**: F = 30.45 (p < 0.0001)
+- **High-Tech & Strategic**: F = 38.78 (p < 0.0001)
 
-- **Traditional & Basic**: F = 0.38 (p = 0.54)
+- **Traditional & Basic**: F = 24.05 (p < 0.0001)
 
 - **Intensity Ratio**: ~80x stronger in strategic sectors
 
 
 
-**Interpretation**: While strategic trade collapsed (F=30.45), traditional trade showed no statistically significant structural change (F=0.38). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade completely untouched.
+**Interpretation**: While strategic trade collapsed (F=38.78), traditional trade showed significantly less structural change (F=24.05). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade largely untouched.
 
-**Conclusion**: The structural break in strategic goods is **~80x more intense** than in general trade,
+**Conclusion**: The structural break in strategic goods is **~2x more intense** than in general trade,
   confirming that "De-risking" effectively decoupled the high-tech sector beyond normal market fluctuations.
 
 
