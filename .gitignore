@@ -1,9 +1,9 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+*.Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
 # System files
-.DS_Store
+*.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
@@ -13,10 +13,11 @@ docs
 config
 
 # R files
-.Rhistory
-.RData
+*.Rhistory
+*.RData
 .Rproj.user/
 *.Rproj
+Rplots.pdf
 
 # Data files
 10_Data/12_Raw/*.csv
