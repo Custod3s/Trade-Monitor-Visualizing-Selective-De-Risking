@@ -55,11 +55,11 @@ To ensure the validity of the Chow test, we performed the following diagnostic c
 
 *   **Normality (Confirmed):** Verified using the **Shapiro-Wilk test** on the segmented residuals.
     *   Result: *W = 0.9769, p-value = 0.4698* (p > 0.05, fails to reject normality).
-    *   [📄 View Segmented QQ Plot](20_Images/07_normality_qq.png)
+    *   [📄 View Segmented QQ Plot](20_Images/07.1_normality_qq.png)
 *   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** separately for Pre- and Post-break periods to rule out serial dependence bias.
-    *   [📄 View Segmented ACF Plot](20_Images/07_autocorrelation_acf.png)
+    *   [📄 View Segmented ACF Plot](20_Images/07.2_autocorrelation_acf.png)
 *   **Homoscedasticity:** Visual inspection of residuals over time (Pre/Post) to confirm constant variance.
-    *   [📄 View Segmented Residuals Plot](20_Images/07_heteroscedasticity.png)
+    *   [📄 View Segmented Residuals Plot](20_Images/07.3_heteroscedasticity.png)
 
 **Results:**
 
