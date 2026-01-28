@@ -113,4 +113,4 @@ p_forecast <- ggplot() +
   theme_esc()
 
 print(p_forecast)
-ggsave("20_Images/07_forecast_linear.png", plot = p_forecast, width = 10, height = 6)
+ggsave("20_Images/10_forecast_linear.png", plot = p_forecast, width = 10, height = 6)

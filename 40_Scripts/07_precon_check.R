@@ -57,7 +57,7 @@ shapiro_res <- shapiro.test(residuals_segmented)
 print(shapiro_res)
 
 # Visual: QQ Plot (Segmented)
-png("20_Images/07_normality_qq.png", width = 800, height = 400)
+png("20_Images/07.1_normality_qq.png", width = 800, height = 400)
 par(mfrow=c(1,2)) # Side by side
 qqnorm(resid_pre, main = "QQ Plot: Pre-Break")
 qqline(resid_pre, col = "red", lwd = 2)
@@ -70,7 +70,7 @@ par(mfrow=c(1,1)) # Reset
 # ------------------------------------------------------------------------------
 print("--- 2. AUTOCORRELATION CHECK (Visual ACF) ---")
 # We check ACF separately to see if memory persists in either regime
-png("20_Images/07_autocorrelation_acf.png", width = 800, height = 400)
+png("20_Images/07.2_autocorrelation_acf.png", width = 800, height = 400)
 par(mfrow=c(1,2))
 acf(resid_pre, main = "ACF: Pre-Break Residuals")
 acf(resid_post, main = "ACF: Post-Break Residuals")
@@ -99,7 +99,7 @@ p_het <- ggplot(plot_data, aes(x = date, y = resid, color = regime)) +
   theme_esc() +
   theme(legend.position = "top")
 
-ggsave("20_Images/07_heteroscedasticity.png", plot = p_het, width = 8, height = 6)
+ggsave("20_Images/07.3_heteroscedasticity.png", plot = p_het, width = 8, height = 6)
 
 print(p_het)
 

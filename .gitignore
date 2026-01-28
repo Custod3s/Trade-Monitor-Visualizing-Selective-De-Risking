@@ -18,6 +18,7 @@ config
 .Rproj.user/
 *.Rproj
 Rplots.pdf
+Data Challenge.Rproj
 
 # Data files
 10_Data/12_Raw/*.csv
