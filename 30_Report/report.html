@@ -130,7 +130,7 @@ window.Quarto = {
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="report.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -219,9 +219,19 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="assumption-verification">Assumption Verification</h2>
 <p>To ensure the statistical validity of the Chow Test, we performed diagnostic checks on the residuals of a <strong>Segmented Model</strong> (splitting the data into Pre- and Post-Break periods). This approach correctly accounts for the structural shift, preventing false positives where a “kinked” trend might otherwise appear as non-normal error distribution.</p>
 <ul>
-<li><p><strong>Normality (Confirmed):</strong> The Shapiro-Wilk test on the segmented residuals yielded a value of <strong>W = 0.9769</strong> with a <strong>p-value of 0.4698</strong>. Since <span class="math inline">\(p &gt; 0.05\)</span>, we fail to reject the null hypothesis, confirming that the residuals are normally distributed once the structural break is accounted for. <img src="../20_Images/07_normality_qq.png" id="fig-qq" class="img-fluid" style="width:70.0%" alt="Segmented QQ Plot"></p></li>
-<li><p><strong>Autocorrelation:</strong> We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime. <img src="../20_Images/07_autocorrelation_acf.png" id="fig-acf" class="img-fluid" style="width:70.0%" alt="Segmented ACF Plot"></p></li>
-<li><p><strong>Homoscedasticity:</strong> Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break. <img src="../20_Images/07_heteroscedasticity.png" id="fig-het" class="img-fluid" style="width:70.0%" alt="Segmented Variance Check"></p></li>
+<li><p><strong>Normality (Confirmed):</strong> The Shapiro-Wilk test on the segmented residuals yielded a value of <strong>W = 0.9769</strong> with a <strong>p-value of 0.4698</strong>. Since <span class="math inline">\(p &gt; 0.05\)</span>, we fail to reject the null hypothesis, confirming that the residuals are normally distributed once the structural break is accounted for. <img src="../20_Images/07.1_normality_qq.png" id="fig-qq" class="img-fluid" style="width:70.0%" alt="Segmented QQ Plot"></p></li>
+<li><p><strong>Autocorrelation:</strong> We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime. <img src="../20_Images/07.2_autocorrelation_acf.png" id="fig-acf" class="img-fluid" style="width:70.0%" alt="Segmented ACF Plot"></p></li>
+<li><p><strong>Homoscedasticity:</strong> Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break.</p>
+<div id="fig-het" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-het-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../20_Images/07.3_heteroscedasticity.png" class="img-fluid figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-het-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Segmented Variance Check
+</figcaption>
+</figure>
+</div></li>
 </ul>
 </section>
 </section>
@@ -283,7 +293,7 @@ Table&nbsp;1: Descriptive Statistics of Monthly Trade Flows (Jan 2021 - Present)
 </section>
 <section id="visualization-of-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-of-distributions">Visualization of Distributions</h2>
-<p>To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values (<a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;1</a>).</p>
+<p>To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values (<a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;2</a>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H">
@@ -292,7 +302,7 @@ Table&nbsp;1: Descriptive Statistics of Monthly Trade Flows (Jan 2021 - Present)
 <img src="report_files/figure-html/fig-boxplot-1.png" class="img-fluid figure-img" data-fig-pos="H" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Structural Shift: High-Tech trade shows a lower median and compressed range post-Structural Break.
+Figure&nbsp;2: Structural Shift: High-Tech trade shows a lower median and compressed range post-Structural Break.
 </figcaption>
 </figure>
 </div>
@@ -313,13 +323,13 @@ Figure&nbsp;1: Structural Shift: High-Tech trade shows a lower median and compre
 <img src="report_files/figure-html/fig-unified-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="H">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: The Dual De-Risking: Divergence of Trade and Finance.
+Figure&nbsp;3: The Dual De-Risking: Divergence of Trade and Finance.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As shown in <a href="#fig-unified" class="quarto-xref">Figure&nbsp;2</a>, the <em>Wandel durch Handel</em> paradigm has not merely paused; it has been replaced by a “dual-track” reality. While traditional goods (Grey Line) continue to follow the logic of comparative advantage, high-tech sectors (Blue Line) have decoupled.</p>
+<p>As shown in <a href="#fig-unified" class="quarto-xref">Figure&nbsp;3</a>, the <em>Wandel durch Handel</em> paradigm has not merely paused; it has been replaced by a “dual-track” reality. While traditional goods (Grey Line) continue to follow the logic of comparative advantage, high-tech sectors (Blue Line) have decoupled.</p>
 <p>Crucially, Banking Exposure (Red Dashed Line) shows a substitution effect. The divergence suggests that while EU firms are importing fewer high-tech goods, they may be increasing capital exposure to maintain market presence—an “In China, For China” strategy that mitigates supply chain risk while increasing financial risk.</p>
 </section>
 <section id="future-trajectory-2026" class="level2">
@@ -333,7 +343,7 @@ Figure&nbsp;2: The Dual De-Risking: Divergence of Trade and Finance.
 <img src="report_files/figure-html/fig-forecast-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="H">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forecast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Forecast 2026: Strategic Sector Trajectory based on post-break linear extrapolation.
+Figure&nbsp;4: Forecast 2026: Strategic Sector Trajectory based on post-break linear extrapolation.
 </figcaption>
 </figure>
 </div>

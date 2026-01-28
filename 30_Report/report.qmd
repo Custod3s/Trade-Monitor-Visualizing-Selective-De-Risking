@@ -26,6 +26,9 @@ format:
   html:
     theme: cosmo
     toc: true
+  gfm:
+    toc: true
+    number-sections: true
 editor: source
 execute:
   echo: false
@@ -112,13 +115,14 @@ To ensure robustness, we filter for pandemic volatility (starting analysis in Ja
 To ensure the statistical validity of the Chow Test, we performed diagnostic checks on the residuals of a **Segmented Model** (splitting the data into Pre- and Post-Break periods). This approach correctly accounts for the structural shift, preventing false positives where a "kinked" trend might otherwise appear as non-normal error distribution.
 
 *   **Normality (Confirmed):** The Shapiro-Wilk test on the segmented residuals yielded a value of **W = 0.9769** with a **p-value of 0.4698**. Since $p > 0.05$, we fail to reject the null hypothesis, confirming that the residuals are normally distributed once the structural break is accounted for.
-    ![Segmented QQ Plot](../20_Images/07_normality_qq.png){#fig-qq width=70%}
+    ![Segmented QQ Plot](../20_Images/07.1_normality_qq.png){#fig-qq width=70%}
 
 *   **Autocorrelation:** We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime.
-    ![Segmented ACF Plot](../20_Images/07_autocorrelation_acf.png){#fig-acf width=70%}
+    ![Segmented ACF Plot](../20_Images/07.2_autocorrelation_acf.png){#fig-acf width=70%}
 
 *   **Homoscedasticity:** Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break.
-    ![Segmented Variance Check](../20_Images/07_heteroscedasticity.png){#fig-het width=70%}
+
+    ![Segmented Variance Check](../20_Images/07.3_heteroscedasticity.png){#fig-het width=70%}
 
 # Results
 
