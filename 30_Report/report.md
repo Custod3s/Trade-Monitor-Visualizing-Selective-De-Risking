@@ -38,10 +38,11 @@ January 28, 2026
 
 The evolution of EU-China economic relations has undergone a fundamental
 departure from the *Wandel durch Handel* (“change through trade”)
-paradigm toward a strategy of “de-risking.” This shift is primarily
-aimed at correcting a trade deficit that reached €304.5 billion by 2024
-and mitigating the risks of “coercive leverage” in critical supply
-chains (Vandermeeren, 2024).
+paradigm toward a strategy of “de-risking,” formalized in the **European
+Economic Security Strategy** (European Commission, 2023). This shift is
+primarily aimed at correcting a trade deficit that reached €304.5
+billion by 2024 and mitigating the risks of “coercive leverage” in
+critical supply chains (Vandermeeren, 2024).
 
 However, the effectiveness of this policy pivot remains contested.
 Beyond the political rhetoric, a critical empirical question remains:
