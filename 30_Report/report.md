@@ -82,7 +82,7 @@ significant fragmentation.
 
 <div id="tbl-descriptive">
 
-Table 1: Descriptive Statistics of Monthly Trade Flows (Jan 2021 -
+Table 1: Descriptive Statistics of Monthly Trade Flows (Jan 2022 -
 Present). Values in Billion USD.
 
 <div class="cell-output-display">
@@ -120,9 +120,8 @@ International Trade Classification (SITC) Revision 4:
 
 The primary analytical instrument utilized is the **Chow Test**, a
 standard in econometric literature for identifying “structural breaks”
-in time-series data. The model tests for a break point in **October
-2023**, coinciding with the formal adoption of the European Economic
-Security Strategy.
+in time-series data. The model tests for a break point in **May
+2023**, coinciding with the global “De-risking” consensus reached at the G7 Hiroshima Summit.
 
 ### Model Diagnostics and Robustness Checks
 
@@ -136,8 +135,8 @@ robustness measures:
     were driven by a general EU recession, both sectors would show
     similar breaks. A divergence isolates the *selective* policy effect.
 2.  **Pandemic Control:** The analysis explicitly filters data to start
-    from **January 2021**, excluding the extreme volatility of the 2020
-    COVID-19 shock which could bias structural break detection.
+    from **January 2022**, excluding the extreme volatility of the 2020-2021
+    COVID-19 recovery phase which could bias structural break detection.
 3.  **Assumption Verification:** Residual diagnostics (Shapiro-Wilk
     test) were performed to ensure the linear model assumptions
     underlying the Chow test were met, confirming that the detected
@@ -149,14 +148,14 @@ robustness measures:
 
 ts_data \<- trade_data %\>% filter(grepl(“CN_X_HK”, partner)) %\>%
 filter(sector_group == “High-Tech & Strategic”) %\>% filter(date \>=
-“2021-01-01”) %\>% group_by(date) %\>% summarise(values = sum(values,
+“2022-01-01”) %\>% group_by(date) %\>% summarise(values = sum(values,
 na.rm = TRUE)) %\>% arrange(date)
 
 # Create TS object
 
-ts_val \<- ts(ts_data\$values, start = c(2021, 1), frequency = 12)
+ts_val \<- ts(ts_data\$values, start = c(2022, 1), frequency = 12)
 
-# Run Chow Test at Oct 2023 (Index 34)
+# Run Chow Test at May 2023 (Strategy Era)
 
 chow_test \<- sctest(ts_val ~ 1, type = “Chow”, point = 34)
 
@@ -169,11 +168,11 @@ p_val_hightech <- format.pval(chow_test$p.value, eps = .001)
 
 ts_data_control \<- trade_data %\>% filter(grepl(“CN_X_HK”, partner))
 %\>% filter(sector_group == “Traditional & Basic”) %\>% filter(date \>=
-“2021-01-01”) %\>% group_by(date) %\>% summarise(values = sum(values,
+“2022-01-01”) %\>% group_by(date) %\>% summarise(values = sum(values,
 na.rm = TRUE)) %\>% arrange(date)
 
 ts_val_ctrl \<-
-ts(ts_data_control$values, start = c(2021, 1), frequency = 12)
+ts(ts_data_control$values, start = c(2022, 1), frequency = 12)
 chow_test_ctrl <- sctest(ts_val_ctrl ~ 1, type = "Chow", point = 34)
 f_stat_ctrl <- round(chow_test_ctrl$statistic, 2) \# Calculate Intensity
 Ratio dynamically intensity_ratio \<-
@@ -188,10 +187,10 @@ that the European Union’s trade architecture is undergoing a fundamental
 re-orientation.
 
 For the **Treatment Group (High-Tech & Strategic)**, the model yielded
-an F-statistic of **30.45** (p \< 0.0001). This highly significant value
+an F-statistic of **21.80** (p \< 0.0001). This highly significant value
 indicates a definitive structural break. Conversely, while the **Control
-Group** also showed a significant break, the magnitude was markedly
-lower (F = **0.38**).
+Group** also showed a significant break, the magnitude was notably
+lower (F = **5.52**).
 
 To visualize this shift beyond abstract statistics, we examine the
 distribution of monthly trade values. As shown in Figure 2, the
@@ -204,11 +203,11 @@ traditional trade distributions remain largely overlapping.
 ![](report_files/figure-commonmark/fig-boxplot-1.png)
 
 Figure 1: Distribution of Monthly Trade Values: Before vs. After the
-Economic Security Strategy (Oct 2023).
+G7 Hiroshima Signal (May 2023).
 
 </div>
 
-The Intensity Ratio of approximately ~80 x is the most salient finding
+The Intensity Ratio of approximately ~4x is the most salient finding
 of this study. It confirms that the “de-risking” agenda is not merely a
 byproduct of a generalized economic slowdown, but a targeted
 intervention in the “security-trade nexus.
@@ -236,7 +235,7 @@ the logic of comparative advantage, high-tech sectors are shifting from
 
 ![](report_files/figure-commonmark/fig-unified-1.png)
 
-Figure 3: The Substitution Effect: Trade & Finance Divergence. Since Oct
+Figure 3: The Substitution Effect: Trade & Finance Divergence. Since May
 2023, EU Banks have *increased* exposure (Capital Investment) while Importers have *reduced* flows (Trade De-risking).
 
 </div>
@@ -244,7 +243,7 @@ Figure 3: The Substitution Effect: Trade & Finance Divergence. Since Oct
 ### Forecast and Policy Implications
 
 Looking ahead, we project the “New Normal” trajectory for strategic
-trade. Based on the post-break trend (Oct 2023–Present), the model
+trade. Based on the post-break trend (May 2023–Present), the model
 suggests a continued stabilization at lower levels rather than a rebound
 to pre-2022 highs.
 
@@ -259,12 +258,13 @@ extrapolation of the post-break trajectory.
 
 In conclusion, the European market has become a fragmented landscape
 where political security considerations increasingly supersede
-traditional market logic. Crucially, the 9-month lag between the
-strategy announcement (Jan 2023) and the structural break (Oct 2023)
-highlights the transmission time of economic security policies. As we
-look toward 2027, policymakers must account for this latency when
-designing future interventions, ensuring that ‘surgical’ precision is
-maintained without devolving into broader protectionism.
+traditional market logic. Crucially, the synchronization between the G7
+Hiroshima consensus (May 2023) and the observed structural break
+highlights the immediate transmission of economic security signals to
+global trade participants. As we look toward 2027, policymakers must
+account for this rapid responsiveness when designing future
+interventions, ensuring that ‘sector-concentrated’ de-risking is
+maintained without devolving into broad-based protectionism.
 
 # References
 

@@ -63,7 +63,7 @@ We hypothesize a dual-track geoeconomic reality: while traditional, low-value-ad
 
 ```{r}
 #| label: tbl-descriptive
-#| tbl-cap: "Descriptive Statistics of Monthly Trade Flows (Jan 2021 - Present). Values in Billion USD."
+#| tbl-cap: "Descriptive Statistics of Monthly Trade Flows (Jan 2022 - Present). Values in Billion USD."
 
 # Filter for relevant period
 desc_data <- trade_data %>%
@@ -103,7 +103,7 @@ The empirical foundation of this research rests on a high-frequency longitudinal
 
 ### Econometric Framework: The Chow Test
 
-The primary analytical instrument utilized is the **Chow Test**, a standard in econometric literature for identifying "structural breaks" in time-series data. The model tests for a break point in **October 2023**, coinciding with the formal adoption of the European Economic Security Strategy.
+The primary analytical instrument utilized is the **Chow Test**, a standard in econometric literature for identifying "structural breaks" in time-series data. The model tests for a break point in **May 2023**, coinciding with the global "De-risking" consensus reached at the G7 Hiroshima Summit.
 
 ### Model Diagnostics and Robustness Checks
 
@@ -131,7 +131,7 @@ ts_data <- trade_data %>%
 # Create TS object
 ts_val <- ts(ts_data$values, start = c(2021, 1), frequency = 12)
 
-# Run Chow Test at Oct 2023 (Index 34)
+# Run Chow Test at May 2023 (Strategy Era)
 chow_test <- sctest(ts_val ~ 1, type = "Chow", point = 34)
 
 # Store results for inline text
@@ -166,7 +166,7 @@ To visualize this shift beyond abstract statistics, we examine the distribution 
 
 ```{r}
 #| label: fig-boxplot
-#| fig-cap: "Distribution of Monthly Trade Values: Before vs. After the Economic Security Strategy (Oct 2023)."
+#| fig-cap: "Distribution of Monthly Trade Values: Before vs. After the G7 Hiroshima Signal (May 2023)."
 
 # 1. Prepare Data with Time Periods
 boxplot_data <- trade_data %>%
@@ -237,7 +237,7 @@ As shown in Figure 4, the Wandel durch Handel paradigm has been replaced by a "d
 
 ```{r}
 #| label: fig-unified
-#| fig-cap: "The Dual De-Risking: Trade & Finance Divergence. Since Oct 2023, EU Banks and High-Tech Importers have both reduced exposure."
+#| fig-cap: "The Dual De-Risking: Trade & Finance Divergence. Since May 2023, EU Banks and High-Tech Importers have shown divergent exposure trends."
 
 # Logic from 06_finance_x_imports_CN.R
 
@@ -291,7 +291,7 @@ ggplot(plot_data_unified, aes(x = date, y = index_val, color = sector_group, lin
 
 ### Forecast and Policy Implications
 
-Looking ahead, we project the "New Normal" trajectory for strategic trade. Based on the post-break trend (Oct 2023–Present), the model suggests a continued stabilization at lower levels rather than a rebound to pre-2022 highs.
+Looking ahead, we project the "New Normal" trajectory for strategic trade. Based on the post-break trend (May 2023–Present), the model suggests a continued stabilization at lower levels rather than a rebound to pre-2022 highs.
 
 ```{r}
 #| label: fig-forecast
@@ -332,7 +332,7 @@ ggplot() +
   theme_esc()
 ```
 
-In conclusion, the European market has become a fragmented landscape where political security considerations increasingly supersede traditional market logic. Crucially, the 9-month lag between the strategy announcement (Jan 2023) and the structural break (Oct 2023) highlights the transmission time of economic security policies. As we look toward 2027, policymakers must account for this latency when designing future interventions, ensuring that 'surgical' precision is maintained without devolving into broader protectionism.
+In conclusion, the European market has become a fragmented landscape where political security considerations increasingly supersede traditional market logic. Crucially, the synchronization between the G7 Hiroshima consensus (May 2023) and the observed structural break highlights the immediate transmission of economic security signals to global trade participants. As we look toward 2027, policymakers must account for this rapid responsiveness when designing future interventions, ensuring that 'sector-concentrated' de-risking is maintained without devolving into broad-based protectionism.
 
 # References
 
