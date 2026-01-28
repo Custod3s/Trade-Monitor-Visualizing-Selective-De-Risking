@@ -119,6 +119,7 @@ To ensure the statistical validity of the Chow Test, we performed diagnostic che
     ![Segmented QQ Plot](../20_Images/07.1_normality_qq.png){#fig-qq width=70%}
 
 *   **Autocorrelation:** We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime.
+
     ![Segmented ACF Plot](../20_Images/07.2_autocorrelation_acf.png){#fig-acf width=70%}
 
 *   **Homoscedasticity:** Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break.
