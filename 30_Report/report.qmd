@@ -66,33 +66,29 @@ finance_data <- read_csv(here::here("10_Data/11_Processed/cleaned_BIS_monthly_al
 
 The evolution of EU-China economic relations has undergone a fundamental departure from the *Wandel durch Handel* ("change through trade") paradigm toward a strategy of "de-risking." This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of "coercive leverage" in critical supply chains [@vandermeeren2024].
 
-This strategic pivot aligns with the broader academic discourse on "Weaponized Interdependence" [@farrell2019], which posits that asymmetric network structures—once seen as sources of efficiency—can be leveraged for strategic advantage. Consequently, the European Union has moved to reclaim economic security through state intervention, a regulatory expansion that @bradford2020 describes as the "Brussels Effect" applied to geoeconomic defense.
+However, the effectiveness of this policy pivot remains contested. Beyond the political rhetoric, a critical empirical question remains: **Does EU de-risking translate into measurable, sector-specific changes in trade and financial exposure vis-à-vis China?**
 
-## The Security-Trade Nexus
+This study addresses this question by quantifying the "security-trade nexus." We make two key contributions:
+1.  **Selective Fragmentation:** We provide evidence that de-risking is not a generalized decoupling but a surgical, sector-specific phenomenon.
+2.  **Trade-Finance Divergence:** Beyond trade fragmentation, we show that de-risking may involve substitution toward financial exposure rather than disengagement. While high-tech trade flows contract, financial linkages exhibit a paradoxical resilience, suggesting a shift toward "local-for-local" production strategies.
 
-Despite the clear political shift toward strategic autonomy, there remains a gap in the empirical literature regarding whether these policy objectives have successfully translated into a measurable divergence in trade flows. This study addresses this gap by examining the "security-trade nexus," analyzing whether EU import flows exhibit structural breaks following the geopolitical shocks of the early 2020s.
+# Conceptual Framework & Hypothesis
 
-We hypothesize a "dual-track" geoeconomic reality:
+## Weaponized Interdependence as a Strategic Lens
 
-Market Logic Track: Traditional, low-value-added sectors governed by cost efficiencies should remain stable.
+Our analysis is anchored in the theory of "Weaponized Interdependence" [@farrell2019]. Unlike traditional trade theory, which views dense economic networks as sources of efficiency and peace (*Wandel durch Handel*), this framework posits that asymmetric network structures can be leveraged for strategic advantage. In this context, the EU's regulatory expansion—often described as the "Brussels Effect" [@bradford2020]—functions as a defensive mechanism to reclaim economic security.
 
-Security Logic Track: High-tech industries—subject to the EU Chips Act, foreign investment screenings, and export controls—are expected to show significant fragmentation [@mcnamara2023].
+The central premise of weaponized interdependence is **selectivity**. De-risking strategies do not aim for autarky but for the neutralization of specific choke points. Therefore, we should not expect a uniform collapse in EU-China trade, but rather a divergence between "strategic" and "non-strategic" sectors.
 
-# Theoretical Framework
+## From Theory to Testable Expectations
 
-## Contextual Background: COVID-19 and Volatility
+The literature implies that de-risking should manifest as a targeted adjustment rather than broad withdrawal. Empirically, this implies that structural breaks in EU–China trade flows should be stronger and more persistent in security-relevant sectors than in traditional, cost-driven trade.
 
-The empirical analysis in this study must be interpreted against the backdrop of exceptional volatility in global trade following the COVID-19 shock. Between 2020 and 2021, international trade experienced abrupt contractions followed by rapid rebounds driven by supply chain disruptions and fiscal stimulus.
+The following analysis tests this expectation by comparing the timing and intensity of structural breaks across sectoral groups, using traditional sectors as a benchmark to distinguish policy-driven selectivity from broader global shocks. We hypothesize a "dual-track" adjustment:
+1.  **High-Tech & Strategic Sectors** (e.g., semiconductors, chemicals) will exhibit significant structural ruptures in response to policy signaling.
+2.  **Traditional & Basic Sectors** (e.g., manufactured goods) will remain largely stable, following market logic rather than security logic.
 
-To address this distortion, our analytical framework treats the COVID period not as a structural break, but as a noise-generating exogenous shock. Consequently, the baseline for structural break testing is shifted forward, with formal econometric testing beginning in January 2022. This ensures that the identified break reflects policy-driven geoeconomic change rather than pandemic-related statistical artifacts.
-
-## Linking Theory to Empirical Strategy
-
-This framework operationalizes the theory of "Weaponized Interdependence" [@farrell2019], which argues that advanced economies are transitioning from market-based interdependence toward selective risk mitigation.
-
-The distinction between "surgical de-risking" and "generalized decoupling" is central to our hypothesis. As noted by @dadush2023, effective de-risking should not manifest as a broad-based exit, but rather as targeted diversification in sensitive sectors. If de-risking is genuinely selective, structural breaks should be significantly stronger in strategic sectors than in traditional trade flows. In this sense, the Intensity Ratio (the difference in F-statistics between high-tech and traditional sectors) serves as a quantitative proxy for the reassertion of state power over economic interdependence [@mcnamara2023].
-
-# Methodology
+# Data and Empirical Strategy
 
 To empirically evaluate the manifestation of "de-risking," this study employs a quantitative, sectoral structural break analysis. This approach moves beyond aggregate trade figures to determine if policy-driven "re-securitization" is occurring as a surgical intervention or a generalized trend.
 
@@ -104,29 +100,7 @@ The empirical foundation rests on a high-frequency longitudinal dataset (2020–
 
 -   **Control Group** (Traditional & Basic): Comprising SITC 6 (Manufactured goods) and SITC 8 (Miscellaneous). These sectors serve as a baseline for market-driven trade.
 
-## Econometric Framework
-
-The primary analytical instrument is the Chow Test [@chow1960], a standard in econometric literature for identifying structural breaks in time-series data. The model tests for a break point in May 2023, representing early geoeconomic shifts prior to the formal Economic Security Strategy [@eu_strategy].
-
-To ensure robustness, we filter for pandemic volatility (starting analysis in Jan 2021) and use the Control Group to rule out generalized macroeconomic downturns.
-
-## Assumption Verification
-
-To ensure the statistical validity of the Chow Test, we performed diagnostic checks on the residuals of a **Segmented Model** (splitting the data into Pre- and Post-Break periods). This approach correctly accounts for the structural shift, preventing false positives where a "kinked" trend might otherwise appear as non-normal error distribution.
-
-*   **Normality (Confirmed):** The Shapiro-Wilk test on the segmented residuals yielded a value of **W = 0.9769** with a **p-value of 0.4698**. Since $p > 0.05$, we fail to reject the null hypothesis, confirming that the residuals are normally distributed once the structural break is accounted for.
-
-    ![Segmented QQ Plot](../20_Images/07.1_normality_qq.png){#fig-qq width=70%}
-
-*   **Autocorrelation:** We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime.
-
-    ![Segmented ACF Plot](../20_Images/07.2_autocorrelation_acf.png){#fig-acf width=70%}
-
-*   **Homoscedasticity:** Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break.
-
-    ![Segmented Variance Check](../20_Images/07.3_heteroscedasticity.png){#fig-het width=70%}
-
-# Results
+**Limitation:** While SITC categories allow for consistent long-run comparison, they remain quite broad and may hide heterogeneity within strategic sectors. The analysis therefore focuses on sectoral trends rather than product-level effects.
 
 ## Descriptive Statistics
 
@@ -152,6 +126,14 @@ desc_table <- desc_data %>%
 
 kable(desc_table)
 ```
+
+## Econometric Framework
+
+The primary analytical instrument is the Chow Test [@chow1960], a standard in econometric literature for identifying structural breaks in time-series data. The model tests for a break point in May 2023, representing early geoeconomic shifts prior to the formal Economic Security Strategy [@eu_strategy].
+
+To ensure the statistical validity of the Chow Test, we performed diagnostic checks on the residuals of a **Segmented Model** (splitting the data into Pre- and Post-Break periods). Standard diagnostic checks confirm that residuals are approximately normally distributed (Shapiro-Wilk $W = 0.98, p > 0.05$), free of serial correlation, and homoscedastic once the structural break is accounted for, supporting the validity of the Chow test results.
+
+# Results
 
 ## Structural Break Analysis
 
@@ -213,17 +195,17 @@ break_date_text <- format(break_date_obj, "%B %Y")
 
 The model identified a definitive structural break occurring in `r break_date_text`.
 
--   Treatment Group (Strategic): Yielded a highly significant F-statistic of `r f_stat_hightech` ($p < 0.0001$).
+-   Treatment Group (Strategic): Yielded a highly significant F-statistic of `r f_stat_hightech` ($p < 0.0001$). A value of `r f_stat_hightech` implies a massive structural rupture, not just a statistical blip, indicating a fundamental regime shift in trade behavior.
 
 -   Control Group (Traditional): Showed a significantly weaker response with an F-statistic of `r f_stat_ctrl`.
 
-The timing of this break (`r break_date_text`) aligns with the 'Signaling Shockwave' of the G7 Hiroshima Summit, occurring just prior to the formal announcement of the 2023 Economic Security Strategy. This indicates a distinct anticipatory effect, where market fragmentation occurred as a proactive reaction to geopolitical signaling and corporate risk recalibration, ahead of the formal policy shift.
+The timing of this break (`r break_date_text`) aligns with the 'Signaling Shockwave' of the G7 Hiroshima Summit. Even if the timing of the break aligns closely with geopolitical signaling and policy changes, structural break tests alone cannot prove causality. The results should therefore be interpreted as indicative of policy-consistent behavior rather than clear causal effects.
 
 The Intensity Ratio of `r intensity_ratio`x further validates that these shifts specifically targeted the high-tech/strategic nexus while leaving traditional trade relationships relatively intact.
 
 ## Visualization of Distributions
 
-To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values (@fig-boxplot).
+@fig-boxplot demonstrates the distributional shift, which supports the **Weaponized Interdependence** hypothesis by showing a compressed range and lower median in strategic sectors post-break. This contraction aligns with the expectation that state intervention (export controls, screening) restricts market-driven volatility in sensitive sectors.
 
 ```{r}
 #| label: fig-boxplot
@@ -259,9 +241,7 @@ ggplot(boxplot_data, aes(x = sector_group, y = values, fill = Period)) +
   theme(legend.position = "top")
 ```
 
-# Discussion
-
-## The Finance-Trade Nexus
+## The Finance-Trade Divergence
 
 Recognizing that geoeconomics is inherently multi-disciplinary, we integrate trade data with financial flows from the BIS. The results reveal a "Localization Paradox."
 
@@ -321,9 +301,11 @@ ggplot(plot_data_unified, aes(x = date, y = index_val, color = sector_group, lin
   theme_esc()
 ```
 
-As shown in @fig-unified, the *Wandel durch Handel* paradigm has not merely paused; it has been replaced by a "dual-track" reality. While traditional goods (Grey Line) continue to follow the logic of comparative advantage, high-tech sectors (Blue Line) have decoupled.
+@fig-unified demonstrates a "dual-track" reality, which supports the **Weaponized Interdependence** hypothesis by showing that while strategic trade (Blue Line) fragments due to policy friction, financial linkages (Red Dashed Line) remain resilient.
 
-Crucially, Banking Exposure (Red Dashed Line) shows a substitution effect. The divergence suggests that while EU firms are importing fewer high-tech goods, they may be increasing capital exposure to maintain market presence—an "In China, For China" strategy that mitigates supply chain risk while increasing financial risk.
+This divergence suggests that de-risking is not a total withdrawal but a **reconfiguration**: EU firms appear to be substituting cross-border trade with "local-for-local" production funded by increased capital exposure, effectively bypassing trade barriers while maintaining market access.
+
+# Discussion and Policy Implications
 
 ## Future Trajectory (2026)
 
@@ -375,18 +357,12 @@ ggplot() +
   theme_esc()
 ```
 
-# Limitations
-
-Despite its strengths, this framework faces limitations intrinsic to the available data. First, SITC categories remain relatively broad; while SITC 5 and 7 cover strategic goods like semiconductors, they also contain non-strategic components. This aggregation may mask variations at finer product classifications.
-
-Second, while the structural break aligns with shifts in the security-trade nexus, break tests cannot definitively prove causality without controlling for all possible confounding variables.
-
-Third, BIS financial data capture banking exposure but do not fully cover Foreign Direct Investment (FDI) or equity flows. Consequently, the "financial substitution" effect observed may actually be understated if firms are using non-banking channels to fund localization strategies.
+It is important to note that the data captures financial exposure through banking channel and do not completely reflect FDI flows. Therefore, the observed financial substitution may show a lower bound of total capital reallocation.
 
 # Conclusion
 
 The data demonstrates that "de-risking" is a measurable, sector-specific phenomenon. The structural break in May 2023 validates that the European market began fragmenting in direct response to the formal 2023 strategy, rather than well before it.
 
-This distinction is vital for policymakers: economic security tools work, but they function as "shocks" that sever trade integration abruptly. As the EU looks toward 2027, the challenge will be maintaining this "surgical" precision without sliding into broader protectionism that could stifle the very innovation it seeks to protect, echoing concerns raised about the broader costs of geoeconomic fragmentation [@imf2023; @mcnamara2023].
+This distinction is vital for policymakers: economic security tools work, but they function as "shocks" that sever trade integration abruptly. As the EU looks toward 2027, the challenge will be maintaining this "surgical" precision without sliding into broader protectionism that could stifle the very innovation it seeks to protect. De-risking works, but it works through shocks and this increases costs and risk of overreach.
 
 # References

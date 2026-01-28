@@ -12,7 +12,7 @@ esc_colors <- c(
 # --- 2. The Custom Theme (Zero Dependencies) ---
 # Replicates the clean look of theme_ipsum using standard ggplot2
 theme_esc <- function() {
-  theme_minimal(base_size = 12) +
+  theme_minimal(base_size = 12, base_family = "serif") +
     theme(
       # Typography
       plot.title    = element_text(face = "bold", size = 16, color = "#1e293b", hjust = 0),

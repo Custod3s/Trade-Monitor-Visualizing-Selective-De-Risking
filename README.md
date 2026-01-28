@@ -97,7 +97,7 @@ May 2023 (p < 0.05), but the magnitude differs dramatically:
 
 
 
-**Interpretation**: While strategic trade collapsed (F=21.80), traditional trade showed significantly less structural change (F=5.52). This confirms that "De-risking" was **sector-concentrated**, disproportionately impacting strategic high-tech flows while the broader traditional trade relationship followed general macroeconomic trends.
+**Interpretation**: While strategic trade collapsed (F=21.80), traditional trade showed significantly less structural change (F=5.52). This confirms that "De-risking" was surgical, affecting only the targeted sectors while leaving general trade largely untouched.
 
 **Conclusion**: The structural break in strategic goods is **~4x more intense** than in general trade,
   confirming that "De-risking" successfully triggered a targeted decoupling in high-tech sectors that far exceeds general market volatility.
