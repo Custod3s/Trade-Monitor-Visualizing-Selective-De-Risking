@@ -157,8 +157,14 @@ accounts for the structural shift, preventing false positives where a
   0.4698**. Since $p > 0.05$, we fail to reject the null hypothesis,
   confirming that the residuals are normally distributed once the
   structural break is accounted for.
-  <img src="../20_Images/07.1_normality_qq.png" id="fig-qq"
-  style="width:70.0%" alt="Segmented QQ Plot" />
+
+  <div id="fig-qq">
+
+  <img src="../20_Images/07.1_normality_qq.png" style="width:70.0%" />
+
+  Figure 1: Segmented QQ Plot
+
+  </div>
 
 - **Autocorrelation:** We assessed the Autocorrelation Function (ACF)
   separately for Pre- and Post-break periods to rule out serial
@@ -175,7 +181,7 @@ accounts for the structural shift, preventing false positives where a
   <img src="../20_Images/07.3_heteroscedasticity.png"
   style="width:70.0%" />
 
-  Figure 1: Segmented Variance Check
+  Figure 2: Segmented Variance Check
 
   </div>
 
@@ -228,14 +234,14 @@ traditional trade relationships relatively intact.
 
 To visualize this shift beyond abstract statistics, we examine the
 distribution of monthly trade values
-(<a href="#fig-boxplot" class="quarto-xref">Figure 2</a>).
+(<a href="#fig-boxplot" class="quarto-xref">Figure 3</a>).
 
 <div id="fig-boxplot">
 
 <img src="report_files/figure-commonmark/fig-boxplot-1.png"
 data-fig-pos="H" />
 
-Figure 2: Structural Shift: High-Tech trade shows a lower median and
+Figure 3: Structural Shift: High-Tech trade shows a lower median and
 compressed range post-Structural Break.
 
 </div>
@@ -253,11 +259,11 @@ reveal a “Localization Paradox.”
 <img src="report_files/figure-commonmark/fig-unified-1.png"
 style="width:100.0%" data-fig-pos="H" />
 
-Figure 3: The Dual De-Risking: Divergence of Trade and Finance.
+Figure 4: The Dual De-Risking: Divergence of Trade and Finance.
 
 </div>
 
-As shown in <a href="#fig-unified" class="quarto-xref">Figure 3</a>, the
+As shown in <a href="#fig-unified" class="quarto-xref">Figure 4</a>, the
 *Wandel durch Handel* paradigm has not merely paused; it has been
 replaced by a “dual-track” reality. While traditional goods (Grey Line)
 continue to follow the logic of comparative advantage, high-tech sectors
@@ -280,7 +286,7 @@ rebound.
 <img src="report_files/figure-commonmark/fig-forecast-1.png"
 style="width:100.0%" data-fig-pos="H" />
 
-Figure 4: Forecast 2026: Strategic Sector Trajectory based on post-break
+Figure 5: Forecast 2026: Strategic Sector Trajectory based on post-break
 linear extrapolation.
 
 </div>
