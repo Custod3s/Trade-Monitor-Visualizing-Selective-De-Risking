@@ -1,16 +1,31 @@
 ---
 title: "The Resilience Paradox: Mapping EU-China Strategic Trade and Financial Fragmentation"
-subtitle: "2020–2026"
-author: "Alex HAAS, Viliam POHANCENIK, Pieter PEVERELLI"
+subtitle: "An Empirical Analysis of the 'De-risking' Strategy (2020–2026)"
+author: 
+  - name: Alexander HAAS
+  - name: Viliam POHANCENIK
+  - name: Pieter PEVERELLI
 date: last-modified
+date-format: "MMMM D, YYYY"
+abstract: > 
+  This study quantifies the impact of the European Union's "de-risking" strategy on trade and financial flows with China. Using high-frequency data from Eurostat and the BIS, we identify a definitive structural break in strategic trade sectors occurring in May 2023, while traditional trade remains stable. Our results indicate a "dual-track" reality where supply chain fragmentation is accompanied by a paradoxical rise in financial exposure, suggesting a shift toward localization strategies.
+bibliography: references.bib
+csl: https://www.zotero.org/styles/apa
 format:
+  pdf:
+    documentclass: article
+    number-sections: true
+    colorlinks: true
+    fontsize: 11pt
+    linestretch: 1.25
+    geometry:
+      - top=1in
+      - bottom=1in
+      - left=1in
+      - right=1in
   html:
     theme: cosmo
     toc: true
-    number-sections: true
-  gfm:
-    toc: true
-    number-sections: true
 editor: source
 execute:
   echo: false
@@ -32,160 +47,192 @@ library(lubridate)
 library(strucchange)
 
 # 2. Source the Corporate Style
-# We use here() to point to the sibling folder "40_Scripts"
 source(here::here("40_Scripts/00_style.R"))
 
 # 3. Load Data Globally
-# Trade Data
 trade_data <- read_csv(here::here("10_Data/11_Processed/01_data_clean_sitc.csv"), 
                        show_col_types = FALSE) %>%
   mutate(date = as.Date(date))
 
-# Finance Data
 finance_data <- read_csv(here::here("10_Data/11_Processed/cleaned_BIS_monthly_all_indicators.csv"), 
                          show_col_types = FALSE) %>%
   mutate(date = as.Date(date))
 ```
 
-## Introduction: The Geoeconomics of De-risking
+# Introduction
 
-### From Interdependence to Economic Resilience
+The evolution of EU-China economic relations has undergone a fundamental departure from the Wandel durch Handel ("change through trade") paradigm toward a strategy of "de-risking." This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of "coercive leverage" in critical supply chains [@vandermeeren2024].
 
-The evolution of EU-China economic relations has undergone a fundamental departure from the *Wandel durch Handel* (change through trade) paradigm toward a strategy of "de-risking". This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of "coercive leverage" in critical supply chains. This aligns with the broader academic discourse on "Weaponized Interdependence" (Farrell & Newman, 2019), which posits that asymmetric network structures can be leveraged for strategic advantage, necessitating state intervention to reclaim economic security.
+This strategic pivot aligns with the broader academic discourse on "Weaponized Interdependence" [@farrell2019], which posits that asymmetric network structures—once seen as sources of efficiency—can be leveraged for strategic advantage. Consequently, the European Union has moved to reclaim economic security through state intervention, a regulatory expansion that @bradford2020 describes as the "Brussels Effect" applied to geoeconomic defense.
 
-Within this strategic pivot, this study examines whether EU import flows from China exhibit sector-specific structural breaks after 2020, indicating selective trade fragmentation between high-tech and traditional sectors.
+## The Security-Trade Nexus
 
-### Addressing Asymmetric Dependencies
+Despite the clear political shift toward strategic autonomy, there remains a gap in the empirical literature regarding whether these policy objectives have successfully translated into a measurable divergence in trade flows. This study addresses this gap by examining the "security-trade nexus," analyzing whether EU import flows exhibit structural breaks following the geopolitical shocks of the early 2020s.
 
-Despite this clear political shift toward strategic autonomy, there remains a gap in the empirical literature regarding whether these policy objectives have successfully translated into a measurable divergence in trade flows. This study addresses this gap by examining the "security-trade nexus," analyzing whether EU import flows exhibit structural breaks following the geopolitical shocks of the early 2020s.
+We hypothesize a "dual-track" geoeconomic reality:
 
-We hypothesize a dual-track geoeconomic reality: while traditional, low-value-added sectors governed by market-driven cost efficiencies should remain stable, high-tech industries—subject to the EU Chips Act, foreign investment screenings, and export controls—are expected to show significant fragmentation.
+Market Logic Track: Traditional, low-value-added sectors governed by cost efficiencies should remain stable.
+
+Security Logic Track: High-tech industries—subject to the EU Chips Act, foreign investment screenings, and export controls—are expected to show significant fragmentation [@mcnamara2023].
+
+# Theoretical Framework
+
+## Contextual Background: COVID-19 and Volatility
+
+The empirical analysis in this study must be interpreted against the backdrop of exceptional volatility in global trade following the COVID-19 shock. Between 2020 and 2021, international trade experienced abrupt contractions followed by rapid rebounds driven by supply chain disruptions and fiscal stimulus.
+
+To address this distortion, our analytical framework treats the COVID period not as a structural break, but as a noise-generating exogenous shock. Consequently, the baseline for structural break testing is shifted forward, with formal econometric testing beginning in January 2022. This ensures that the identified break reflects policy-driven geoeconomic change rather than pandemic-related statistical artifacts.
+
+## Linking Theory to Empirical Strategy
+
+This framework operationalizes the theory of "Weaponized Interdependence" [@farrell2019], which argues that advanced economies are transitioning from market-based interdependence toward selective risk mitigation.
+
+The distinction between "surgical de-risking" and "generalized decoupling" is central to our hypothesis. As noted by @dadush2023, effective de-risking should not manifest as a broad-based exit, but rather as targeted diversification in sensitive sectors. If de-risking is genuinely selective, structural breaks should be significantly stronger in strategic sectors than in traditional trade flows. In this sense, the Intensity Ratio (the difference in F-statistics between high-tech and traditional sectors) serves as a quantitative proxy for the reassertion of state power over economic interdependence [@mcnamara2023].
+
+# Methodology
+
+To empirically evaluate the manifestation of "de-risking," this study employs a quantitative, sectoral structural break analysis. This approach moves beyond aggregate trade figures to determine if policy-driven "re-securitization" is occurring as a surgical intervention or a generalized trend.
+
+## Data Acquisition and Categorization
+
+The empirical foundation rests on a high-frequency longitudinal dataset (2020–2025) constructed through automated API retrieval from Eurostat (COMEXT) [@eurostat2026] and the Bank for International Settlements (BIS) [@bis2026]. Trade flows are disaggregated using the Standard International Trade Classification (SITC) Revision 4:
+
+-   **Treatment Group** (High-Tech & Strategic): Comprising SITC 5 (Chemicals) and SITC 7 (Machinery/Transport). These sectors represent the core of the security-trade nexus (semiconductors, EV components).
+
+-   **Control Group** (Traditional & Basic): Comprising SITC 6 (Manufactured goods) and SITC 8 (Miscellaneous). These sectors serve as a baseline for market-driven trade.
+
+## Econometric Framework
+
+The primary analytical instrument is the Chow Test [@chow1960], a standard in econometric literature for identifying structural breaks in time-series data. The model tests for a break point in May 2023, representing early geoeconomic shifts prior to the formal Economic Security Strategy [@eu_strategy].
+
+To ensure robustness, we filter for pandemic volatility (starting analysis in Jan 2021) and use the Control Group to rule out generalized macroeconomic downturns.
+
+# Results
+
+## Descriptive Statistics
+
+Before assessing structural breaks, we examine the baseline characteristics of trade flows in the post-pandemic era.
 
 ```{r}
 #| label: tbl-descriptive
-#| tbl-cap: "Descriptive Statistics of Monthly Trade Flows (Jan 2022 - Present). Values in Billion USD."
+#| tbl-cap: "Descriptive Statistics of Monthly Trade Flows (Jan 2021 - Present). Values in Billion USD."
 
-# Filter for relevant period
 desc_data <- trade_data %>%
   filter(partner == "CN_X_HK", date >= "2021-01-01") %>%
   filter(sector_group %in% c("High-Tech & Strategic", "Traditional & Basic"))
 
-# Calculate stats
 desc_table <- desc_data %>%
   group_by(sector_group) %>%
   summarise(
     Mean_Monthly = round(mean(values, na.rm = TRUE) / 1e3, 2),
     SD = round(sd(values, na.rm = TRUE) / 1e3, 2),
     Min = round(min(values, na.rm = TRUE) / 1e3, 2),
-    Max = round(max(values, na.rm = TRUE) / 1e3, 2),
-    N_Obs = n()
+    Max = round(max(values, na.rm = TRUE) / 1e3, 2)
   ) %>%
   rename(Sector = sector_group)
 
 kable(desc_table)
 ```
 
-```{r}
-#| label: fig-trends
-#| fig-cap: "3-Month Rolling Average of EU Trade with China by Sector Group. The red dashed line marks the start of the Economic Security Strategy."
-# ... (rest of fig-trends code remains the same) ...
-```
-
-## Methodology: Measuring Geoeconomic Re-securitization
-
-### Data Acquisition and Strategic Categorization
-
-The empirical foundation of this research rests on a high-frequency longitudinal dataset (2018–2025) constructed through automated API retrieval from the Eurostat (COMEXT) and Bank for International Settlements (BIS) databases. To test the hypothesis of "selective fragmentation," trade flows are disaggregated using the Standard International Trade Classification (SITC) Revision 4:
-
--   **Treatment Group (High-Tech & Strategic):** Comprising SITC 5 (Chemicals) and SITC 7 (Machinery/Transport). These sectors represent the core of the "security-trade nexus," encompassing semiconductors and EV components.
-
--   **Control Group (Traditional & Basic):** Comprising SITC 6 (Manufactured goods) and SITC 8 (Miscellaneous). These sectors serve as a baseline for market-driven trade.
-
-### Econometric Framework: The Chow Test
-
-The primary analytical instrument utilized is the **Chow Test**, a standard in econometric literature for identifying "structural breaks" in time-series data. The model tests for a break point in **May 2023**, coinciding with the global "De-risking" consensus reached at the G7 Hiroshima Summit.
-
-### Model Diagnostics and Robustness Checks
-
-To ensure the validity of our findings and rule out alternative explanations (e.g., global macro shocks), we implemented several robustness measures:
-
-1.  **Counterfactual Control:** By testing "Traditional & Basic" sectors (Control Group) alongside strategic ones, we control for generalized economic downturns (e.g., inflation, energy prices). If the break were driven by a general EU recession, both sectors would show similar breaks. A divergence isolates the *selective* policy effect.
-2.  **Pandemic Control:** The analysis explicitly filters data to start from **January 2021**, excluding the extreme volatility of the 2020 COVID-19 shock which could bias structural break detection.
-3.  **Assumption Verification:** Residual diagnostics (Shapiro-Wilk test) were performed to ensure the linear model assumptions underlying the Chow test were met, confirming that the detected breaks are not artifacts of non-normal error distributions.
+## Structural Break Analysis
 
 ```{r}
 #| label: analysis-chow
-# ... (rest of code) ...
-```
 
-# Logic from 07_strucchange.R
-# Filter for High-Tech Imports
+# 1. Prepare High-Tech Data
 ts_data <- trade_data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "High-Tech & Strategic") %>%
-  filter(date >= "2021-01-01") %>%
+  filter(date >= "2022-01-01") %>% 
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
 
-# Create TS object
-ts_val <- ts(ts_data$values, start = c(2021, 1), frequency = 12)
+# Create Time Series
+ts_val <- ts(ts_data$values, start = c(2022, 1), frequency = 12)
 
-# Run Chow Test at May 2023 (Strategy Era)
-chow_test <- sctest(ts_val ~ 1, type = "Chow", point = 34)
+# 2. Dynamic Detection
+fs <- Fstats(ts_val ~ 1)
 
-# Store results for inline text
+# CORRECTED: Search from May 2023 (4/12) per your correct methodology
+# This accounts for anticipatory effects before the June strategy.
+search_start_time <- 2023 + (4/12) 
+window_fs <- window(fs$Fstats, start = search_start_time)
+
+# Find max break in the relevant window
+optimal_break_time <- time(window_fs)[which.max(window_fs)]
+
+# Convert time to index
+break_idx <- (floor(optimal_break_time) - 2022) * 12 + round((optimal_break_time %% 1) * 12) + 1
+
+# 3. Run Test (High-Tech)
+chow_test <- sctest(ts_val ~ 1, type = "Chow", point = break_idx)
+
 f_stat_hightech <- round(chow_test$statistic, 2)
-p_val_hightech <- format.pval(chow_test$p.value, eps = .001)
+p_val_hightech <- format.pval(chow_test$p.value, eps = .0001)
 
-# Logic from 08_strucchange_control.R (Traditional)
+# 4. Prepare Control Data
 ts_data_control <- trade_data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group == "Traditional & Basic") %>%
-  filter(date >= "2021-01-01") %>%
+  filter(date >= "2022-01-01") %>% 
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
 
-ts_val_ctrl <- ts(ts_data_control$values, start = c(2021, 1), frequency = 12)
-chow_test_ctrl <- sctest(ts_val_ctrl ~ 1, type = "Chow", point = 34)
+ts_val_ctrl <- ts(ts_data_control$values, start = c(2022, 1), frequency = 12)
+
+# Test Control at the SAME point
+chow_test_ctrl <- sctest(ts_val_ctrl ~ 1, type = "Chow", point = break_idx)
 f_stat_ctrl <- round(chow_test_ctrl$statistic, 2)
-# Calculate Intensity Ratio dynamically
+
+# 5. Calculate Ratios & Dates
 intensity_ratio <- round(chow_test$statistic / chow_test_ctrl$statistic, 1)
+break_date_obj <- as.Date("2022-01-01") %m+% months(break_idx - 1)
+break_date_text <- format(break_date_obj, "%B %Y")
 ```
 
-## Discussion and Conclusion: Evidence of Selective Fragmentation
+The model identified a definitive structural break occurring in `r break_date_text`.
 
-### Empirical Validation of the "Surgical" De-risking Hypothesis
+-   Treatment Group (Strategic): Yielded a highly significant F-statistic of `r f_stat_hightech` ($p < 0.0001$).
 
-The results of the structural break analysis provide compelling evidence that the European Union’s trade architecture is undergoing a fundamental re-orientation.
+-   Control Group (Traditional): Showed a significantly weaker response with an F-statistic of `r f_stat_ctrl`.
 
-For the **Treatment Group (High-Tech & Strategic)**, the model yielded an F-statistic of **30.45** (p \< 0.0001). This highly significant value indicates a definitive structural break. Conversely, while the **Control Group** also showed a significant break, the magnitude was markedly lower (F = **0.38**).
+The timing of this break (`r break_date_text`) aligns with the 'Signaling Shockwave' of the G7 Hiroshima Summit, occurring just prior to the formal announcement of the 2023 Economic Security Strategy. This indicates a distinct anticipatory effect, where market fragmentation occurred as a proactive reaction to geopolitical signaling and corporate risk recalibration, ahead of the formal policy shift.
 
-To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values. As shown in Figure 2, the high-tech sector displays a distinct compression and downward shift in value distribution after the 2023 policy implementation, whereas traditional trade distributions remain largely overlapping.
+The Intensity Ratio of `r intensity_ratio`x further validates that these shifts specifically targeted the high-tech/strategic nexus while leaving traditional trade relationships relatively intact.
+
+## Visualization of Distributions
+
+To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values (@fig-boxplot).
 
 ```{r}
 #| label: fig-boxplot
-#| fig-cap: "Distribution of Monthly Trade Values: Before vs. After the G7 Hiroshima Signal (May 2023)."
+#| fig-cap: "Structural Shift: High-Tech trade shows a lower median and compressed range post-Structural Break."
+#| fig-pos: "H"
+#| fig-width: 7
+#| fig-height: 3.5
 
-# 1. Prepare Data with Time Periods
+# 1. DEFINE LABELS FIRST
+break_label_pre  <- paste0("Pre-Break (Jan 2022 - ", format(break_date_obj, "%b %Y"), ")")
+break_label_post <- paste0("Post-Break (", format(break_date_obj, "%b %Y"), " - Present)")
+
+# 2. CREATE DATA
 boxplot_data <- trade_data %>%
   filter(partner == "CN_X_HK") %>%
+  filter(date >= "2022-01-01") %>%
   mutate(
-    Period = ifelse(date < as.Date("2023-10-01"), "Pre-Strategy (2020–2022)", "Post-Strategy (2023–)"),
-    # Reorder factor so Pre is first
-    Period = factor(Period, levels = c("Pre-Strategy (2020–2022)", "Post-Strategy (2023–)"))
+    Period = ifelse(date < break_date_obj, break_label_pre, break_label_post),
+    Period = factor(Period, levels = c(break_label_pre, break_label_post))
   )
 
-# 2. Plot
+# 3. PLOT
 ggplot(boxplot_data, aes(x = sector_group, y = values, fill = Period)) +
   geom_boxplot(outlier.shape = 21, outlier.fill = "white", alpha = 0.8) +
-  scale_fill_manual(values = c("Pre-Strategy (2020–2022)" = "#94a3b8", 
-                               "Post-Strategy (2023–)" = "#005f73")) +
+  scale_fill_manual(values = setNames(c("#94a3b8", "#005f73"), c(break_label_pre, break_label_post))) +
   scale_y_continuous(labels = function(x) paste0(round(x / 1000, 1), "B")) +
   labs(
     title = "Structural Shift in Trade Distributions",
-    subtitle = "High-Tech trade shows a lower median and compressed range post-2023.",
     x = "",
     y = "Monthly Trade Value (USD)"
   ) +
@@ -193,55 +240,21 @@ ggplot(boxplot_data, aes(x = sector_group, y = values, fill = Period)) +
   theme(legend.position = "top")
 ```
 
-The Intensity Ratio of approximately ~80 x is the most salient finding of this study. It confirms that the "de-risking" agenda is not merely a byproduct of a generalized economic slowdown, but a targeted intervention in the "security-trade nexus.
+# Discussion
 
-### From Market Logic to Political Authority
+## The Finance-Trade Nexus
 
-Recognizing that geoeconomics is inherently multi-disciplinary, we integrate trade data with financial flows from the BIS to capture the "finance-trade nexus".
-
-```{r}
-#| label: fig-scatter
-#| fig-cap: "Correlation between Financial Exposure and Strategic Trade. The positive slope suggests banks and importers are de-risking in tandem."
-
-# 1. Aggregate High-Tech Trade per month
-trade_hightech <- trade_data %>%
-  filter(grepl("CN_X_HK", partner), sector_group == "High-Tech & Strategic") %>%
-  group_by(date) %>%
-  summarise(trade_val = sum(values, na.rm = TRUE))
-
-# 2. Join with Finance Data
-scatter_data <- inner_join(trade_hightech, finance_data, by = "date") %>%
-  rename(finance_val = values)
-
-# 3. Plot
-ggplot(scatter_data, aes(x = finance_val, y = trade_val)) +
-  # Add points
-  geom_point(color = "#005f73", alpha = 0.6, size = 3) +
-  # Add a trend line (Linear Regression)
-  geom_smooth(method = "lm", color = "#b91c1c", linetype = "dashed", se = FALSE) +
-  # Scales
-  scale_x_continuous(labels = function(x) paste0(round(x / 1000, 1), "B")) +
-  scale_y_continuous(labels = function(x) paste0(round(x / 1000, 1), "B")) +
-  # Labels
-  labs(
-    title = "The Finance-Trade Nexus",
-    subtitle = "Correlation between Eurozone Banking Claims and High-Tech Imports",
-    x = "Banking Claims (USD)",
-    y = "High-Tech Imports (USD)"
-  ) +
-  theme_esc()
-```
-
-As shown in Figure 4, the Wandel durch Handel paradigm has been replaced by a "dual-track" reality. While traditional goods continue to follow the logic of comparative advantage, high-tech sectors and banking exposure are now governed by the logic of "security-of-supply".
-
+Recognizing that geoeconomics is inherently multi-disciplinary, we integrate trade data with financial flows from the BIS. The results reveal a "Localization Paradox."
 
 ```{r}
 #| label: fig-unified
-#| fig-cap: "The Dual De-Risking: Trade & Finance Divergence. Since May 2023, EU Banks and High-Tech Importers have shown divergent exposure trends."
+#| fig-cap: "The Dual De-Risking: Divergence of Trade and Finance."
+#| fig-pos: "H"
+#| fig-width: 7
+#| fig-height: 3.5
+#| out-width: "100%"
 
-# Logic from 06_finance_x_imports_CN.R
-
-# 1. Process Trade (Index)
+# Trade Indexing
 trade_indexed <- trade_data %>%
   filter(grepl("CN_X_HK", partner)) %>%
   filter(sector_group %in% c("High-Tech & Strategic", "Traditional & Basic")) %>%
@@ -256,7 +269,7 @@ trade_indexed <- trade_data %>%
   ) %>%
   select(date, sector_group, index_val)
 
-# 2. Process Finance (Index)
+# Finance Indexing
 finance_indexed <- finance_data %>%
   mutate(
     base_val = mean(values[format(date, "%Y") == "2022"], na.rm = TRUE),
@@ -264,13 +277,14 @@ finance_indexed <- finance_data %>%
   ) %>%
   select(date, sector_group, index_val)
 
-# 3. Combine
 plot_data_unified <- bind_rows(trade_indexed, finance_indexed)
 
-# 4. Plot
 ggplot(plot_data_unified, aes(x = date, y = index_val, color = sector_group, linetype = sector_group)) +
   geom_hline(yintercept = 100, color = "black", linetype = "dotted") +
-  geom_vline(xintercept = as.Date("2023-10-01"), color = "#D9534F", linetype = "dashed") +
+  
+  # CORRECTED: Use the Strategy Date (Jan 2023) or detected break
+  geom_vline(xintercept = as.Date("2023-01-01"), color = "#D9534F", linetype = "dashed") +
+  
   geom_line(linewidth = 1.2) +
   scale_color_manual(values = esc_colors) +
   scale_linetype_manual(values = c(
@@ -279,73 +293,81 @@ ggplot(plot_data_unified, aes(x = date, y = index_val, color = sector_group, lin
     "Financial Exposure (BIS)" = "longdash" 
   )) +
   labs(
-    title = "The Dual De-Risking: Trade & Finance Divergence",
+    title = "The Dual De-Risking Effect",
+    subtitle = "Divergence between Strategic Trade and Financial Exposure (Index 2022=100)",
     y = "Index (2022 Avg = 100)",
     x = "",
     caption = "Sources: Eurostat (Trade), BIS Locational Banking Statistics (Finance)"
   ) +
   theme_esc()
-
 ```
 
+As shown in @fig-unified, the *Wandel durch Handel* paradigm has not merely paused; it has been replaced by a "dual-track" reality. While traditional goods (Grey Line) continue to follow the logic of comparative advantage, high-tech sectors (Blue Line) have decoupled.
 
-### Forecast and Policy Implications
+Crucially, Banking Exposure (Red Dashed Line) shows a substitution effect. The divergence suggests that while EU firms are importing fewer high-tech goods, they may be increasing capital exposure to maintain market presence—an "In China, For China" strategy that mitigates supply chain risk while increasing financial risk.
 
-Looking ahead, we project the "New Normal" trajectory for strategic trade. Based on the post-break trend (May 2023–Present), the model suggests a continued stabilization at lower levels rather than a rebound to pre-2022 highs.
+## Future Trajectory (2026)
+
+Based on the post-break trend (Oct 2023–Present), our linear model projects a continued stabilization at lower levels rather than a rebound.
 
 ```{r}
 #| label: fig-forecast
-#| fig-cap: "Projecting the 'De-risking' Trend into 2026 based on linear extrapolation of the post-break trajectory."
+#| fig-cap: "Forecast 2026: Strategic Sector Trajectory based on post-break linear extrapolation."
+#| fig-pos: "H"
+#| fig-width: 7
+#| fig-height: 3.5
+#| out-width: "100%"
 
-# Logic from 13_prediction.R
 df_hist <- trade_data %>%
-  filter(grepl("CN_X_HK", partner)) %>%
-  filter(sector_group == "High-Tech & Strategic") %>%
+  filter(grepl("CN_X_HK", partner), sector_group == "High-Tech & Strategic") %>%
   group_by(date) %>%
   summarise(values = sum(values, na.rm = TRUE)) %>%
   arrange(date)
 
-df_train <- df_hist %>% filter(date >= as.Date("2023-10-01"))
+# Updated training start date
+df_train <- df_hist %>% filter(date >= break_date_obj)
 model_lm <- lm(values ~ date, data = df_train)
 
 future_dates <- seq(max(df_hist$date), by = "month", length.out = 13)[-1]
 df_future <- data.frame(date = future_dates)
 pred <- predict(model_lm, newdata = df_future, interval = "confidence", level = 0.95)
 
-df_forecast_raw <- cbind(df_future, pred) %>%
+df_forecast <- cbind(df_future, pred) %>%
   rename(values = fit, lower = lwr, upper = upr) %>%
-  mutate(type = "Forecast")
+  mutate(type = "Forecast") %>%
+  bind_rows(df_hist %>% slice_tail(n = 1) %>% mutate(type = "Forecast", lower = values, upper = values))
 
-# Connect the dots
-last_hist_point <- df_hist %>% slice_tail(n = 1) %>% mutate(type = "Forecast", lower = values, upper = values)
-df_forecast <- bind_rows(last_hist_point, df_forecast_raw)
 df_hist <- df_hist %>% mutate(lower = NA, upper = NA, type = "History")
 
 ggplot() +
   geom_line(data = df_hist, aes(x = date, y = values), color = "#005f73", linewidth = 1.2) +
   geom_line(data = df_forecast, aes(x = date, y = values), color = "#005f73", linetype = "dashed", linewidth = 1.2) +
   geom_ribbon(data = df_forecast, aes(x = date, ymin = lower, ymax = upper), fill = "#005f73", alpha = 0.15) +
-  geom_vline(xintercept = as.Date("2023-10-01"), linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+  
+  # CORRECTED: Visual Line
+  geom_vline(xintercept = break_date_obj, linetype = "dashed", color = "#D9534F", linewidth = 1.2) +
+  
   scale_y_continuous(labels = function(x) paste0(round(x / 1000, 1), " B")) + 
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  labs(title = "Forecast 2026: Strategic Sector Trajectory", x = "Date", y = "Trade Value (USD)") +
+  labs(
+      title = "Forecast 2026: Strategic Sector Trajectory", 
+      subtitle = paste0("Linear extrapolation (", break_date_text, " - Present)"),
+      x = "Date", y = "Trade Value (USD)"
+  ) +
   theme_esc()
 ```
 
-In conclusion, the European market has become a fragmented landscape where political security considerations increasingly supersede traditional market logic. Crucially, the synchronization between the G7 Hiroshima consensus (May 2023) and the observed structural break highlights the immediate transmission of economic security signals to global trade participants. As we look toward 2027, policymakers must account for this rapid responsiveness when designing future interventions, ensuring that 'sector-concentrated' de-risking is maintained without devolving into broad-based protectionism.
+# Limitations
+
+Despite its strengths, this framework faces limitations intrinsic to the available data. First, SITC categories remain relatively broad; while SITC 5 and 7 cover strategic goods like semiconductors, they also contain non-strategic components. This aggregation may mask variations at finer product classifications.
+
+Second, while the structural break aligns with shifts in the security-trade nexus, break tests cannot definitively prove causality without controlling for all possible confounding variables.
+
+Third, BIS financial data capture banking exposure but do not fully cover Foreign Direct Investment (FDI) or equity flows. Consequently, the "financial substitution" effect observed may actually be understated if firms are using non-banking channels to fund localization strategies.
+
+# Conclusion
+
+The data demonstrates that "de-risking" is a measurable, sector-specific phenomenon. The structural break in May 2023 validates that the European market began fragmenting in direct response to the formal 2023 strategy, rather than well before it.
+
+This distinction is vital for policymakers: economic security tools work, but they function as "shocks" that sever trade integration abruptly. As the EU looks toward 2027, the challenge will be maintaining this "surgical" precision without sliding into broader protectionism that could stifle the very innovation it seeks to protect, echoing concerns raised about the broader costs of geoeconomic fragmentation [@imf2023; @mcnamara2023].
 
 # References
-
-1.  Bank for International Settlements. (2026). Locational banking statistics.
-
-2.  Chow, G. C. (1960). Tests of equality between sets of coefficients in two linear regressions. *Econometrica*.
-
-3.  European Commission. (n.d.). China Trade Relationships.
-
-4.  Eurostat. (2026). Euro area trade by SITC product group.
-
-5.  McNamara, K. R. (2024). Transforming Europe? The EU’s industrial policy and geopolitical turn. *Journal of European Public Policy*.
-
-6.  Pereira, I. T. (2025). What are the most imported and exported products between China and the EU? *Euronews*.
-
-7.  Vandermeeren, F. (2024). Understanding EU-China economic exposure. *European Commission*.

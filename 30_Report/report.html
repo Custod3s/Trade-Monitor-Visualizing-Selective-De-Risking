@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alex HAAS, Viliam POHANCENIK, Pieter PEVERELLI">
-<meta name="dcterms.date" content="2026-01-26">
+<meta name="author" content="Alexander HAAS">
+<meta name="author" content="Viliam POHANCENIK">
+<meta name="author" content="Pieter PEVERELLI">
+<meta name="dcterms.date" content="2026-01-28">
 
 <title>The Resilience Paradox: Mapping EU-China Strategic Trade and Financial Fragmentation</title>
 <style>
@@ -22,7 +24,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="report_files/libs/clipboard/clipboard.min.js"></script>
@@ -78,41 +100,43 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-the-geoeconomics-of-de-risking" id="toc-introduction-the-geoeconomics-of-de-risking" class="nav-link active" data-scroll-target="#introduction-the-geoeconomics-of-de-risking"><span class="header-section-number">0.1</span> Introduction: The Geoeconomics of De-risking</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#from-interdependence-to-economic-resilience" id="toc-from-interdependence-to-economic-resilience" class="nav-link" data-scroll-target="#from-interdependence-to-economic-resilience"><span class="header-section-number">0.1.1</span> From Interdependence to Economic Resilience</a></li>
-  <li><a href="#addressing-asymmetric-dependencies" id="toc-addressing-asymmetric-dependencies" class="nav-link" data-scroll-target="#addressing-asymmetric-dependencies"><span class="header-section-number">0.1.2</span> Addressing Asymmetric Dependencies</a></li>
+  <li><a href="#the-security-trade-nexus" id="toc-the-security-trade-nexus" class="nav-link" data-scroll-target="#the-security-trade-nexus">The Security-Trade Nexus</a></li>
   </ul></li>
-  <li><a href="#methodology-measuring-geoeconomic-re-securitization" id="toc-methodology-measuring-geoeconomic-re-securitization" class="nav-link" data-scroll-target="#methodology-measuring-geoeconomic-re-securitization"><span class="header-section-number">0.2</span> Methodology: Measuring Geoeconomic Re-securitization</a>
+  <li><a href="#theoretical-framework" id="toc-theoretical-framework" class="nav-link" data-scroll-target="#theoretical-framework">Theoretical Framework</a>
   <ul class="collapse">
-  <li><a href="#data-acquisition-and-strategic-categorization" id="toc-data-acquisition-and-strategic-categorization" class="nav-link" data-scroll-target="#data-acquisition-and-strategic-categorization"><span class="header-section-number">0.2.1</span> Data Acquisition and Strategic Categorization</a></li>
-  <li><a href="#econometric-framework-the-chow-test" id="toc-econometric-framework-the-chow-test" class="nav-link" data-scroll-target="#econometric-framework-the-chow-test"><span class="header-section-number">0.2.2</span> Econometric Framework: The Chow Test</a></li>
-  <li><a href="#model-diagnostics-and-robustness-checks" id="toc-model-diagnostics-and-robustness-checks" class="nav-link" data-scroll-target="#model-diagnostics-and-robustness-checks"><span class="header-section-number">0.2.3</span> Model Diagnostics and Robustness Checks</a></li>
+  <li><a href="#contextual-background-covid-19-and-volatility" id="toc-contextual-background-covid-19-and-volatility" class="nav-link" data-scroll-target="#contextual-background-covid-19-and-volatility">Contextual Background: COVID-19 and Volatility</a></li>
+  <li><a href="#linking-theory-to-empirical-strategy" id="toc-linking-theory-to-empirical-strategy" class="nav-link" data-scroll-target="#linking-theory-to-empirical-strategy">Linking Theory to Empirical Strategy</a></li>
   </ul></li>
-  <li><a href="#logic-from-07_strucchange.r" id="toc-logic-from-07_strucchange.r" class="nav-link" data-scroll-target="#logic-from-07_strucchange.r"><span class="header-section-number">1</span> Logic from 07_strucchange.R</a></li>
-  <li><a href="#filter-for-high-tech-imports" id="toc-filter-for-high-tech-imports" class="nav-link" data-scroll-target="#filter-for-high-tech-imports"><span class="header-section-number">2</span> Filter for High-Tech Imports</a></li>
-  <li><a href="#create-ts-object" id="toc-create-ts-object" class="nav-link" data-scroll-target="#create-ts-object"><span class="header-section-number">3</span> Create TS object</a></li>
-  <li><a href="#run-chow-test-at-oct-2023-index-34" id="toc-run-chow-test-at-oct-2023-index-34" class="nav-link" data-scroll-target="#run-chow-test-at-oct-2023-index-34"><span class="header-section-number">4</span> Run Chow Test at Oct 2023 (Index 34)</a></li>
-  <li><a href="#store-results-for-inline-text" id="toc-store-results-for-inline-text" class="nav-link" data-scroll-target="#store-results-for-inline-text"><span class="header-section-number">5</span> Store results for inline text</a></li>
-  <li><a href="#logic-from-08_strucchange_control.r-traditional" id="toc-logic-from-08_strucchange_control.r-traditional" class="nav-link" data-scroll-target="#logic-from-08_strucchange_control.r-traditional"><span class="header-section-number">6</span> Logic from 08_strucchange_control.R (Traditional)</a>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a>
   <ul class="collapse">
-  <li><a href="#discussion-and-conclusion-evidence-of-selective-fragmentation" id="toc-discussion-and-conclusion-evidence-of-selective-fragmentation" class="nav-link" data-scroll-target="#discussion-and-conclusion-evidence-of-selective-fragmentation"><span class="header-section-number">6.1</span> Discussion and Conclusion: Evidence of Selective Fragmentation</a>
+  <li><a href="#data-acquisition-and-categorization" id="toc-data-acquisition-and-categorization" class="nav-link" data-scroll-target="#data-acquisition-and-categorization">Data Acquisition and Categorization</a></li>
+  <li><a href="#econometric-framework" id="toc-econometric-framework" class="nav-link" data-scroll-target="#econometric-framework">Econometric Framework</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
   <ul class="collapse">
-  <li><a href="#empirical-validation-of-the-surgical-de-risking-hypothesis" id="toc-empirical-validation-of-the-surgical-de-risking-hypothesis" class="nav-link" data-scroll-target="#empirical-validation-of-the-surgical-de-risking-hypothesis"><span class="header-section-number">6.1.1</span> Empirical Validation of the “Surgical” De-risking Hypothesis</a></li>
-  <li><a href="#from-market-logic-to-political-authority" id="toc-from-market-logic-to-political-authority" class="nav-link" data-scroll-target="#from-market-logic-to-political-authority"><span class="header-section-number">6.1.2</span> From Market Logic to Political Authority</a></li>
-  <li><a href="#forecast-and-policy-implications" id="toc-forecast-and-policy-implications" class="nav-link" data-scroll-target="#forecast-and-policy-implications"><span class="header-section-number">6.1.3</span> Forecast and Policy Implications</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">Descriptive Statistics</a></li>
+  <li><a href="#structural-break-analysis" id="toc-structural-break-analysis" class="nav-link" data-scroll-target="#structural-break-analysis">Structural Break Analysis</a></li>
+  <li><a href="#visualization-of-distributions" id="toc-visualization-of-distributions" class="nav-link" data-scroll-target="#visualization-of-distributions">Visualization of Distributions</a></li>
   </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#the-finance-trade-nexus" id="toc-the-finance-trade-nexus" class="nav-link" data-scroll-target="#the-finance-trade-nexus">The Finance-Trade Nexus</a></li>
+  <li><a href="#future-trajectory-2026" id="toc-future-trajectory-2026" class="nav-link" data-scroll-target="#future-trajectory-2026">Future Trajectory (2026)</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="report.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../../report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Resilience Paradox: Mapping EU-China Strategic Trade and Financial Fragmentation</h1>
-<p class="subtitle lead">2020–2026</p>
+<p class="subtitle lead">An Empirical Analysis of the ‘De-risking’ Strategy (2020–2026)</p>
 </div>
 
 
@@ -120,38 +144,82 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
-             <p>Alex HAAS, Viliam POHANCENIK, Pieter PEVERELLI </p>
+             <p>Alexander HAAS </p>
+             <p>Viliam POHANCENIK </p>
+             <p>Pieter PEVERELLI </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 26, 2026</p>
+      <p class="date">January 28, 2026</p>
     </div>
   </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>This study quantifies the impact of the European Union’s “de-risking” strategy on trade and financial flows with China. Using high-frequency data from Eurostat and the BIS, we identify a definitive structural break in strategic trade sectors occurring in May 2023, while traditional trade remains stable. Our results indicate a “dual-track” reality where supply chain fragmentation is accompanied by a paradoxical rise in financial exposure, suggesting a shift toward localization strategies.</p>
+  </div>
+</div>
 
 
 </header>
 
 
-<section id="introduction-the-geoeconomics-of-de-risking" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="introduction-the-geoeconomics-of-de-risking"><span class="header-section-number">0.1</span> Introduction: The Geoeconomics of De-risking</h2>
-<section id="from-interdependence-to-economic-resilience" class="level3" data-number="0.1.1">
-<h3 data-number="0.1.1" class="anchored" data-anchor-id="from-interdependence-to-economic-resilience"><span class="header-section-number">0.1.1</span> From Interdependence to Economic Resilience</h3>
-<p>The evolution of EU-China economic relations has undergone a fundamental departure from the <em>Wandel durch Handel</em> (change through trade) paradigm toward a strategy of “de-risking”. This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of “coercive leverage” in critical supply chains. This aligns with the broader academic discourse on “Weaponized Interdependence” (Farrell &amp; Newman, 2019), which posits that asymmetric network structures can be leveraged for strategic advantage, necessitating state intervention to reclaim economic security.</p>
-<p>Within this strategic pivot, this study examines whether EU import flows from China exhibit sector-specific structural breaks after 2020, indicating selective trade fragmentation between high-tech and traditional sectors.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The evolution of EU-China economic relations has undergone a fundamental departure from the Wandel durch Handel (“change through trade”) paradigm toward a strategy of “de-risking.” This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of “coercive leverage” in critical supply chains <span class="citation" data-cites="vandermeeren2024">(<a href="#ref-vandermeeren2024" role="doc-biblioref">Vandermeeren, 2024</a>)</span>.</p>
+<p>This strategic pivot aligns with the broader academic discourse on “Weaponized Interdependence” <span class="citation" data-cites="farrell2019">(<a href="#ref-farrell2019" role="doc-biblioref">Farrell &amp; Newman, 2019</a>)</span>, which posits that asymmetric network structures—once seen as sources of efficiency—can be leveraged for strategic advantage. Consequently, the European Union has moved to reclaim economic security through state intervention, a regulatory expansion that <span class="citation" data-cites="bradford2020">Bradford (<a href="#ref-bradford2020" role="doc-biblioref">2020</a>)</span> describes as the “Brussels Effect” applied to geoeconomic defense.</p>
+<section id="the-security-trade-nexus" class="level2">
+<h2 class="anchored" data-anchor-id="the-security-trade-nexus">The Security-Trade Nexus</h2>
+<p>Despite the clear political shift toward strategic autonomy, there remains a gap in the empirical literature regarding whether these policy objectives have successfully translated into a measurable divergence in trade flows. This study addresses this gap by examining the “security-trade nexus,” analyzing whether EU import flows exhibit structural breaks following the geopolitical shocks of the early 2020s.</p>
+<p>We hypothesize a “dual-track” geoeconomic reality:</p>
+<p>Market Logic Track: Traditional, low-value-added sectors governed by cost efficiencies should remain stable.</p>
+<p>Security Logic Track: High-tech industries—subject to the EU Chips Act, foreign investment screenings, and export controls—are expected to show significant fragmentation <span class="citation" data-cites="mcnamara2023">(<a href="#ref-mcnamara2023" role="doc-biblioref">McNamara, 2023</a>)</span>.</p>
 </section>
-<section id="addressing-asymmetric-dependencies" class="level3" data-number="0.1.2">
-<h3 data-number="0.1.2" class="anchored" data-anchor-id="addressing-asymmetric-dependencies"><span class="header-section-number">0.1.2</span> Addressing Asymmetric Dependencies</h3>
-<p>Despite this clear political shift toward strategic autonomy, there remains a gap in the empirical literature regarding whether these policy objectives have successfully translated into a measurable divergence in trade flows. This study addresses this gap by examining the “security-trade nexus,” analyzing whether EU import flows exhibit structural breaks following the geopolitical shocks of the early 2020s.</p>
-<p>We hypothesize a dual-track geoeconomic reality: while traditional, low-value-added sectors governed by market-driven cost efficiencies should remain stable, high-tech industries—subject to the EU Chips Act, foreign investment screenings, and export controls—are expected to show significant fragmentation.</p>
+</section>
+<section id="theoretical-framework" class="level1">
+<h1>Theoretical Framework</h1>
+<section id="contextual-background-covid-19-and-volatility" class="level2">
+<h2 class="anchored" data-anchor-id="contextual-background-covid-19-and-volatility">Contextual Background: COVID-19 and Volatility</h2>
+<p>The empirical analysis in this study must be interpreted against the backdrop of exceptional volatility in global trade following the COVID-19 shock. Between 2020 and 2021, international trade experienced abrupt contractions followed by rapid rebounds driven by supply chain disruptions and fiscal stimulus.</p>
+<p>To address this distortion, our analytical framework treats the COVID period not as a structural break, but as a noise-generating exogenous shock. Consequently, the baseline for structural break testing is shifted forward, with formal econometric testing beginning in January 2022. This ensures that the identified break reflects policy-driven geoeconomic change rather than pandemic-related statistical artifacts.</p>
+</section>
+<section id="linking-theory-to-empirical-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="linking-theory-to-empirical-strategy">Linking Theory to Empirical Strategy</h2>
+<p>This framework operationalizes the theory of “Weaponized Interdependence” <span class="citation" data-cites="farrell2019">(<a href="#ref-farrell2019" role="doc-biblioref">Farrell &amp; Newman, 2019</a>)</span>, which argues that advanced economies are transitioning from market-based interdependence toward selective risk mitigation.</p>
+<p>The distinction between “surgical de-risking” and “generalized decoupling” is central to our hypothesis. As noted by <span class="citation" data-cites="dadush2023">Dadush (<a href="#ref-dadush2023" role="doc-biblioref">2023</a>)</span>, effective de-risking should not manifest as a broad-based exit, but rather as targeted diversification in sensitive sectors. If de-risking is genuinely selective, structural breaks should be significantly stronger in strategic sectors than in traditional trade flows. In this sense, the Intensity Ratio (the difference in F-statistics between high-tech and traditional sectors) serves as a quantitative proxy for the reassertion of state power over economic interdependence <span class="citation" data-cites="mcnamara2023">(<a href="#ref-mcnamara2023" role="doc-biblioref">McNamara, 2023</a>)</span>.</p>
+</section>
+</section>
+<section id="methodology" class="level1">
+<h1>Methodology</h1>
+<p>To empirically evaluate the manifestation of “de-risking,” this study employs a quantitative, sectoral structural break analysis. This approach moves beyond aggregate trade figures to determine if policy-driven “re-securitization” is occurring as a surgical intervention or a generalized trend.</p>
+<section id="data-acquisition-and-categorization" class="level2">
+<h2 class="anchored" data-anchor-id="data-acquisition-and-categorization">Data Acquisition and Categorization</h2>
+<p>The empirical foundation rests on a high-frequency longitudinal dataset (2020–2025) constructed through automated API retrieval from Eurostat (COMEXT) <span class="citation" data-cites="eurostat2026">(<a href="#ref-eurostat2026" role="doc-biblioref">Eurostat, 2026</a>)</span> and the Bank for International Settlements (BIS) <span class="citation" data-cites="bis2026">(<a href="#ref-bis2026" role="doc-biblioref">Bank for International Settlements, 2026</a>)</span>. Trade flows are disaggregated using the Standard International Trade Classification (SITC) Revision 4:</p>
+<ul>
+<li><p><strong>Treatment Group</strong> (High-Tech &amp; Strategic): Comprising SITC 5 (Chemicals) and SITC 7 (Machinery/Transport). These sectors represent the core of the security-trade nexus (semiconductors, EV components).</p></li>
+<li><p><strong>Control Group</strong> (Traditional &amp; Basic): Comprising SITC 6 (Manufactured goods) and SITC 8 (Miscellaneous). These sectors serve as a baseline for market-driven trade.</p></li>
+</ul>
+</section>
+<section id="econometric-framework" class="level2">
+<h2 class="anchored" data-anchor-id="econometric-framework">Econometric Framework</h2>
+<p>The primary analytical instrument is the Chow Test <span class="citation" data-cites="chow1960">(<a href="#ref-chow1960" role="doc-biblioref">Chow, 1960</a>)</span>, a standard in econometric literature for identifying structural breaks in time-series data. The model tests for a break point in May 2023, representing early geoeconomic shifts prior to the formal Economic Security Strategy <span class="citation" data-cites="eu_strategy">(<a href="#ref-eu_strategy" role="doc-biblioref">European Commission, 2023</a>)</span>.</p>
+<p>To ensure robustness, we filter for pandemic volatility (starting analysis in Jan 2021) and use the Control Group to rule out generalized macroeconomic downturns.</p>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<section id="descriptive-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="descriptive-statistics">Descriptive Statistics</h2>
+<p>Before assessing structural breaks, we examine the baseline characteristics of trade flows in the post-pandemic era.</p>
 <div class="cell">
 <div id="tbl-descriptive" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -168,25 +236,22 @@ Table&nbsp;1: Descriptive Statistics of Monthly Trade Flows (Jan 2021 - Present)
 <th style="text-align: right;">SD</th>
 <th style="text-align: right;">Min</th>
 <th style="text-align: right;">Max</th>
-<th style="text-align: right;">N_Obs</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">High-Tech &amp; Strategic</td>
-<td style="text-align: right;">23.27</td>
+<td style="text-align: right;">23.33</td>
 <td style="text-align: right;">3.29</td>
 <td style="text-align: right;">15.59</td>
 <td style="text-align: right;">30.52</td>
-<td style="text-align: right;">58</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Traditional &amp; Basic</td>
-<td style="text-align: right;">12.27</td>
-<td style="text-align: right;">1.91</td>
+<td style="text-align: right;">12.26</td>
+<td style="text-align: right;">1.90</td>
 <td style="text-align: right;">8.73</td>
 <td style="text-align: right;">17.34</td>
-<td style="text-align: right;">58</td>
 </tr>
 </tbody>
 </table>
@@ -196,148 +261,124 @@ Table&nbsp;1: Descriptive Statistics of Monthly Trade Flows (Jan 2021 - Present)
 </div>
 </div>
 </section>
-</section>
-<section id="methodology-measuring-geoeconomic-re-securitization" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="methodology-measuring-geoeconomic-re-securitization"><span class="header-section-number">0.2</span> Methodology: Measuring Geoeconomic Re-securitization</h2>
-<section id="data-acquisition-and-strategic-categorization" class="level3" data-number="0.2.1">
-<h3 data-number="0.2.1" class="anchored" data-anchor-id="data-acquisition-and-strategic-categorization"><span class="header-section-number">0.2.1</span> Data Acquisition and Strategic Categorization</h3>
-<p>The empirical foundation of this research rests on a high-frequency longitudinal dataset (2018–2025) constructed through automated API retrieval from the Eurostat (COMEXT) and Bank for International Settlements (BIS) databases. To test the hypothesis of “selective fragmentation,” trade flows are disaggregated using the Standard International Trade Classification (SITC) Revision 4:</p>
+<section id="structural-break-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="structural-break-analysis">Structural Break Analysis</h2>
+<p>The model identified a definitive structural break occurring in May 2023.</p>
 <ul>
-<li><p><strong>Treatment Group (High-Tech &amp; Strategic):</strong> Comprising SITC 5 (Chemicals) and SITC 7 (Machinery/Transport). These sectors represent the core of the “security-trade nexus,” encompassing semiconductors and EV components.</p></li>
-<li><p><strong>Control Group (Traditional &amp; Basic):</strong> Comprising SITC 6 (Manufactured goods) and SITC 8 (Miscellaneous). These sectors serve as a baseline for market-driven trade.</p></li>
+<li><p>Treatment Group (Strategic): Yielded a highly significant F-statistic of 21.8 (<span class="math inline">\(p &lt; 0.0001\)</span>).</p></li>
+<li><p>Control Group (Traditional): Showed a significantly weaker response with an F-statistic of 5.52.</p></li>
 </ul>
+<p>The timing of this break (May 2023) aligns with the ‘Signaling Shockwave’ of the G7 Hiroshima Summit, occurring just prior to the formal announcement of the 2023 Economic Security Strategy. This indicates a distinct anticipatory effect, where market fragmentation occurred as a proactive reaction to geopolitical signaling and corporate risk recalibration, ahead of the formal policy shift.</p>
+<p>The Intensity Ratio of 3.9x further validates that these shifts specifically targeted the high-tech/strategic nexus while leaving traditional trade relationships relatively intact.</p>
 </section>
-<section id="econometric-framework-the-chow-test" class="level3" data-number="0.2.2">
-<h3 data-number="0.2.2" class="anchored" data-anchor-id="econometric-framework-the-chow-test"><span class="header-section-number">0.2.2</span> Econometric Framework: The Chow Test</h3>
-<p>The primary analytical instrument utilized is the <strong>Chow Test</strong>, a standard in econometric literature for identifying “structural breaks” in time-series data. The model tests for a break point in <strong>October 2023</strong>, coinciding with the formal adoption of the European Economic Security Strategy.</p>
-</section>
-<section id="model-diagnostics-and-robustness-checks" class="level3" data-number="0.2.3">
-<h3 data-number="0.2.3" class="anchored" data-anchor-id="model-diagnostics-and-robustness-checks"><span class="header-section-number">0.2.3</span> Model Diagnostics and Robustness Checks</h3>
-<p>To ensure the validity of our findings and rule out alternative explanations (e.g., global macro shocks), we implemented several robustness measures:</p>
-<ol type="1">
-<li><strong>Counterfactual Control:</strong> By testing “Traditional &amp; Basic” sectors (Control Group) alongside strategic ones, we control for generalized economic downturns (e.g., inflation, energy prices). If the break were driven by a general EU recession, both sectors would show similar breaks. A divergence isolates the <em>selective</em> policy effect.</li>
-<li><strong>Pandemic Control:</strong> The analysis explicitly filters data to start from <strong>January 2021</strong>, excluding the extreme volatility of the 2020 COVID-19 shock which could bias structural break detection.</li>
-<li><strong>Assumption Verification:</strong> Residual diagnostics (Shapiro-Wilk test) were performed to ensure the linear model assumptions underlying the Chow test were met, confirming that the detected breaks are not artifacts of non-normal error distributions.</li>
-</ol>
-</section>
-</section>
-<section id="logic-from-07_strucchange.r" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Logic from 07_strucchange.R</h1>
-</section>
-<section id="filter-for-high-tech-imports" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Filter for High-Tech Imports</h1>
-<p>ts_data &lt;- trade_data %&gt;% filter(grepl(“CN_X_HK”, partner)) %&gt;% filter(sector_group == “High-Tech &amp; Strategic”) %&gt;% filter(date &gt;= “2021-01-01”) %&gt;% group_by(date) %&gt;% summarise(values = sum(values, na.rm = TRUE)) %&gt;% arrange(date)</p>
-</section>
-<section id="create-ts-object" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Create TS object</h1>
-<p>ts_val &lt;- ts(ts_data$values, start = c(2021, 1), frequency = 12)</p>
-</section>
-<section id="run-chow-test-at-oct-2023-index-34" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Run Chow Test at Oct 2023 (Index 34)</h1>
-<p>chow_test &lt;- sctest(ts_val ~ 1, type = “Chow”, point = 34)</p>
-</section>
-<section id="store-results-for-inline-text" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Store results for inline text</h1>
-<p>f_stat_hightech &lt;- round(chow_test<span class="math inline">\(statistic, 2)
-p_val_hightech &lt;- format.pval(chow_test\)</span>p.value, eps = .001)</p>
-</section>
-<section id="logic-from-08_strucchange_control.r-traditional" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Logic from 08_strucchange_control.R (Traditional)</h1>
-<p>ts_data_control &lt;- trade_data %&gt;% filter(grepl(“CN_X_HK”, partner)) %&gt;% filter(sector_group == “Traditional &amp; Basic”) %&gt;% filter(date &gt;= “2021-01-01”) %&gt;% group_by(date) %&gt;% summarise(values = sum(values, na.rm = TRUE)) %&gt;% arrange(date)</p>
-<p>ts_val_ctrl &lt;- ts(ts_data_control<span class="math inline">\(values, start = c(2021, 1), frequency = 12)
-chow_test_ctrl &lt;- sctest(ts_val_ctrl ~ 1, type = "Chow", point = 34)
-f_stat_ctrl &lt;- round(chow_test_ctrl\)</span>statistic, 2) # Calculate Intensity Ratio dynamically intensity_ratio &lt;- round(chow_test<span class="math inline">\(statistic / chow_test_ctrl\)</span>statistic, 1) ```</p>
-<section id="discussion-and-conclusion-evidence-of-selective-fragmentation" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="discussion-and-conclusion-evidence-of-selective-fragmentation"><span class="header-section-number">6.1</span> Discussion and Conclusion: Evidence of Selective Fragmentation</h2>
-<section id="empirical-validation-of-the-surgical-de-risking-hypothesis" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="empirical-validation-of-the-surgical-de-risking-hypothesis"><span class="header-section-number">6.1.1</span> Empirical Validation of the “Surgical” De-risking Hypothesis</h3>
-<p>The results of the structural break analysis provide compelling evidence that the European Union’s trade architecture is undergoing a fundamental re-orientation.</p>
-<p>For the <strong>Treatment Group (High-Tech &amp; Strategic)</strong>, the model yielded an F-statistic of <strong>30.45</strong> (p &lt; 0.0001). This highly significant value indicates a definitive structural break. Conversely, while the <strong>Control Group</strong> also showed a significant break, the magnitude was markedly lower (F = <strong>0.38</strong>).</p>
-<p>To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values. As shown in Figure 2, the high-tech sector displays a distinct compression and downward shift in value distribution after the 2023 policy implementation, whereas traditional trade distributions remain largely overlapping.</p>
+<section id="visualization-of-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-of-distributions">Visualization of Distributions</h2>
+<p>To visualize this shift beyond abstract statistics, we examine the distribution of monthly trade values (<a href="#fig-boxplot" class="quarto-xref">Figure&nbsp;1</a>).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="report_files/figure-html/fig-boxplot-1.png" class="img-fluid figure-img" width="672">
+<img src="report_files/figure-html/fig-boxplot-1.png" class="img-fluid figure-img" data-fig-pos="H" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Distribution of Monthly Trade Values: Before vs.&nbsp;After the Economic Security Strategy (Oct 2023).
+Figure&nbsp;1: Structural Shift: High-Tech trade shows a lower median and compressed range post-Structural Break.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The Intensity Ratio of approximately ~80 x is the most salient finding of this study. It confirms that the “de-risking” agenda is not merely a byproduct of a generalized economic slowdown, but a targeted intervention in the “security-trade nexus.</p>
 </section>
-<section id="from-market-logic-to-political-authority" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="from-market-logic-to-political-authority"><span class="header-section-number">6.1.2</span> From Market Logic to Political Authority</h3>
-<p>Recognizing that geoeconomics is inherently multi-disciplinary, we integrate trade data with financial flows from the BIS to capture the “finance-trade nexus”.</p>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<section id="the-finance-trade-nexus" class="level2">
+<h2 class="anchored" data-anchor-id="the-finance-trade-nexus">The Finance-Trade Nexus</h2>
+<p>Recognizing that geoeconomics is inherently multi-disciplinary, we integrate trade data with financial flows from the BIS. The results reveal a “Localization Paradox.”</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="report_files/figure-html/fig-scatter-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Correlation between Financial Exposure and Strategic Trade. The positive slope suggests banks and importers are de-risking in tandem.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>As shown in Figure 4, the Wandel durch Handel paradigm has been replaced by a “dual-track” reality. While traditional goods continue to follow the logic of comparative advantage, high-tech sectors and banking exposure are now governed by the logic of “security-of-supply”.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-unified" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-unified" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-unified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="report_files/figure-html/fig-unified-1.png" class="img-fluid figure-img" width="672">
+<img src="report_files/figure-html/fig-unified-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="H">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: The Dual De-Risking: Trade &amp; Finance Divergence. Since Oct 2023, EU Banks and High-Tech Importers have both reduced exposure.
+Figure&nbsp;2: The Dual De-Risking: Divergence of Trade and Finance.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>As shown in <a href="#fig-unified" class="quarto-xref">Figure&nbsp;2</a>, the <em>Wandel durch Handel</em> paradigm has not merely paused; it has been replaced by a “dual-track” reality. While traditional goods (Grey Line) continue to follow the logic of comparative advantage, high-tech sectors (Blue Line) have decoupled.</p>
+<p>Crucially, Banking Exposure (Red Dashed Line) shows a substitution effect. The divergence suggests that while EU firms are importing fewer high-tech goods, they may be increasing capital exposure to maintain market presence—an “In China, For China” strategy that mitigates supply chain risk while increasing financial risk.</p>
 </section>
-<section id="forecast-and-policy-implications" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="forecast-and-policy-implications"><span class="header-section-number">6.1.3</span> Forecast and Policy Implications</h3>
-<p>Looking ahead, we project the “New Normal” trajectory for strategic trade. Based on the post-break trend (Oct 2023–Present), the model suggests a continued stabilization at lower levels rather than a rebound to pre-2022 highs.</p>
+<section id="future-trajectory-2026" class="level2">
+<h2 class="anchored" data-anchor-id="future-trajectory-2026">Future Trajectory (2026)</h2>
+<p>Based on the post-break trend (Oct 2023–Present), our linear model projects a continued stabilization at lower levels rather than a rebound.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-forecast" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-forecast" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-forecast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="report_files/figure-html/fig-forecast-1.png" class="img-fluid figure-img" width="672">
+<img src="report_files/figure-html/fig-forecast-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="H">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forecast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Projecting the ‘De-risking’ Trend into 2026 based on linear extrapolation of the post-break trajectory.
+Figure&nbsp;3: Forecast 2026: Strategic Sector Trajectory based on post-break linear extrapolation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In conclusion, the European market has become a fragmented landscape where political security considerations increasingly supersede traditional market logic. Crucially, the 9-month lag between the strategy announcement (Jan 2023) and the structural break (Oct 2023) highlights the transmission time of economic security policies. As we look toward 2027, policymakers must account for this latency when designing future interventions, ensuring that ‘surgical’ precision is maintained without devolving into broader protectionism.</p>
 </section>
 </section>
+<section id="limitations" class="level1">
+<h1>Limitations</h1>
+<p>Despite its strengths, this framework faces limitations intrinsic to the available data. First, SITC categories remain relatively broad; while SITC 5 and 7 cover strategic goods like semiconductors, they also contain non-strategic components. This aggregation may mask variations at finer product classifications.</p>
+<p>Second, while the structural break aligns with shifts in the security-trade nexus, break tests cannot definitively prove causality without controlling for all possible confounding variables.</p>
+<p>Third, BIS financial data capture banking exposure but do not fully cover Foreign Direct Investment (FDI) or equity flows. Consequently, the “financial substitution” effect observed may actually be understated if firms are using non-banking channels to fund localization strategies.</p>
 </section>
-<section id="references" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> References</h1>
-<ol type="1">
-<li><p>Bank for International Settlements. (2026). Locational banking statistics.</p></li>
-<li><p>Chow, G. C. (1960). Tests of equality between sets of coefficients in two linear regressions. <em>Econometrica</em>.</p></li>
-<li><p>European Commission. (n.d.). China Trade Relationships.</p></li>
-<li><p>Eurostat. (2026). Euro area trade by SITC product group.</p></li>
-<li><p>McNamara, K. R. (2024). Transforming Europe? The EU’s industrial policy and geopolitical turn. <em>Journal of European Public Policy</em>.</p></li>
-<li><p>Pereira, I. T. (2025). What are the most imported and exported products between China and the EU? <em>Euronews</em>.</p></li>
-<li><p>Vandermeeren, F. (2024). Understanding EU-China economic exposure. <em>European Commission</em>.</p></li>
-</ol>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>The data demonstrates that “de-risking” is a measurable, sector-specific phenomenon. The structural break in May 2023 validates that the European market began fragmenting in direct response to the formal 2023 strategy, rather than well before it.</p>
+<p>This distinction is vital for policymakers: economic security tools work, but they function as “shocks” that sever trade integration abruptly. As the EU looks toward 2027, the challenge will be maintaining this “surgical” precision without sliding into broader protectionism that could stifle the very innovation it seeks to protect, echoing concerns raised about the broader costs of geoeconomic fragmentation <span class="citation" data-cites="imf2023 mcnamara2023">(<a href="#ref-imf2023" role="doc-biblioref">International Monetary Fund, 2023</a>; <a href="#ref-mcnamara2023" role="doc-biblioref">McNamara, 2023</a>)</span>.</p>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-bis2026" class="csl-entry" role="listitem">
+Bank for International Settlements. (2026). <em>Locational banking statistics</em>. BIS. <a href="https://stats.bis.org">https://stats.bis.org</a>
+</div>
+<div id="ref-bradford2020" class="csl-entry" role="listitem">
+Bradford, A. (2020). <em>The brussels effect: How the european union rules the world</em>. Oxford University Press.
+</div>
+<div id="ref-chow1960" class="csl-entry" role="listitem">
+Chow, G. C. (1960). <em>Tests of equality between sets of coefficients in two linear regressions</em> (Vol. 28, pp. 591–605). Econometrica.
+</div>
+<div id="ref-dadush2023" class="csl-entry" role="listitem">
+Dadush, U. (2023). <em>De-risking is not decoupling</em> (Policy Brief 10). Bruegel.
+</div>
+<div id="ref-eu_strategy" class="csl-entry" role="listitem">
+European Commission. (2023). <em>Joint communication on a european economic security strategy</em>. European Union.
+</div>
+<div id="ref-eurostat2026" class="csl-entry" role="listitem">
+Eurostat. (2026). <em>Euro area trade by SITC product group</em>. European Commission. <a href="https://ec.europa.eu/eurostat">https://ec.europa.eu/eurostat</a>
+</div>
+<div id="ref-farrell2019" class="csl-entry" role="listitem">
+Farrell, H., &amp; Newman, A. L. (2019). Weaponized interdependence: How global economic networks shape state coercion. <em>International Security</em>, <em>44</em>(1), 42–79.
+</div>
+<div id="ref-imf2023" class="csl-entry" role="listitem">
+International Monetary Fund. (2023). <em>Geoeconomic fragmentation and foreign direct investment</em> [World Economic Outlook, Chapter 4]. IMF.
+</div>
+<div id="ref-mcnamara2023" class="csl-entry" role="listitem">
+McNamara, K. R. (2023). Transforming europe? The EU’s industrial policy and geopolitical turn. <em>Journal of European Public Policy</em>, <em>31</em>(9), 2371–2396.
+</div>
+<div id="ref-vandermeeren2024" class="csl-entry" role="listitem">
+Vandermeeren, F. (2024). Understanding EU-china economic exposure. <em>European Economy Brief</em>, (004).
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
