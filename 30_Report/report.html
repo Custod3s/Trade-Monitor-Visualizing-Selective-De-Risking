@@ -113,6 +113,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#data-acquisition-and-categorization" id="toc-data-acquisition-and-categorization" class="nav-link" data-scroll-target="#data-acquisition-and-categorization">Data Acquisition and Categorization</a></li>
   <li><a href="#econometric-framework" id="toc-econometric-framework" class="nav-link" data-scroll-target="#econometric-framework">Econometric Framework</a></li>
+  <li><a href="#assumption-verification" id="toc-assumption-verification" class="nav-link" data-scroll-target="#assumption-verification">Assumption Verification</a></li>
   </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
   <ul class="collapse">
@@ -175,7 +176,7 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>The evolution of EU-China economic relations has undergone a fundamental departure from the Wandel durch Handel (“change through trade”) paradigm toward a strategy of “de-risking.” This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of “coercive leverage” in critical supply chains <span class="citation" data-cites="vandermeeren2024">(<a href="#ref-vandermeeren2024" role="doc-biblioref">Vandermeeren, 2024</a>)</span>.</p>
+<p>The evolution of EU-China economic relations has undergone a fundamental departure from the <em>Wandel durch Handel</em> (“change through trade”) paradigm toward a strategy of “de-risking.” This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of “coercive leverage” in critical supply chains <span class="citation" data-cites="vandermeeren2024">(<a href="#ref-vandermeeren2024" role="doc-biblioref">Vandermeeren, 2024</a>)</span>.</p>
 <p>This strategic pivot aligns with the broader academic discourse on “Weaponized Interdependence” <span class="citation" data-cites="farrell2019">(<a href="#ref-farrell2019" role="doc-biblioref">Farrell &amp; Newman, 2019</a>)</span>, which posits that asymmetric network structures—once seen as sources of efficiency—can be leveraged for strategic advantage. Consequently, the European Union has moved to reclaim economic security through state intervention, a regulatory expansion that <span class="citation" data-cites="bradford2020">Bradford (<a href="#ref-bradford2020" role="doc-biblioref">2020</a>)</span> describes as the “Brussels Effect” applied to geoeconomic defense.</p>
 <section id="the-security-trade-nexus" class="level2">
 <h2 class="anchored" data-anchor-id="the-security-trade-nexus">The Security-Trade Nexus</h2>
@@ -213,6 +214,15 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="econometric-framework">Econometric Framework</h2>
 <p>The primary analytical instrument is the Chow Test <span class="citation" data-cites="chow1960">(<a href="#ref-chow1960" role="doc-biblioref">Chow, 1960</a>)</span>, a standard in econometric literature for identifying structural breaks in time-series data. The model tests for a break point in May 2023, representing early geoeconomic shifts prior to the formal Economic Security Strategy <span class="citation" data-cites="eu_strategy">(<a href="#ref-eu_strategy" role="doc-biblioref">European Commission, 2023</a>)</span>.</p>
 <p>To ensure robustness, we filter for pandemic volatility (starting analysis in Jan 2021) and use the Control Group to rule out generalized macroeconomic downturns.</p>
+</section>
+<section id="assumption-verification" class="level2">
+<h2 class="anchored" data-anchor-id="assumption-verification">Assumption Verification</h2>
+<p>To ensure the statistical validity of the Chow Test, we performed diagnostic checks on the residuals of a <strong>Segmented Model</strong> (splitting the data into Pre- and Post-Break periods). This approach correctly accounts for the structural shift, preventing false positives where a “kinked” trend might otherwise appear as non-normal error distribution.</p>
+<ul>
+<li><p><strong>Normality (Confirmed):</strong> The Shapiro-Wilk test on the segmented residuals yielded a value of <strong>W = 0.9769</strong> with a <strong>p-value of 0.4698</strong>. Since <span class="math inline">\(p &gt; 0.05\)</span>, we fail to reject the null hypothesis, confirming that the residuals are normally distributed once the structural break is accounted for. <img src="../20_Images/07_normality_qq.png" id="fig-qq" class="img-fluid" style="width:70.0%" alt="Segmented QQ Plot"></p></li>
+<li><p><strong>Autocorrelation:</strong> We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime. <img src="../20_Images/07_autocorrelation_acf.png" id="fig-acf" class="img-fluid" style="width:70.0%" alt="Segmented ACF Plot"></p></li>
+<li><p><strong>Homoscedasticity:</strong> Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break. <img src="../20_Images/07_heteroscedasticity.png" id="fig-het" class="img-fluid" style="width:70.0%" alt="Segmented Variance Check"></p></li>
+</ul>
 </section>
 </section>
 <section id="results" class="level1">
@@ -314,7 +324,7 @@ Figure&nbsp;2: The Dual De-Risking: Divergence of Trade and Finance.
 </section>
 <section id="future-trajectory-2026" class="level2">
 <h2 class="anchored" data-anchor-id="future-trajectory-2026">Future Trajectory (2026)</h2>
-<p>Based on the post-break trend (Oct 2023–Present), our linear model projects a continued stabilization at lower levels rather than a rebound.</p>
+<p>Based on the post-break trend (May 2023–Present), our linear model projects a continued stabilization at lower levels rather than a rebound.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-forecast" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H">

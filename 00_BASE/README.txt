@@ -103,6 +103,11 @@ METHODOLOGY
 4. Intensity Ratio: Calculating the relative strength of decoupling in 
    strategic sectors (SITC 5+7) vs. traditional sectors (SITC 6+8).
 
+5. Assumption Verification: Diagnostic checks (Normality, Autocorrelation) 
+   performed on the residuals of a **Segmented Model** (Pre- vs. Post-Break). 
+   This ensures that the structural shift is correctly accounted for, preventing 
+   false positives in statistical tests.
+
 
 KEY RESULTS
 --------------------------------------------------------------------------------
@@ -138,12 +143,12 @@ Generated files (after running run_all.R):
      the "Substitution Effect" (Trade decline vs. Capital rise).
    - 06_banking_claims_CN.png: Tracks Eurozone banking exposure to China, 
      revealing the "Localization Paradox".
-   - 07_normality_qq.png: Diagnostic QQ-Plot verifying the normality of 
-     residuals for the statistical validity of the Chow Test.
-   - 07_autocorrelation_acf.png: ACF plot checking for serial correlation 
-     in time-series residuals.
-   - 07_heteroscedasticity.png: Variance check ensuring constant error 
-     spread over the analysis timeframe.
+   - 07_normality_qq.png: Segmented QQ-Plot verifying the normality of 
+     residuals (Pre- vs Post-Break) for the statistical validity of the Chow Test.
+   - 07_autocorrelation_acf.png: Segmented ACF plot checking for serial 
+     correlation in time-series residuals across both periods.
+   - 07_heteroscedasticity.png: Segmented variance check ensuring constant 
+     error spread before and after the structural break.
    - 07_forecast_linear.png: 2026 Projection based on the structural trend 
      established after the de-risking signal.
 

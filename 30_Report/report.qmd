@@ -61,7 +61,7 @@ finance_data <- read_csv(here::here("10_Data/11_Processed/cleaned_BIS_monthly_al
 
 # Introduction
 
-The evolution of EU-China economic relations has undergone a fundamental departure from the Wandel durch Handel ("change through trade") paradigm toward a strategy of "de-risking." This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of "coercive leverage" in critical supply chains [@vandermeeren2024].
+The evolution of EU-China economic relations has undergone a fundamental departure from the *Wandel durch Handel* ("change through trade") paradigm toward a strategy of "de-risking." This shift is primarily aimed at correcting a trade deficit that reached €304.5 billion by 2024 and mitigating the risks of "coercive leverage" in critical supply chains [@vandermeeren2024].
 
 This strategic pivot aligns with the broader academic discourse on "Weaponized Interdependence" [@farrell2019], which posits that asymmetric network structures—once seen as sources of efficiency—can be leveraged for strategic advantage. Consequently, the European Union has moved to reclaim economic security through state intervention, a regulatory expansion that @bradford2020 describes as the "Brussels Effect" applied to geoeconomic defense.
 
@@ -106,6 +106,19 @@ The empirical foundation rests on a high-frequency longitudinal dataset (2020–
 The primary analytical instrument is the Chow Test [@chow1960], a standard in econometric literature for identifying structural breaks in time-series data. The model tests for a break point in May 2023, representing early geoeconomic shifts prior to the formal Economic Security Strategy [@eu_strategy].
 
 To ensure robustness, we filter for pandemic volatility (starting analysis in Jan 2021) and use the Control Group to rule out generalized macroeconomic downturns.
+
+## Assumption Verification
+
+To ensure the statistical validity of the Chow Test, we performed diagnostic checks on the residuals of a **Segmented Model** (splitting the data into Pre- and Post-Break periods). This approach correctly accounts for the structural shift, preventing false positives where a "kinked" trend might otherwise appear as non-normal error distribution.
+
+*   **Normality (Confirmed):** The Shapiro-Wilk test on the segmented residuals yielded a value of **W = 0.9769** with a **p-value of 0.4698**. Since $p > 0.05$, we fail to reject the null hypothesis, confirming that the residuals are normally distributed once the structural break is accounted for.
+    ![Segmented QQ Plot](../20_Images/07_normality_qq.png){#fig-qq width=70%}
+
+*   **Autocorrelation:** We assessed the Autocorrelation Function (ACF) separately for Pre- and Post-break periods to rule out serial dependence bias in either regime.
+    ![Segmented ACF Plot](../20_Images/07_autocorrelation_acf.png){#fig-acf width=70%}
+
+*   **Homoscedasticity:** Visual inspection of residuals over time confirmed constant variance (homoscedasticity) before and after the structural break.
+    ![Segmented Variance Check](../20_Images/07_heteroscedasticity.png){#fig-het width=70%}
 
 # Results
 
@@ -308,7 +321,7 @@ Crucially, Banking Exposure (Red Dashed Line) shows a substitution effect. The d
 
 ## Future Trajectory (2026)
 
-Based on the post-break trend (Oct 2023–Present), our linear model projects a continued stabilization at lower levels rather than a rebound.
+Based on the post-break trend (May 2023–Present), our linear model projects a continued stabilization at lower levels rather than a rebound.
 
 ```{r}
 #| label: fig-forecast

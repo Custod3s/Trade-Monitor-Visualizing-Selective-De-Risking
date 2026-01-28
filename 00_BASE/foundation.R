@@ -4,7 +4,7 @@
 # =============================================================================
 # Description: Central configuration file for project setup, package management,
 #              and environment initialization
-# Author: [Your Name]
+# Author: Alexander Haas
 # Last Updated: 2025-01-15
 # =============================================================================
 

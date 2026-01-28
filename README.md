@@ -51,13 +51,15 @@ The algorithm identified **May 2023** as the statistically most significant stru
 * **Timeframe Note:** The structural break analysis (`08_strucchange.R`) intentionally restricts the search window to start from **January 2022** (excluding 2020-2021 data). This was done to filter out the extreme "COVID Recovery Noise" (e.g., supply chain bullwhip effects in late 2021) that would otherwise mask the more subtle policy-driven break in late 2023.
 
 **Assumption Verification (Pre-Conditions):**
-To ensure the validity of the Chow test, we performed the following diagnostic checks on the linear model residuals (Script `07_precon_check.R`):
-*   **Normality:** Verified using the **Shapiro-Wilk test** and visual inspection of **QQ Plots**.
-    *   [📄 View QQ Plot](20_Images/07_normality_qq.png)
-*   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** to check for serial dependence in the time series.
-    *   [📄 View Visual ACF Plot](20_Images/07_autocorrelation_acf.png)
-*   **Homoscedasticity:** Visual inspection of residuals over time to confirm constant variance and rule out heteroscedasticity.
-    *   [📄 View Residuals Plot](20_Images/07_heteroscedasticity.png)
+To ensure the validity of the Chow test, we performed the following diagnostic checks on the residuals of a **Segmented Model** (splitting the data into Pre- and Post-Break periods). This approach correctly accounts for the structural shift, preventing false positives in diagnostic tests.
+
+*   **Normality (Confirmed):** Verified using the **Shapiro-Wilk test** on the segmented residuals.
+    *   Result: *W = 0.9769, p-value = 0.4698* (p > 0.05, fails to reject normality).
+    *   [📄 View Segmented QQ Plot](20_Images/07_normality_qq.png)
+*   **Autocorrelation:** Assessed via the **Autocorrelation Function (ACF)** separately for Pre- and Post-break periods to rule out serial dependence bias.
+    *   [📄 View Segmented ACF Plot](20_Images/07_autocorrelation_acf.png)
+*   **Homoscedasticity:** Visual inspection of residuals over time (Pre/Post) to confirm constant variance.
+    *   [📄 View Segmented Residuals Plot](20_Images/07_heteroscedasticity.png)
 
 **Results:**
 
