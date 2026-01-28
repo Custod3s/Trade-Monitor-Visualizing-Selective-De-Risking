@@ -17,6 +17,9 @@ This project investigates the hypothesis of **"Weaponized Interdependence"** in 
 
 Using monthly trade data from **Eurostat (2020–2025)** and financial data from the **BIS**, this analysis separates import flows into **High-Tech/Strategic** (SITC 5+7) and **Traditional/Basic** (SITC 6+8) sectors.
 
+**Research Question:**
+*Does EU de-risking translate into measurable, sector-specific changes in trade and financial exposure vis-à-vis China?*
+
 **Key Findings:**
 1.  **Selective Fragmentation:** We identify a definitive structural break in **May 2023**, coinciding with the G7 Hiroshima Summit. This break is **~4x more intense** in strategic sectors than in traditional trade, confirming that de-risking is a surgical intervention, not a generalized decoupling.
 2.  **The "Localization Paradox":** While high-tech trade flows have structurally declined, EU banking claims in China have risen. This divergence suggests a shift toward **"In China, For China"** strategies, where firms substitute cross-border trade with local production to bypass regulatory friction.
